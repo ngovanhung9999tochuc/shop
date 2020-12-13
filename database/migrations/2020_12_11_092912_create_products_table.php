@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('image');
             $table->text('description');
             $table->json('specifications');
+            $table->text('specifications_all');
             $table->integer('product_type_id');
             $table->integer('user_id');
             $table->string('publisher');

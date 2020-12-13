@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('email');
             $table->string('address');
             $table->string('phone');
+            $table->string('image_icon');
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
