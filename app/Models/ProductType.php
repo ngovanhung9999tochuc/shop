@@ -11,4 +11,14 @@ class ProductType extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = [];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'product_type_id');
+    }
+
+    public function productTypeChildrent()
+    {
+        return $this->hasMany(ProductType::class, 'parent_id');
+    }
 }

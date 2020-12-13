@@ -12,4 +12,14 @@ class Bill extends Model
     use SoftDeletes;
     protected $guarded = [];
 
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'bill_details')->withPivot('quantity', 'unit_price')
+            ->withTimestamps();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

@@ -17,7 +17,6 @@ class CreateProductTypesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('icon');
-            $table->string('key_code');
             $table->integer('parent_id')->default(0);
             $table->softDeletes();
             $table->timestamps();

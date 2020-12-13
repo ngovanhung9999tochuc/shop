@@ -11,4 +11,9 @@ class Menu extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = [];
+
+    public function menuChildrent()
+    {
+        return $this->hasMany(Menu::class, 'parent_id');
+    }
 }

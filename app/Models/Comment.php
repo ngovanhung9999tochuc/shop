@@ -11,4 +11,9 @@ class Comment extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = [];
+
+    public function commentChildrent()
+    {
+        return $this->hasMany(Comment::class, 'parent_id');
+    }
 }
