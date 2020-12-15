@@ -6,7 +6,8 @@
 @endsection
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    @include("back_end.parials.content_header")
+    @include("back_end.parials.content_header",['title'=>'Danh sách sản phẩm',
+    'name'=>'product','key'=>'list','route'=>route('product.index')])
     <!-- /.content-header -->
 
     <!-- Main content -->

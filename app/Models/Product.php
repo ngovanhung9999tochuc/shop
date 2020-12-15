@@ -14,7 +14,7 @@ class Product extends Model
     protected $casts = [
         'specifications' => 'array'
     ];
-
+    public $incrementing = false;
     public function bills()
     {
         return $this->belongsToMany(Bill::class, 'bill_details')->withPivot('quantity', 'unit_price')

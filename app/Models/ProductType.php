@@ -17,8 +17,13 @@ class ProductType extends Model
         return $this->hasMany(Product::class, 'product_type_id');
     }
 
-    public function productTypeChildrent()
+    public function productTypeChildrents()
     {
         return $this->hasMany(ProductType::class, 'parent_id');
+    }
+
+    public function productTypeParent()
+    {
+        return $this->belongsTo(ProductType::class, 'parent_id');
     }
 }

@@ -19,9 +19,9 @@ class CreateProductsTable extends Migration
             $table->integer('unit_price')->nullable();
             $table->integer('promotion_price')->nullable();
             $table->string('image');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->json('specifications');
-            $table->text('specifications_all');
+            $table->text('specifications_all')->nullable();
             $table->integer('product_type_id');
             $table->integer('user_id');
             $table->string('publisher');
