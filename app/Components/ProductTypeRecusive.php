@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Components;
+
 use App\Models\ProductType;
 
 class ProductTypeRecusive
@@ -14,27 +15,50 @@ class ProductTypeRecusive
 
     public function ProductTypeRecusiveAdd($parent_id = 0, $subMark = '')
     {
-        $data=ProductType::where('parent_id',$parent_id)->get();
+        $data = ProductType::where('parent_id', $parent_id)->get();
         foreach ($data as $key => $value) {
-            $this->htmlOption.='<option value="'.$value->id.'">'.$subMark.$value->name.'</option>';
-            $this->ProductTypeRecusiveAdd($value->id,$subMark.'-- ');
+            $this->htmlOption .= '<option value="' . $value->id . '">' . $subMark . $value->name . '</option>';
+            $this->ProductTypeRecusiveAdd($value->id, $subMark . '-- ');
         }
         return $this->htmlOption;
     }
 
-    public function ProductTypeRecusiveEdit($id,$parent_id = 0, $subMark = '')
+    public function ProductTypeRecusiveEdit($id, $parent_id = 0, $subMark = '')
     {
-        $data=ProductType::where('parent_id',$parent_id)->get();
+        $data = ProductType::where('parent_id', $parent_id)->get();
         foreach ($data as $key => $value) {
             if (!empty($id) && $id == $value['id']) {
-                $this->htmlOption.='<option selected value="'.$value->id.'">'.$subMark.$value->name.'</option>';
-            }else{
-                $this->htmlOption.='<option value="'.$value->id.'">'.$subMark.$value->name.'</option>';
+                $this->htmlOption .= '<option selected value="' . $value->id . '">' . $subMark . $value->name . '</option>';
+            } else {
+                $this->htmlOption .= '<option value="' . $value->id . '">' . $subMark . $value->name . '</option>';
             }
-           
-            $this->ProductTypeRecusiveEdit($id,$value->id,$subMark.'-- ');
+
+            $this->ProductTypeRecusiveEdit($id, $value->id, $subMark . '-- ');
         }
         return $this->htmlOption;
     }
-   
+
+
+    public function ProductTypeLoopAdd($parent_id = 0)
+    {
+        $data = ProductType::where('parent_id', $parent_id)->get();
+        foreach ($data as $key => $value) {
+            $this->htmlOption .= '<option value="' . $value->id . '">' . $value->name . '</option>';
+        }
+        return $this->htmlOption;
+    }
+
+
+    public function ProductTypeLoopEdit($id, $parent_id = 0)
+    {
+        $data = ProductType::where('parent_id', $parent_id)->get();
+        foreach ($data as $key => $value) {
+            if (!empty($id) && $id == $value['id']) {
+                $this->htmlOption .= '<option selected value="' . $value->id . '">' . $value->name . '</option>';
+            } else {
+                $this->htmlOption .= '<option value="' . $value->id . '">' . $value->name . '</option>';
+            }
+        }
+        return $this->htmlOption;
+    }
 }

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
-use App\Models\Product;
+use App\Http\Controllers\ProductTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +32,13 @@ Route::prefix('admin')->group(function () {
     Route::post('/product/search', [ProductController::class, 'search'])->name('product.search');
     Route::get('/product/price/{product}', [ProductController::class, 'getPrice'])->name('product.price');
     Route::post('/product/price/{product}', [ProductController::class, 'setPrice'])->name('product.price');
+
+    Route::get('/producttype', [ProductTypeController::class, 'index'])->name('producttype.index');
+    Route::get('/producttype/create', [ProductTypeController::class, 'create'])->name('producttype.create');
+    Route::post('/producttype', [ProductTypeController::class, 'store'])->name('producttype.store');
+    Route::get('/producttype/{producttype}', [ProductTypeController::class, 'show'])->name('producttype.show');
+    Route::get('/producttype/{producttype}/edit', [ProductTypeController::class, 'edit'])->name('producttype.edit');
+    Route::put('/producttype/{producttype}', [ProductTypeController::class, 'update'])->name('producttype.update');
+    Route::delete('/producttype/{producttype}', [ProductTypeController::class, 'destroy'])->name('producttype.destroy');
+    Route::post('/producttype/search', [ProductTypeController::class, 'search'])->name('producttype.search');
 });

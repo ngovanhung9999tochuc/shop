@@ -31,6 +31,15 @@
             </p>
           </a>
         </li>
+        
+        <li class="nav-item">
+          <a href="{{route('producttype.index')}}" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              LOẠI SẢN PHẨM
+            </p>
+          </a>
+        </li>
 
       </ul>
     </nav>
