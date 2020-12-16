@@ -157,7 +157,33 @@ class ProductRepository
         }
     }
 
-    public function search()
+    public function search($request)
     {
+        return $this->product->where('name', 'like', '%' . $request->table_search . '%')
+            ->orWhere('id', 'like', '%' . $request->table_search . '%')->paginate(10);
+    }
+
+    public function setPrice($request, $id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $dataProductUpdate = [
+                'unit_price' => $request->unit_price,
+                'promotion_price' => $request->promotion_price,
+            ];
+            $this->product->find($id)->update($dataProductUpdate);
+
+            DB::commit();
+            return $this->successfulMessage('thêm giá', 'sản phẩm');
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
+            return $this->errorMessage('thêm giá', 'sản phẩm');
+        }
+    }
+    public function getPrice($id)
+    {
+        
     }
 }

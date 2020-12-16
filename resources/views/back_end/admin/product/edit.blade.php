@@ -132,7 +132,7 @@
                             @enderror
                         </div>
                         
-                        <button type="submit" class="btn btn-primary">Gửi</button>
+                        <button type="submit" class="btn btn-primary" style="width: 100px; margin-left: 40%;">Gửi</button>
                     </form>
                 </div>
             </div>

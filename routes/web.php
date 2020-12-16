@@ -29,5 +29,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('product.edit');
     Route::put('/product/{product}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('/product/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
-    
+    Route::post('/product/search', [ProductController::class, 'search'])->name('product.search');
+    Route::get('/product/price/{product}', [ProductController::class, 'getPrice'])->name('product.price');
+    Route::post('/product/price/{product}', [ProductController::class, 'setPrice'])->name('product.price');
 });

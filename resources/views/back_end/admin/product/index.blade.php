@@ -18,14 +18,15 @@
                         <div class="card-header">
                             <a class="btn btn-success btn-sm" style="width: 100px;" href="{{route('product.create')}}"><i class="fas fa-plus"> Thêm mới</i></a>
                             <div class="card-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-
+                                <form method="POST" action="{{route('product.search')}}">
+                                    @csrf @method('post')
+                                    <div class="input-group input-group-sm" style="width: 250px;">
+                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -52,7 +53,7 @@
                                         <td>{{$product->promotion_price}}%</td>
                                         <td><img src="{{$product->image}}" style="width:100px ; height: 100px;" /></td>
                                         <td>{{$product->productType->productTypeParent->name." ".$product->productType->name}}</td>
-                                        <td><a class="btn btn-success btn-sm" style="width: 100px;" href=""><i class="fas fa-plus"> Nhập giá</i></a></td>
+                                        <td><a class="btn btn-success btn-sm" style="width: 100px;" href="{{route('product.price',$product->id)}}"><i class="fas fa-plus"> Nhập giá</i></a></td>
                                         <td>
                                             <a class="btn btn-info btn-sm" href="{{route('product.edit',$product->id)}}"><i class="fas fa-pencil-alt"></i></a>
                                             <button data-url="{{route('product.destroy',$product->id)}}" value="{{$product->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>

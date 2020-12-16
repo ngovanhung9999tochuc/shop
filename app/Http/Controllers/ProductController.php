@@ -101,4 +101,22 @@ class ProductController extends Controller
     {
         return $this->repository->destroy($id);
     }
+
+    public function search(Request $request)
+    {
+        $products = $this->repository->search($request);
+        return view('back_end.admin.product.index', ['products' => $products]);
+    }
+
+    public function getPrice($id)
+    {
+        $product = Product::find($id);
+        return view('back_end.admin.product.price', ['product' => $product]);
+    }
+
+    public function setPrice(Request $request, $id)
+    {
+        $result = $this->repository->setPrice($request, $id);
+        return redirect()->back()->with('message', $result);
+    }
 }

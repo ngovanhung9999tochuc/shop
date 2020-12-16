@@ -117,7 +117,7 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Gửi</button>
+                        <button style="width: 100px; margin-left: 40%;" type="submit" class="btn btn-primary">Gửi</button>
                     </form>
                 </div>
             </div>
