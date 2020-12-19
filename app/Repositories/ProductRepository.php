@@ -77,7 +77,7 @@ class ProductRepository
             }
             DB::commit();
             return $this->successfulMessage('thêm', 'sản phẩm');
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
             return $this->errorMessage('thêm', 'sản phẩm');
@@ -132,7 +132,7 @@ class ProductRepository
             }
             DB::commit();
             return $this->successfulMessage('sửa', 'sản phẩm');
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
             return $this->errorMessage('sửa', 'sản phẩm');

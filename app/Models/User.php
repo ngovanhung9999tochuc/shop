@@ -44,7 +44,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function Bills()
+    public function bills()
     {
         return $this->hasMany(Bill::class, 'user_id');
     }
@@ -69,5 +69,10 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'role_users', 'user_id', 'role_id')->withTimestamps();
+    }
+
+    public function billins()
+    {
+        return $this->hasMany(BillIn::class, 'user_id');
     }
 }

@@ -43,7 +43,7 @@ class ProductTypeRepository
             $this->productType->create($dataProductTypeCreate);
             DB::commit();
             return $this->successfulMessage('thêm', 'loại sản phẩm');
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
             return $this->errorMessage('thêm', 'loại sản phẩm');
@@ -67,7 +67,7 @@ class ProductTypeRepository
             $this->productType->find($id)->update($dataProductTypeCreate);
             DB::commit();
             return $this->successfulMessage('sửa', 'loại sản phẩm');
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
             return $this->errorMessage('sửa', 'loại sản phẩm');

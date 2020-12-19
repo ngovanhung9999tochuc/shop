@@ -22,4 +22,11 @@ class BillIn extends Model
     {
         return $this->belongsTo(Supplier::class, 'supplier_id');
     }
+
+  
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
