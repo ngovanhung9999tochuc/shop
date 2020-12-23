@@ -1,6 +1,7 @@
 @extends('back_end.layout.layout')
 @section('content')
 @section('css')
+<link href="{{asset('Admin/admin/bill_in/add/add.css')}}" rel="stylesheet" />
 <style>
     #product-list-are-looking-for {
 
@@ -75,15 +76,11 @@
                                             <label>Nhà cung ứng</label>
                                             <div class="row">
                                                 <div class="col-md-10">
-                                                    <select class="form-control @error('supplier_id') is-invalid @enderror" name="supplier_id">
-                                                        <option value="">Chọn nhà cung ứng</option>
-                                                        @foreach($suppliers as $supplier)
-                                                        <option value="{{$supplier->id}}">{{$supplier->name}}</option>
-                                                        @endforeach
+                                                    <select id="select-supplers" class="form-control" name="supplier_id">
                                                     </select>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <a class="btn btn-success" style="width: 100%; height:37px ; " href="{{route('supplier.create')}}"><i class="fas fa-plus"></i></a>
+                                                    <a id="btn-add-supplier" class="btn btn-success" style="width: 100%; height:37px ; "><i class="fas fa-plus"></i></a>
                                                 </div>
 
                                             </div>
@@ -107,11 +104,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Tổng số lượng</label>
-                                            <input type="text" class="form-control" id="total-quantity" name="quantity" value="" readonly >
+                                            <input type="text" class="form-control" id="total-quantity" name="quantity" value="" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label>Tổng cộng</label>
-                                            <input type="text" class="form-control" id="total-price" name="total_price" value="" readonly >
+                                            <input type="text" class="form-control" id="total-price" name="total_price" value="" readonly>
                                         </div>
                                         <input type="hidden" id="data-product-bill" name="data_product_bill" value="">
                                     </div>
@@ -126,6 +123,55 @@
                     </div>
                 </div>
             </div>
+            <div id="id01" class="modal col-md-12">
+                <div class="modal-content animate">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    </div>
+
+                    <div class="container">
+                        <div class="container">
+                            <div class="col-md-12">
+                                <div class="card card-info">
+                                    <div class="card-header" style="background-color: #28a745;">
+                                        <h3 class="card-title"><b>Thêm nhà cung cấp</b></h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <form id="form-supplier" method="POST">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label>Tên nhà cung cấp</label>
+                                                <input type="text" name="name" class="form-control" value="" placeholder="nhập tên nhà cung cấp">
+                                                <div id="validation-name"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input type="email" name="email" class="form-control" value="" placeholder="nhập email">
+                                                <div id="validation-email"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Địa chỉ</label>
+                                                <input type="text" name="address" class="form-control" value="" placeholder="nhập địa chỉ">
+                                                <div id="validation-address"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Số điện thoại</label>
+                                                <input type="text" name="phone" class="form-control" value="" placeholder="nhập số điện thoại">
+                                                <div id="validation-phone"></div>
+                                            </div>
+                                            <button style="width: 100px; margin-left: 40%;" type="submit" class="btn btn-primary">Lưu</button>
+                                        </form>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -133,6 +179,7 @@
 </div>
 @endsection @section('js')
 <script src="{{asset('Admin/admin/bill_in/add/add.js')}}"></script>
+<script src="{{asset('Admin/admin/bill_in/add/add1.js')}}"></script>
 @php
 if(Session::has('message')){
 echo Session::get('message');

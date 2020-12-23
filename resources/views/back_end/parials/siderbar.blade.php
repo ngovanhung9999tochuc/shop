@@ -2,7 +2,7 @@
   <!-- Brand Logo -->
   <a href="index3.html" class="brand-link" style="text-align: center;">
    
-    <span class="brand-text font-weight-light" >QUẢN TRỊ</span>
+    <span class="brand-text font-weight-light" >Quản trị</span>
   </a>
 
   <!-- Sidebar -->
@@ -27,7 +27,7 @@
           <a href="{{route('product.index')}}" class="nav-link">
             <i class="nav-icon fa fa-barcode"></i>
             <p>
-              SẢN PHẨM
+              Sản phẩm
             </p>
           </a>
         </li>
@@ -36,7 +36,7 @@
           <a href="{{route('producttype.index')}}" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
             <p>
-              LOẠI SẢN PHẨM
+              Loại sản phẩm
             </p>
           </a>
         </li>
@@ -45,7 +45,7 @@
           <a href="{{route('supplier.index')}}" class="nav-link">
             <i class="nav-icon fas fa-industry"></i>
             <p>
-              NHÀ CUNG ỨNG
+              Nhà cung cấp
             </p>
           </a>
         </li>
@@ -54,7 +54,16 @@
           <a href="{{route('billin.index')}}" class="nav-link">
             <i class="nav-icon fa fa-truck"></i>
             <p>
-              NHẬP KHO
+              Nhập kho
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="{{route('user.index')}}" class="nav-link">
+            <i class="nav-icon fa fa-users"></i>
+            <p>
+              Người dùng
             </p>
           </a>
         </li>

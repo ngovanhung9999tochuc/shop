@@ -35,10 +35,11 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Nhà cung ứng</th>
                                         <th>Ngày nhập</th>
+                                        <th>Nhà cung ứng</th>
                                         <th>Số Lượng</th>
                                         <th>Tổng tiền</th>
+                                        <th>Người nhập</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </thead>
@@ -46,10 +47,11 @@
                                     @foreach($bill_ins as $bill)
                                     <tr>
                                         <td>{{$bill->id}}</td>
-                                        <td>{{$bill->supplier->name}}</td>
                                         <td>{{date("m/d/y g:i A", strtotime($bill->input_date))}}</td>
+                                        <td>{{$bill->supplier->name}}</td>
                                         <td>{{$bill->quantity}}</td>
                                         <td>{{number_format($bill->total_price)}}đ</td>
+                                        <td>{{$bill->user->name}}</td>
                                         <td>
                                             <a class="btn btn-info btn-sm" href="{{route('billin.show',$bill->id)}}"><i class="fas fa-search-plus"></i></a>
                                             <button data-url="{{route('billin.destroy',$bill->id)}}" value="{{$bill->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>

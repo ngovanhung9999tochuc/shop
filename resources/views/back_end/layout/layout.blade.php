@@ -31,9 +31,10 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> @yield('css')
+  
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed" style="font-family:'Roboto',sans-serif; font-size: 14px; font-weight:600 ">
+<body class="hold-transition sidebar-mini layout-fixed" style="font-family:sans-serif; font-size: 14px; font-weight:450 ">
   <div class="wrapper">
 
     <!-- Navbar -->
@@ -94,6 +95,7 @@
   <!-- AdminLTE for demo purposes -->
   <script src="admin/dist/js/demo.js"></script>
   <script src="{{asset('vendor/sweetalert2@10.js')}}"></script>
+  
   @yield('js')
 </body>
 

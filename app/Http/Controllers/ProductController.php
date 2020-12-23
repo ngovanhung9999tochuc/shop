@@ -111,12 +111,12 @@ class ProductController extends Controller
     public function getPrice($id)
     {
         $product = Product::find($id);
-        return view('back_end.admin.product.price', ['product' => $product]);
+        return json_encode($product);
     }
 
     public function setPrice(Request $request, $id)
     {
         $result = $this->repository->setPrice($request, $id);
-        return redirect()->back()->with('message', $result);
+        return json_encode((object) array('result' => $result));
     }
 }

@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SupplierAddRequest;
-use App\Models\Supplier;
-use App\Repositories\SupplierRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
-
-class SupplierController extends Controller
+class UserController extends Controller
 {
-
+    ///storage/product/DTSS000001/IFcdwv88mgjB3PNJ9Aly.png
+    ///storage/product/DTSS000001/v1pYBeKGHiFFxyt1F9fW.jpg
     protected $repository;
 
-    public function __construct(SupplierRepository $repository)
+    public function __construct(UserRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -24,8 +22,9 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        $suppliers = $this->repository->getAll();
-        return view('back_end.admin.supplier.index', ['suppliers' => $suppliers]);
+        $roles = $this->repository->getRoles();
+        $users = $this->repository->getAll();
+        return view('back_end.admin.user.index', ['users' => $users, 'roles' => $roles]);
     }
 
     /**
@@ -35,7 +34,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        //return view('back_end.admin.supplier.add');
+        //
     }
 
     /**
@@ -46,7 +45,7 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-       return $this->repository->create($request);
+        //
     }
 
     /**
@@ -55,9 +54,10 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+       $result=$this->repository->show($request);
+       echo json_encode($result);
     }
 
     /**
@@ -66,10 +66,9 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit($id)
     {
-        $supplier = Supplier::find($request->id);
-        return json_encode((object) array('supplier' => $supplier));
+        //
     }
 
     /**
@@ -79,9 +78,9 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        return $this->repository->update($request);
+        //
     }
 
     /**
@@ -95,9 +94,15 @@ class SupplierController extends Controller
         return $this->repository->destroy($id);
     }
 
+    public function updateRole(Request $request)
+    {
+        $this->repository->updateRole($request);
+    }
+
     public function search(Request $request)
     {
-        $suppliers = $this->repository->search($request);
-        return view('back_end.admin.supplier.index', ['suppliers' => $suppliers]);
+        $roles = $this->repository->getRoles();
+        $users = $this->repository->search($request);
+        return view('back_end.admin.user.index', ['users' => $users, 'roles' => $roles]);
     }
 }

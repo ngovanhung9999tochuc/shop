@@ -3,7 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
 class SupplierAddRequest extends FormRequest
 {
     /**
@@ -43,4 +44,6 @@ class SupplierAddRequest extends FormRequest
             'phone.digits' => 'Số điện thoại phải là 10 số'
         ];
     }
+   
+  
 }

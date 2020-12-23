@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\BillInController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,14 +46,15 @@ Route::prefix('admin')->group(function () {
 
 
     Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier.index');
-    Route::get('/supplier/create', [SupplierController::class, 'create'])->name('supplier.create');
-    Route::post('/supplier', [SupplierController::class, 'store'])->name('supplier.store');
+    //Route::get('/supplier/create', [SupplierController::class, 'create'])->name('supplier.create');
+    Route::post('/supplier/store', [SupplierController::class, 'store'])->name('supplier.store');
     //Route::get('/supplier/{supplier}', [SupplierController::class, 'show'])->name('supplier.show');
-    Route::get('/supplier/{supplier}/edit', [SupplierController::class, 'edit'])->name('supplier.edit');
-    Route::put('/supplier/{supplier}', [SupplierController::class, 'update'])->name('supplier.update');
+    Route::post('/supplier/edit', [SupplierController::class, 'edit'])->name('supplier.edit');
+    Route::post('/supplier/update', [SupplierController::class, 'update'])->name('supplier.update');
     Route::delete('/supplier/{supplier}', [SupplierController::class, 'destroy'])->name('supplier.destroy');
     Route::post('/supplier/search', [SupplierController::class, 'search'])->name('supplier.search');
-
+    //bill in
+    Route::post('/billin/supplier', [BillInController::class, 'getSuppliers'])->name('billin.supplier');
     Route::post('/billin/products', [BillInController::class, 'searchProducts'])->name('billin.products');
     Route::get('/billin', [BillInController::class, 'index'])->name('billin.index');
     Route::get('/billin/create', [BillInController::class, 'create'])->name('billin.create');
@@ -63,4 +65,15 @@ Route::prefix('admin')->group(function () {
     Route::delete('/billin/{billin}', [BillInController::class, 'destroy'])->name('billin.destroy');
     Route::post('/billin/search', [BillInController::class, 'search'])->name('billin.search');
     
+
+     //user
+     Route::get('/user', [UserController::class, 'index'])->name('user.index');
+     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+     Route::post('/user', [UserController::class, 'store'])->name('user.store');
+     Route::post('/user/show', [UserController::class, 'show'])->name('user.show');
+     Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
+     Route::put('/user/{user}', [UserController::class, 'update'])->name('user.update');
+     Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+     Route::post('/user/search', [UserController::class, 'search'])->name('user.search');
+     Route::post('/user/role', [UserController::class, 'updateRole'])->name('user.role');
 });

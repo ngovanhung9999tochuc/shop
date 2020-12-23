@@ -1,8 +1,7 @@
 @extends('back_end.layout.layout')
 @section('content')
 @section('css')
-
-
+<link href="{{asset('Admin/admin/product/index/index.css')}}" rel="stylesheet" />
 @endsection
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -49,14 +48,14 @@
                                     <tr>
                                         <td>{{$product->id}}</td>
                                         <td>{{$product->name}}</td>
-                                        <td>{{number_format($product->unit_price)}}</td>
-                                        <td>{{$product->promotion_price}}%</td>
+                                        <td id="td-unit-price-{{$product->id}}">{{number_format($product->unit_price)}}.0</td>
+                                        <td id="td-promotion-price-{{$product->id}}">{{$product->promotion_price}}%</td>
                                         <td><img src="{{$product->image}}" style="width:100px ; height: 100px;" /></td>
                                         <td>{{$product->productType->productTypeParent->name." ".$product->productType->name}}</td>
-                                        <td><a class="btn btn-success btn-sm" style="width: 100px;" href="{{route('product.price',$product->id)}}"><i class="fas fa-plus"> Nhập giá</i></a></td>
+                                        <td><button id="price_{{$product->id}}" class="btn btn-success btn-sm btn-price" style="width: 100px;"><i class="fas fa-plus"> Nhập giá</i></button></td>
                                         <td>
-                                            <a class="btn btn-info btn-sm" href="{{route('product.edit',$product->id)}}"><i class="fas fa-pencil-alt"></i></a>
-                                            <button data-url="{{route('product.destroy',$product->id)}}" value="{{$product->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
+                                            <a title="Sửa sản phẩm" class="btn btn-info btn-sm" href="{{route('product.edit',$product->id)}}"><i class="fas fa-pencil-alt"></i></a>
+                                            <button title="Xóa" data-url="{{route('product.destroy',$product->id)}}" value="{{$product->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -69,6 +68,50 @@
                     <!-- /.card -->
                 </div>
                 {{$products->links()}}
+                <div id="id01" class="modal col-md-12">
+                    <div class="modal-content animate">
+                        <div class="imgcontainer">
+                            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                        </div>
+
+                        <div class="container">
+                            <div class="container">
+                                <div class="col-md-12">
+                                    <div class="card card-info">
+                                        <div class="card-header" style="background-color: #28a745;">
+                                            <h3 class="card-title"><b>Thêm giá bán</b></h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <form id="form-price" method="POST">
+                                                @csrf
+                                                <h6 class="mt-3 "><b>Giá bán</b></h6>
+                                                <div class="input-group mb-3">
+                                                    <input type="number" min="0" class="form-control" value="0" name="unit_price">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">Đồng</span>
+                                                    </div>
+
+                                                </div>
+
+                                                <h6 class="mt-3 "><b>Khuyến mãi</b></h6>
+                                                <div class="input-group mb-3">
+                                                    <input type="number" min="0" class="form-control" value="0" name="promotion_price">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">%</span>
+                                                    </div>
+
+                                                </div>
+                                                <button type="submit" class="btn btn-primary" style="width: 100px; margin-left: 40%;">Gửi</button>
+                                            </form>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -79,5 +122,7 @@
 </div>
 @endsection
 @section('js')
+<script src="{{asset('vendor/jquery-2.2.0.min.js')}}"></script>
 <script src="{{asset('Admin/admin/delete.js')}}"></script>
+<script src="{{asset('Admin/admin/product/index/index.js')}}"></script>
 @endsection

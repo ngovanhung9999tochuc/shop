@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\BillIn;
 use App\Models\Product;
+use App\Models\Supplier;
 use App\Traits\StorageImageTrait;
 use App\Traits\MessageTrait;
 use Exception;
@@ -39,7 +40,7 @@ class BillInRepository
 
         try {
             DB::beginTransaction();
-            if(empty((array)json_decode($request->data_product_bill))){
+            if (empty((array)json_decode($request->data_product_bill))) {
                 return $this->infoMessage("Lưu không thành công, phiếu không có sản phẩm nào !");
             }
             $bill_in_detail = [];
@@ -114,5 +115,10 @@ class BillInRepository
             }
         }
         return $result;
+    }
+    public function getSuppliers()
+    {
+        $suppliers = Supplier::all();
+        return response()->json(array('success' => true, 'suppliers' => $suppliers), 200);
     }
 }

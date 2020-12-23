@@ -35,8 +35,7 @@ class BillInController extends Controller
      */
     public function create()
     {
-        $suppliers = Supplier::all();
-        return view('back_end.admin.bill_in.add', ['suppliers' => $suppliers]);
+        return view('back_end.admin.bill_in.add');
     }
 
     /**
@@ -106,5 +105,10 @@ class BillInController extends Controller
     {
         $result = $this->repository->searchProducts($request);
         echo json_encode($result);
+    }
+
+    public function getSuppliers(Request $request)
+    {
+        return $this->repository->getSuppliers();
     }
 }

@@ -175,11 +175,11 @@ class ProductRepository
             $this->product->find($id)->update($dataProductUpdate);
 
             DB::commit();
-            return $this->successfulMessage('thêm giá', 'sản phẩm');
+            return true;
         } catch (\Exception $exception) {
             DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
-            return $this->errorMessage('thêm giá', 'sản phẩm');
+            return false;
         }
     }
     public function getPrice($id)
