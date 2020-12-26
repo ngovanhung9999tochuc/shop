@@ -48,7 +48,7 @@
                                     <tr>
                                         <td>{{$product->id}}</td>
                                         <td>{{$product->name}}</td>
-                                        <td id="td-unit-price-{{$product->id}}">{{number_format($product->unit_price)}}.0</td>
+                                        <td id="td-unit-price-{{$product->id}}">{{number_format($product->unit_price)}}đ</td>
                                         <td id="td-promotion-price-{{$product->id}}">{{$product->promotion_price}}%</td>
                                         <td><img src="{{$product->image}}" style="width:100px ; height: 100px;" /></td>
                                         <td>{{$product->productType->productTypeParent->name." ".$product->productType->name}}</td>

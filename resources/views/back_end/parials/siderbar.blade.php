@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="index3.html" class="brand-link" style="text-align: center;">
-   
-    <span class="brand-text font-weight-light" >Quản trị</span>
+
+    <span class="brand-text font-weight-light">Quản trị</span>
   </a>
 
   <!-- Sidebar -->
@@ -31,7 +31,7 @@
             </p>
           </a>
         </li>
-        
+
         <li class="nav-item">
           <a href="{{route('producttype.index')}}" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
@@ -73,6 +73,15 @@
             <i class="nav-icon fa fa-shopping-cart"></i>
             <p>
               Đơn hàng
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="{{route('archive.index')}}" class="nav-link">
+            <i class="nav-icon fa fa-list-alt"></i>
+            <p>
+              Tồn kho
             </p>
           </a>
         </li>

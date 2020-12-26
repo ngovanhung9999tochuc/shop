@@ -49,7 +49,6 @@
                     //su ly user
                     imageAvata.src = user['image_icon'];
                     fullName.innerHTML = user['name'];
-
                     //su ly thong tin
                     let textContent = '';
                     textContent += '<div class="card-body">';
@@ -103,7 +102,7 @@
                     textContent += '<h6 class="mb-0">Tổng Tiền</h6>';
                     textContent += '</div>';
                     textContent += '<div class="col-sm-9 text-secondary">';
-                    textContent += bill['total'];
+                    textContent += Number(bill['total']).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ';
                     textContent += '</div>';
                     textContent += '</div>';
                     textContent += '</div>';
@@ -117,7 +116,7 @@
                         td += '<td>' + product['id'] + '</td>';
                         td += '<td>' + product['name'] + '</td>';
                         td += '<td>' + product['pivot']['quantity'] + '</td>';
-                        td += '<td>' + product['pivot']['unit_price'] + '</td>';
+                        td += '<td>' + Number(product['pivot']['unit_price']).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ' + '</td>';
                         td += '<td><img src="' + product['image'] + '" style="width:80px ; height: 80px;" /></td>';
                         td += '</tr>';
                         tr += td;
@@ -131,12 +130,6 @@
             //modal.style.display = "block";
         });
     });
-
-
-
-
-
-
 
 
     //change status

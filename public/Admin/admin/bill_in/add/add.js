@@ -47,7 +47,7 @@
                                 <td style="width: 180px;">' + dataProductBill[id].name + '</td>\
                                 <td class="text-center" style="width: 90px;"><input id="quantity-' + dataProductBill[id].id + '" type="number" min="0" class=" form-control" value="' + dataProductBill[id].quantity + '"></td>\
                                 <td class="text-center" style="width: 150px;"><input id="price-' + dataProductBill[id].id + '" type="number" min="0" class=" form-control" value="' + dataProductBill[id].original_price + '"></td>\
-                                <td class="text-center" id="total-' + dataProductBill[id].id + '">' + (dataProductBill[id].quantity * dataProductBill[id].original_price).toLocaleString('vi', { style: 'currency', currency: 'VND' }) + '</td>\
+                                <td class="text-center" id="total-' + dataProductBill[id].id + '">' + (dataProductBill[id].quantity * dataProductBill[id].original_price).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ' + '</td>\
                                 <td class="text-center" style="width: 50px;"><i id="btnDelete-' + dataProductBill[id].id + '" class="fas fa-trash"></i></td>';
                             proSearchAppend.appendChild(trProduct);
 
@@ -58,13 +58,13 @@
                             let btnDelete = document.getElementById('btnDelete-' + dataProductBill[id].id);
                             inputQuantity.addEventListener('change', function() {
                                 dataProductBill[id].quantity = inputQuantity.value;
-                                inputTotal.innerHTML = (dataProductBill[id].quantity * dataProductBill[id].original_price).toLocaleString('vi', { style: 'currency', currency: 'VND' });
+                                inputTotal.innerHTML = (dataProductBill[id].quantity * dataProductBill[id].original_price).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ';
                                 totalPriceAndQuantity();
                             });
 
                             inputPrice.addEventListener('change', function() {
                                 dataProductBill[id].original_price = inputPrice.value;
-                                inputTotal.innerHTML = (dataProductBill[id].quantity * dataProductBill[id].original_price).toLocaleString('vi', { style: 'currency', currency: 'VND' });
+                                inputTotal.innerHTML = (dataProductBill[id].quantity * dataProductBill[id].original_price).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ';
                                 totalPriceAndQuantity();
                             });
 
@@ -88,7 +88,7 @@
                                 Total += dataProductBill[key]['original_price'] * dataProductBill[key]['quantity'];
                             }
                             totalQuantity.value = quantity;
-                            totalPrice.value = Total.toLocaleString('vi', { style: 'currency', currency: 'VND' });
+                            totalPrice.value = Total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ';
                             inputProductBill.value = JSON.stringify(dataProductBill);
                         }
                     });

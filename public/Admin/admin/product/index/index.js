@@ -49,7 +49,7 @@
                     showConfirmButton: false,
                     timer: 4000
                 });
-                tdUnitPrice.innerHTML = Number(unitPrice).toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+                tdUnitPrice.innerHTML = Number(unitPrice).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ';
                 tdPromotionPrice.innerHTML = promotionPrice + '%';
             } else {
                 Swal.fire({

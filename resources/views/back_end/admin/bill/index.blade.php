@@ -101,7 +101,7 @@
                                         <td>{{$bill->user->name}}</td>
                                         <td>{{$bill->phone}}</td>
                                         <td>{{$bill->quantity}}</td>
-                                        <td>{{$bill->total}}</td>
+                                        <td>{{number_format($bill->total)}}đ</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button style="width: 110px;" type="button" id="btn-text-{{$bill->id}}" class="btn 

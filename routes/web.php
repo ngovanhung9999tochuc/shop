@@ -7,6 +7,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\BillInController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BillController;
+use App\Http\Controllers\ArchiveController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -77,7 +78,7 @@ Route::prefix('admin')->group(function () {
     Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
     Route::post('/user/search', [UserController::class, 'search'])->name('user.search');
     Route::post('/user/role', [UserController::class, 'updateRole'])->name('user.role');
-
+    //bill
     Route::get('/bill', [BillController::class, 'index'])->name('bill.index');
     Route::get('/bill/create', [BillController::class, 'create'])->name('bill.create');
     Route::post('/bill', [BillController::class, 'store'])->name('bill.store');
@@ -88,5 +89,16 @@ Route::prefix('admin')->group(function () {
     Route::post('/bill/search', [BillController::class, 'search'])->name('bill.search');
     Route::post('/bill/status', [BillController::class, 'changeStatus'])->name('bill.status');
     Route::post('/bill/search/status', [BillController::class, 'searchStatus'])->name('bill.search.status');
+
+    //archive
+    Route::get('/archive', [ArchiveController::class, 'index'])->name('archive.index');
+    // Route::get('/archive/create', [ArchiveController::class, 'create'])->name('archive.create');
+    // Route::post('/archive', [ArchiveController::class, 'store'])->name('archive.store');
+    // Route::get('/archive/{archive}', [ArchiveController::class, 'show'])->name('archive.show');
+    // Route::get('/archive/{archive}/edit', [ArchiveController::class, 'edit'])->name('archive.edit');
+    // Route::put('/archive/{archive}', [ArchiveController::class, 'update'])->name('archive.update');
+    // Route::delete('/archive/{archive}', [ArchiveController::class, 'destroy'])->name('archive.destroy');
+    Route::post('/archive/search', [ArchiveController::class, 'search'])->name('archive.search');
+    Route::post('/archive/producttype', [ArchiveController::class, 'searchProductType'])->name('archive.producttype');
 
 });
