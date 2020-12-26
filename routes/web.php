@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\BillInController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BillController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,16 +65,28 @@ Route::prefix('admin')->group(function () {
     //Route::put('/billin/{billin}', [BillInController::class, 'update'])->name('billin.update');
     Route::delete('/billin/{billin}', [BillInController::class, 'destroy'])->name('billin.destroy');
     Route::post('/billin/search', [BillInController::class, 'search'])->name('billin.search');
-    
 
-     //user
-     Route::get('/user', [UserController::class, 'index'])->name('user.index');
-     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
-     Route::post('/user', [UserController::class, 'store'])->name('user.store');
-     Route::post('/user/show', [UserController::class, 'show'])->name('user.show');
-     Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
-     Route::put('/user/{user}', [UserController::class, 'update'])->name('user.update');
-     Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
-     Route::post('/user/search', [UserController::class, 'search'])->name('user.search');
-     Route::post('/user/role', [UserController::class, 'updateRole'])->name('user.role');
+
+    //user
+    Route::get('/user', [UserController::class, 'index'])->name('user.index');
+    Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+    Route::post('/user', [UserController::class, 'store'])->name('user.store');
+    Route::post('/user/show', [UserController::class, 'show'])->name('user.show');
+    Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/user/{user}', [UserController::class, 'update'])->name('user.update');
+    Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::post('/user/search', [UserController::class, 'search'])->name('user.search');
+    Route::post('/user/role', [UserController::class, 'updateRole'])->name('user.role');
+
+    Route::get('/bill', [BillController::class, 'index'])->name('bill.index');
+    Route::get('/bill/create', [BillController::class, 'create'])->name('bill.create');
+    Route::post('/bill', [BillController::class, 'store'])->name('bill.store');
+    Route::post('/bill/show', [BillController::class, 'show'])->name('bill.show');
+    Route::get('/bill/{bill}/edit', [BillController::class, 'edit'])->name('bill.edit');
+    Route::put('/bill/{bill}', [BillController::class, 'update'])->name('bill.update');
+    Route::delete('/bill/{bill}', [BillController::class, 'destroy'])->name('bill.destroy');
+    Route::post('/bill/search', [BillController::class, 'search'])->name('bill.search');
+    Route::post('/bill/status', [BillController::class, 'changeStatus'])->name('bill.status');
+    Route::post('/bill/search/status', [BillController::class, 'searchStatus'])->name('bill.search.status');
+
 });

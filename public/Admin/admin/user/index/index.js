@@ -48,7 +48,6 @@
                     '_token': _token
                 },
                 success: function(data) {
-
                     let textContent = '';
                     textContent += '<div class="card-body">';
                     textContent += '<div class="row">';
@@ -118,7 +117,7 @@
                     for (const i of data[1]) {
                         textRoles += i['display_name'] + ', ';
                     }
-                    console.log(data[1]);
+
                     imageAvata.src = data[0]['image_icon'];
                     fullName.innerHTML = data[0]['name'];
                     roles.innerHTML = textRoles.substring(0, textRoles.length - 2);

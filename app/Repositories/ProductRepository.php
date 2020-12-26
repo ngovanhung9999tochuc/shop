@@ -182,8 +182,6 @@ class ProductRepository
             return false;
         }
     }
-    public function getPrice($id)
-    {
-        
-    }
+
+   
 }

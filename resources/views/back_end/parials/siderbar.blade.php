@@ -68,6 +68,14 @@
           </a>
         </li>
 
+        <li class="nav-item">
+          <a href="{{route('bill.index')}}" class="nav-link">
+            <i class="nav-icon fa fa-shopping-cart"></i>
+            <p>
+              Đơn hàng
+            </p>
+          </a>
+        </li>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

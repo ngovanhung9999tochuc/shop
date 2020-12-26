@@ -17,7 +17,7 @@
     btnAddSupplier.addEventListener('click', function() {
         modal.style.display = "block";
         clearErrorMessages()
-        clearFormValue();
+        formSupplier.reset();
     });
 
 
@@ -46,7 +46,7 @@
                     showConfirmButton: false,
                     timer: 4000
                 });
-                clearFormValue();
+                formSupplier.reset();
                 getSuppliers();
             } else {
                 Swal.fire({

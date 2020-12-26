@@ -18,7 +18,7 @@ window.onclick = function(event) {
 btnAddSupplier.addEventListener('click', function() {
     modal.style.display = "block";
     clearErrorMessages()
-    clearFormValue();
+    formSupplier.reset();
 });
 
 formSupplierEdit.addEventListener('submit', function(event) {
@@ -95,7 +95,7 @@ formSupplier.addEventListener('submit', function(event) {
                 showConfirmButton: false,
                 timer: 4000
             });
-            clearFormValue();
+            formSupplier.reset();
             let supplier = data['supplier'];
             let tr = document.createElement('tr');
             let dataSupplier = '';
@@ -137,6 +137,7 @@ function editSupplier(edit) {
     const _token = document.getElementById('_token');
     modal2.style.display = "block";
     clearErrorMessagesEdit();
+    formSupplierEdit.reset();
     let [x, y, id] = edit.id.split('-')
     request(base_url + '/admin/supplier/edit', JSON.stringify({
         '_token': _token.value,
@@ -152,8 +153,6 @@ function editSupplier(edit) {
 }
 
 
-
-
 function clearErrorMessages() {
     document.getElementById('validation-name').innerHTML = '';
     document.getElementById('validation-email').innerHTML = '';
@@ -167,15 +166,6 @@ function clearErrorMessagesEdit() {
     document.getElementById('validation-edit-address').innerHTML = '';
     document.getElementById('validation-edit-phone').innerHTML = '';
 }
-
-function clearFormValue() {
-    formSupplier['name'].value = '';
-    formSupplier['email'].value = '';
-    formSupplier['address'].value = '';
-    formSupplier['phone'].value = '';
-}
-
-
 
 function request(url = "", para = "", callbackSuccess = function() {}, callbackError = function(err) { console.log(err) }) {
     let xmlHttp = new XMLHttpRequest();
