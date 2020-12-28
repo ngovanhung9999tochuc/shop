@@ -85,6 +85,14 @@
             </p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="{{route('slide.index')}}" class="nav-link">
+            <i class="nav-icon fas fa-swatchbook"></i>
+            <p>
+              Bìa
+            </p>
+          </a>
+        </li>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

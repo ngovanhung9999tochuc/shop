@@ -2,10 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Slide;
+use App\Repositories\SlideRepository;
 use Illuminate\Http\Request;
 
 class SlideController extends Controller
 {
+
+    protected $repository;
+
+    public function __construct(SlideRepository $repository)
+    {
+        $this->repository = $repository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +22,8 @@ class SlideController extends Controller
      */
     public function index()
     {
-        //
+        $slides = $this->repository->getAll();
+        return view('back_end.admin.slide.index', ['slides' => $slides]);
     }
 
     /**
@@ -21,9 +31,9 @@ class SlideController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -34,7 +44,7 @@ class SlideController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $this->repository->create($request);
     }
 
     /**
@@ -54,9 +64,10 @@ class SlideController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $slide = Slide::find($request->id);
+        return json_encode((object) array('slide' => $slide));
     }
 
     /**
@@ -66,9 +77,9 @@ class SlideController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        return $this->repository->update($request);
     }
 
     /**
@@ -79,6 +90,12 @@ class SlideController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->repository->destroy($id);
+    }
+
+    public function search(Request $request)
+    {
+        $slides = $this->repository->search($request);
+        return view('back_end.admin.slide.index', ['slides' => $slides]);
     }
 }

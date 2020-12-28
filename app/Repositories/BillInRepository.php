@@ -72,10 +72,19 @@ class BillInRepository
     }
 
 
-    public function show($id)
+    public function show($request)
     {
-        $bill_in = $this->bill_in->find($id);
-        return $bill_in->products()->paginate(10);
+        try {
+            DB::beginTransaction();
+            $bill_in = $this->bill_in->find($request->id);
+            $products = $bill_in->products;
+            DB::commit();
+            return response()->json(array('success' => true, 'bill' => $bill_in), 200);
+        } catch (Exception $exception) {
+            DB::rollBack();
+            Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
+            return response()->json(array('fail' => false), 200);
+        }
     }
 
     public function destroy($id)

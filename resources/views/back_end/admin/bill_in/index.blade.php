@@ -1,7 +1,7 @@
 @extends('back_end.layout.layout')
 @section('content')
 @section('css')
-
+<link href="{{asset('Admin/admin/bill_in/index/index.css')}}" rel="stylesheet" />
 
 @endsection
 <div class="content-wrapper">
@@ -53,7 +53,7 @@
                                         <td>{{number_format($bill->total_price)}}đ</td>
                                         <td>{{$bill->user->name}}</td>
                                         <td>
-                                            <a class="btn btn-info btn-sm" href="{{route('billin.show',$bill->id)}}"><i class="fas fa-search-plus"></i></a>
+                                            <a id="btn_info-{{$bill->id}}" class="btn-show-info btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
                                             <button data-url="{{route('billin.destroy',$bill->id)}}" value="{{$bill->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
@@ -63,7 +63,41 @@
                         </div>
                     </div>
                 </div>
+                <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" />
                 {{$bill_ins->links()}}
+                <div id="id01" class="modal col-md-12">
+
+                    <div class="modal-content animate">
+                        <div class="imgcontainer">
+                            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                        </div>
+
+                        <div class="container">
+                            <div class="container">
+                                <div class="main-body">
+                                    <div class="row">
+                                        <div class="card-body table-responsive p-0">
+                                            <table class="table table-hover text-nowrap">
+                                                <thead>
+                                                    <tr>
+                                                    <th>ID</th>
+                                                        <th>Tên sản phẩm</th>
+                                                        <th>Số Lượng</th>
+                                                        <th>Giá nhập</th>
+                                                        <th>Hình ảnh</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="table-product">
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -71,4 +105,5 @@
 @endsection
 @section('js')
 <script src="{{asset('Admin/admin/delete.js')}}"></script>
+<script src="{{asset('Admin/admin/bill_in/index/index.js')}}"></script>
 @endsection

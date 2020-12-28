@@ -86,29 +86,29 @@
                         </div>
                         <div class="form-group">
                             <label>Hình ảnh sản phẩm</label>
-                            <input type="file" name="image_file" class="form-control-file @error('image_file') is-invalid @enderror" value=""> @error('image_file')
+                            <input type="file" id="image-file" name="image_file" class="form-control-file @error('image_file') is-invalid @enderror" value=""> @error('image_file')
                             <br />
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
 
-                            <div class="col-md-12" style="margin-top: 10px;">
+                            <div class="col-md-12">
                                 <div class="row">
-                                    <img src="{{$product->image}}" alt="" style="width: 100px; height: 100px;" />
+                                    <img src="{{$product->image}}" id="output-image-file"  style="width: 150px; height: 150px;margin-top: 10px;" />
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label>Hình ảnh chi tiết</label>
-                            <input type="file" name="detailed_image_file[]" multiple="multiple" class="form-control-file @error('detailed_image_file') is-invalid @enderror" value=""> @error('detailed_image_file')
+                            <input type="file" id="detailed-image-file" name="detailed_image_file[]" multiple="multiple" class="form-control-file @error('detailed_image_file') is-invalid @enderror" value=""> @error('detailed_image_file')
                             <br />
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
 
                             <div class="col-md-12" style="margin-top: 10px;">
-                                <div class="row">
+                                <div id="output-detailed-image-file" class="row">
                                     @foreach($product->productImages as $image)
-                                        <img style="margin-left: 10px; width: 100px; height: 100px;" src="{{$image->image}}" alt="" />
+                                    <img style="margin-left: 10px; width: 100px; height: 100px;" src="{{$image->image}}" alt="" />
                                     @endforeach
                                 </div>
                             </div>
@@ -131,13 +131,13 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        
+
                         <button type="submit" class="btn btn-primary" style="width: 100px; margin-left: 40%;">Gửi</button>
                     </form>
                 </div>
             </div>
 
-           
+
         </div>
     </section>
     <!-- /.content -->
@@ -146,6 +146,33 @@
 <script>
     $('#description').summernote();
     $('#specifications-all').summernote();
+    const imageFile = document.getElementById('image-file');
+    const detailedImageFile = document.getElementById('detailed-image-file');
+
+
+    //event
+    imageFile.addEventListener('change', function() {
+        const outputImageFile = document.getElementById('output-image-file');
+        outputImageFile.src = URL.createObjectURL(this.files[0]);
+        outputImageFile.style.height = '150px';
+        outputImageFile.style.width = '150px';
+        outputImageFile.style.marginTop = '10px';
+    });
+
+
+    detailedImageFile.addEventListener('change', function() {
+        const outputDetailedImageFile = document.getElementById('output-detailed-image-file');
+        outputDetailedImageFile.innerHTML = '';
+        let totalfiles = detailedImageFile.files.length;
+        for (let index = 0; index < totalfiles; index++) {
+            let img = document.createElement('img');
+            img.src = URL.createObjectURL(detailedImageFile.files[index]);
+            img.style.height = '100px';
+            img.style.width = '100px';
+            img.style.marginLeft = '10px';
+            outputDetailedImageFile.appendChild(img);
+        }
+    });
 </script>
 @php
 if(Session::has('message')){

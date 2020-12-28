@@ -56,10 +56,9 @@ class BillInController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        $bill_in_details = $this->repository->show($id);
-        return view('back_end.admin.bill_in.show', ['bill_in_details' => $bill_in_details]);
+        return $this->repository->show($request);
     }
 
     /**

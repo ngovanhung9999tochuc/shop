@@ -1,13 +1,13 @@
 @extends('back_end.layout.layout')
 @section('content')
 @section('css')
-<link href="{{asset('Admin/admin/producttype/index/index.css')}}" rel="stylesheet" />
-<link href="{{asset('Admin/admin/producttype/index/index2.css')}}" rel="stylesheet" />
+<link href="{{asset('Admin/admin/slide/index/index.css')}}" rel="stylesheet" />
+<link href="{{asset('Admin/admin/slide/index/index2.css')}}" rel="stylesheet" />
 @endsection
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    @include("back_end.parials.content_header",['title'=>'Danh sách loại sản phẩm',
-    'name'=>'producttype','key'=>'list','route'=>route('producttype.index')])
+    @include("back_end.parials.content_header",['title'=>'Danh sách bìa',
+    'name'=>'slide','key'=>'list','route'=>route('slide.index')])
     <!-- /.content-header -->
     <!-- Main content -->
     <section class="content">
@@ -16,12 +16,12 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <button id="btn-add-type" class="btn btn-success btn-sm" style="width: 100px;"><i class="fas fa-plus"> Thêm mới</i></button>
+                            <button id="btn-add-slide" class="btn btn-success btn-sm" style="width: 100px;"><i class="fas fa-plus"> Thêm mới</i></button>
                             <div class="card-tools">
-                                <form method="POST" action="{{route('producttype.search')}}">
+                                <form method="POST" action="{{route('slide.search')}}">
                                     @csrf @method('post')
                                     <div class="input-group input-group-sm" style="width: 300px;">
-                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Tìm mã hoặc tên loại sản phẩm">
+                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Tìm mã hoặc tiêu để bìa">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
                                         </div>
@@ -35,30 +35,25 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Tên loại</th>
+                                        <th>Tiêu đề</th>
+                                        <th>Miêu tả</th>
                                         <th>Hình ảnh</th>
-                                        <th>Loại cha</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody id="trbody">
-                                    @foreach($productTypes as $productType)
+                                    @foreach($slides as $slide)
                                     <tr>
-                                        <td id="id-{{$productType->id}}">{{$productType->id}}</td>
-                                        <td id="name-{{$productType->id}}">{{$productType->name}}</td>
-                                        <td id="icon-{{$productType->id}}">
-                                            @if($productType->icon)
-                                            <img src="{{$productType->icon}}" alt="icon" style="width:200px ; height: 50px;" />
-                                            @endif
-                                        </td>
-                                        <td id="parent-{{$productType->id}}">{{optional($productType->productTypeParent)->name}}</td>
+                                        <td id="id-{{$slide->id}}">{{$slide->id}}</td>
+                                        <td id="title-{{$slide->id}}">{{$slide->title}}</td>
+                                        <td id="description-{{$slide->id}}">{{$slide->description}}</td>
+                                        <td ><img id="image-{{$slide->id}}" src="{{$slide->image}}" alt="image" style="width:250px ; height: 80px;" /></td>
                                         <td>
-                                            <button id="btn-edit-{{$productType->id}}" title="Sửa" onclick="editProductType(this)" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>
-                                            <button data-url="{{route('producttype.destroy',$productType->id)}}" value="{{$productType->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
+                                            <button id="btn-edit-{{$slide->id}}" title="Sửa bìa" onclick="editSlide(this)"  class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>
+                                            <button title="Xóa" data-url="{{route('slide.destroy',$slide->id)}}" value="{{$slide->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
                                     @endforeach
-
                                 </tbody>
                             </table>
                         </div>
@@ -67,7 +62,7 @@
                     <!-- /.card -->
                 </div>
                 <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" />
-                {{$productTypes->links()}}
+                {{$slides->links()}}
                 <div id="id01" class="modal col-md-12">
                     <div class="modal-content animate">
                         <div class="imgcontainer">
@@ -79,34 +74,33 @@
                                 <div class="col-md-12">
                                     <div class="card card-info">
                                         <div class="card-header" style="background-color: #28a745;">
-                                            <h3 class="card-title"><b>Thêm loại sản phẩm</b></h3>
+                                            <h3 class="card-title"><b>Thêm bìa</b></h3>
                                         </div>
                                         <div class="card-body">
-                                            <form id="form-add-type" method="POST">
+                                            <form id="form-add-slide" method="POST">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label>Tên loại sản phẩm</label>
-                                                    <input type="text" name="name" class="form-control" value="" placeholder="nhập tên loại sản phẩm">
-                                                    <div style="margin-top: 5px;" id="validation-add-name"></div>
+                                                    <label>Tiêu đề</label>
+                                                    <input type="text" name="title" class="form-control" value="" placeholder="nhập tiêu đề">
+                                                    <div style="margin-top: 5px;" id="validation-add-title"></div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label>Loại sản phẩm cha</label>
-                                                    <select id="parent_id" class="form-control" name="parent_id">
 
-                                                    </select>
-                                                </div>
                                                 <div class="form-group">
-                                                    <label>Mã</label>
-                                                    <input type="text" name="key_code" class="form-control" value="" placeholder="nhập mã loại sản phẩm">
-                                                    <div style="margin-top: 10px;" id="validation-add-key_code"></div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Hình ảnh loại sản phẩm</label>
-                                                    <input type="file" id="image" name="image_file" class="form-control-file" value="">
+                                                    <label>Hình ảnh</label>
+                                                    <input type="file" id="image" name="image" class="form-control-file" value="">
+                                                    <div style="margin-top: 10px;" id="validation-add-image"></div>
                                                     <img id="output-image" />
-                                                    <div style="margin-top: 10px;" id="validation-add-image_file"></div>
                                                 </div>
 
+                                                <div class="form-group">
+                                                    <label>Miêu tả</label>
+                                                    <textarea class="form-control" name="description" placeholder="nhập miêu tả"></textarea>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Link</label>
+                                                    <input type="text" name="link" class="form-control" value="" placeholder="nhập link bìa">
+                                                </div>
                                                 <button style="width: 100px; margin-left: 40%;" type="submit" class="btn btn-primary">Lưu</button>
                                             </form>
                                         </div>
@@ -130,33 +124,33 @@
                                 <div class="col-md-12">
                                     <div class="card card-info">
                                         <div class="card-header" style="background-color: #28a745;">
-                                            <h3 class="card-title"><b>Sửa loại sản phẩm</b></h3>
+                                            <h3 class="card-title"><b>Sửa bìa</b></h3>
                                         </div>
                                         <div class="card-body">
-                                            <form id="form-edit-type" method="POST">
+                                            <form id="form-edit-slide" method="POST">
                                                 @csrf
-                                                <input type="hidden" name="id" value="" />
+                                                <input type="hidden" name="id" value=""/>
                                                 <div class="form-group">
-                                                    <label>Tên loại sản phẩm</label>
-                                                    <input type="text" name="name" class="form-control" value="" placeholder="nhập tên loại sản phẩm">
-                                                    <div style="margin-top: 5px;" id="validation-edit-name"></div>
+                                                    <label>Tiêu đề</label>
+                                                    <input type="text" name="title" class="form-control" value="" placeholder="nhập tiêu đề">
+                                                    <div style="margin-top: 5px;" id="validation-edit-title"></div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label>Loại sản phẩm cha</label>
-                                                    <select id="parent-edit" class="form-control" name="parent_id">
 
-                                                    </select>
-                                                </div>
                                                 <div class="form-group">
-                                                    <label>Mã</label>
-                                                    <input type="text" name="key_code" class="form-control" value="" placeholder="nhập mã loại sản phẩm">
-                                                    <div style="margin-top: 10px;" id="validation-edit-key_code"></div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Hình ảnh loại sản phẩm</label>
-                                                    <input type="file" id="image-edit" name="image_file" class="form-control-file" value="">
+                                                    <label>Hình ảnh</label>
+                                                    <input type="file" id="image-edit" name="image" class="form-control-file" value="">
+                                                    <div style="margin-top: 10px;" id="validation-edit-image"></div>
                                                     <img id="output-image-edit" />
-                                                    <div style="margin-top: 10px;" id="validation-edit-image_file"></div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Miêu tả</label>
+                                                    <textarea class="form-control" name="description" placeholder="nhập miêu tả"></textarea>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Link</label>
+                                                    <input type="text" name="link" class="form-control" value="" placeholder="nhập link bìa">
                                                 </div>
                                                 <button style="width: 150px; margin-left: 37%;" type="submit" class="btn btn-primary">Cập Nhật</button>
                                             </form>
@@ -179,5 +173,5 @@
 @endsection
 @section('js')
 <script src="{{asset('Admin/admin/delete.js')}}"></script>
-<script src="{{asset('Admin/admin/producttype/index/index.js')}}"></script>
+<script src="{{asset('Admin/admin/slide/index/index.js')}}"></script>
 @endsection

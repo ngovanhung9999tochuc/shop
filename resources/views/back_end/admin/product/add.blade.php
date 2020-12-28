@@ -86,18 +86,28 @@
                         </div>
                         <div class="form-group">
                             <label>Hình ảnh sản phẩm</label>
-                            <input type="file" name="image_file" class="form-control-file @error('image_file') is-invalid @enderror" value=""> @error('image_file')
+                            <input type="file" id="image-file" name="image_file" class="form-control-file @error('image_file') is-invalid @enderror" value=""> @error('image_file')
                             <br />
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <img id="output-image-file" />
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label>Hình ảnh chi tiết</label>
-                            <input type="file" name="detailed_image_file[]" multiple="multiple" class="form-control-file @error('detailed_image_file') is-invalid @enderror" value=""> @error('detailed_image_file')
+                            <input type="file" id="detailed-image-file" name="detailed_image_file[]" multiple="multiple" class="form-control-file @error('detailed_image_file') is-invalid @enderror" value=""> @error('detailed_image_file')
                             <br />
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
+                            <div class="col-md-12" style="margin-top: 10px;">
+                                <div id="output-detailed-image-file" class="row">
+
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -122,7 +132,7 @@
                 </div>
             </div>
 
-           
+
         </div>
     </section>
     <!-- /.content -->
@@ -131,6 +141,33 @@
 <script>
     $('#description').summernote();
     $('#specifications-all').summernote();
+    const imageFile = document.getElementById('image-file');
+    const detailedImageFile = document.getElementById('detailed-image-file');
+
+
+    //event
+    imageFile.addEventListener('change', function() {
+        const outputImageFile = document.getElementById('output-image-file');
+        outputImageFile.src = URL.createObjectURL(this.files[0]);
+        outputImageFile.style.height = '150px';
+        outputImageFile.style.width = '150px';
+        outputImageFile.style.marginTop = '10px';
+    });
+
+
+    detailedImageFile.addEventListener('change', function() {
+        const outputDetailedImageFile = document.getElementById('output-detailed-image-file');
+        outputDetailedImageFile.innerHTML = '';
+        let totalfiles = detailedImageFile.files.length;
+        for (let index = 0; index < totalfiles; index++) {
+            let img = document.createElement('img');
+            img.src = URL.createObjectURL(detailedImageFile.files[index]);
+            img.style.height = '100px';
+            img.style.width = '100px';
+            img.style.marginLeft='10px';
+            outputDetailedImageFile.appendChild(img);  
+        }
+    });
 </script>
 @php
 if(Session::has('message')){

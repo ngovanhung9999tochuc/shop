@@ -8,6 +8,7 @@ use App\Http\Controllers\BillInController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\ArchiveController;
+use App\Http\Controllers\SlideController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,15 +38,24 @@ Route::prefix('admin')->group(function () {
     Route::get('/product/price/{product}', [ProductController::class, 'getPrice'])->name('product.price');
     Route::post('/product/price/{product}', [ProductController::class, 'setPrice'])->name('product.price');
 
+    // Route::get('/producttype', [ProductTypeController::class, 'index'])->name('producttype.index');
+    // Route::get('/producttype/create', [ProductTypeController::class, 'create'])->name('producttype.create');
+    // Route::post('/producttype', [ProductTypeController::class, 'store'])->name('producttype.store');
+    // Route::get('/producttype/{producttype}', [ProductTypeController::class, 'show'])->name('producttype.show');
+    // Route::get('/producttype/{producttype}/edit', [ProductTypeController::class, 'edit'])->name('producttype.edit');
+    // Route::put('/producttype/{producttype}', [ProductTypeController::class, 'update'])->name('producttype.update');
+    // Route::delete('/producttype/{producttype}', [ProductTypeController::class, 'destroy'])->name('producttype.destroy');
+    // Route::post('/producttype/search', [ProductTypeController::class, 'search'])->name('producttype.search');
+
+    Route::post('/producttype/parent', [ProductTypeController::class, 'getParent'])->name('producttype.parent');
     Route::get('/producttype', [ProductTypeController::class, 'index'])->name('producttype.index');
-    Route::get('/producttype/create', [ProductTypeController::class, 'create'])->name('producttype.create');
-    Route::post('/producttype', [ProductTypeController::class, 'store'])->name('producttype.store');
+    //Route::get('/producttype/create', [ProductTypeController::class, 'create'])->name('producttype.create');
+    Route::post('/producttype/store', [ProductTypeController::class, 'store'])->name('producttype.store');
     //Route::get('/producttype/{producttype}', [ProductTypeController::class, 'show'])->name('producttype.show');
-    Route::get('/producttype/{producttype}/edit', [ProductTypeController::class, 'edit'])->name('producttype.edit');
-    Route::put('/producttype/{producttype}', [ProductTypeController::class, 'update'])->name('producttype.update');
+    Route::post('/producttype/edit', [ProductTypeController::class, 'edit'])->name('producttype.edit');
+    Route::post('/producttype/update', [ProductTypeController::class, 'update'])->name('producttype.update');
     Route::delete('/producttype/{producttype}', [ProductTypeController::class, 'destroy'])->name('producttype.destroy');
     Route::post('/producttype/search', [ProductTypeController::class, 'search'])->name('producttype.search');
-
 
     Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier.index');
     //Route::get('/supplier/create', [SupplierController::class, 'create'])->name('supplier.create');
@@ -61,7 +71,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/billin', [BillInController::class, 'index'])->name('billin.index');
     Route::get('/billin/create', [BillInController::class, 'create'])->name('billin.create');
     Route::post('/billin', [BillInController::class, 'store'])->name('billin.store');
-    Route::get('/billin/{billin}', [BillInController::class, 'show'])->name('billin.show');
+    Route::post('/billin/show', [BillInController::class, 'show'])->name('billin.show');
     //Route::get('/billin/{billin}/edit', [BillInController::class, 'edit'])->name('billin.edit');
     //Route::put('/billin/{billin}', [BillInController::class, 'update'])->name('billin.update');
     Route::delete('/billin/{billin}', [BillInController::class, 'destroy'])->name('billin.destroy');
@@ -101,4 +111,15 @@ Route::prefix('admin')->group(function () {
     Route::post('/archive/search', [ArchiveController::class, 'search'])->name('archive.search');
     Route::post('/archive/producttype', [ArchiveController::class, 'searchProductType'])->name('archive.producttype');
 
+
+    //slide
+
+    Route::get('/slide', [SlideController::class, 'index'])->name('slide.index');
+    //Route::get('/slide/create', [SlideController::class, 'create'])->name('slide.create');
+    Route::post('/slide/store', [SlideController::class, 'store'])->name('slide.store');
+    //Route::get('/slide/{slide}', [SlideController::class, 'show'])->name('slide.show');
+    Route::post('/slide/edit', [SlideController::class, 'edit'])->name('slide.edit');
+    Route::post('/slide/update', [SlideController::class, 'update'])->name('slide.update');
+    Route::delete('/slide/{slide}', [SlideController::class, 'destroy'])->name('slide.destroy');
+    Route::post('/slide/search', [SlideController::class, 'search'])->name('slide.search');
 });

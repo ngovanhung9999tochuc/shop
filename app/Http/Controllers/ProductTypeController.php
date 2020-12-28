@@ -10,8 +10,6 @@ use Illuminate\Http\Request;
 
 class ProductTypeController extends Controller
 {
-
-
     protected $repository;
     protected $productTypeRecusive;
 
@@ -48,10 +46,9 @@ class ProductTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductTypeAddRequest $request)
+    public function store(Request $request)
     {
-        $result = $this->repository->create($request);
-        return redirect()->back()->with('message', $result);
+        return $this->repository->create($request);
     }
 
     /**
@@ -71,11 +68,9 @@ class ProductTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        $productType = ProductType::find($id);
-        $htmlOption = $this->productTypeRecusive->ProductTypeLoopEdit($productType->parent_id);
-        return view('back_end.admin.producttype.edit', ['productType' => $productType, 'htmlOption' => $htmlOption]);
+       return $this->repository->edit($request);
     }
 
     /**
@@ -85,10 +80,9 @@ class ProductTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $result = $this->repository->update($request, $id);
-        return redirect()->back()->with('message', $result);
+        return $this->repository->update($request);
     }
 
     /**
@@ -106,5 +100,10 @@ class ProductTypeController extends Controller
     {
         $productTypes = $this->repository->search($request);
         return view('back_end.admin.producttype.index', ['productTypes' => $productTypes]);
+    }
+
+    public function getParent(Request $request)
+    {
+        return $this->repository->getParent();
     }
 }

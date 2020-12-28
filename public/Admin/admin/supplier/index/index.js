@@ -138,7 +138,7 @@ function editSupplier(edit) {
     modal2.style.display = "block";
     clearErrorMessagesEdit();
     formSupplierEdit.reset();
-    let [x, y, id] = edit.id.split('-')
+    let [x, y, id] = edit.id.split('-');
     request(base_url + '/admin/supplier/edit', JSON.stringify({
         '_token': _token.value,
         'id': id
