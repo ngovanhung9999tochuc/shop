@@ -10,6 +10,7 @@ use App\Http\Controllers\BillController;
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\RoleController;
 /*
 /*
 |--------------------------------------------------------------------------
@@ -135,4 +136,14 @@ Route::prefix('admin')->group(function () {
     Route::post('/menu/update', [MenuController::class, 'update'])->name('menu.update');
     Route::delete('/menu/{menu}', [MenuController::class, 'destroy'])->name('menu.destroy');
     Route::post('/menu/search', [MenuController::class, 'search'])->name('menu.search');
+
+    //role
+    Route::get('/role', [RoleController::class, 'index'])->name('role.index');
+    Route::get('/role/create', [RoleController::class, 'create'])->name('role.create');
+    Route::post('/role/store', [RoleController::class, 'store'])->name('role.store');
+    Route::get('/role/{role}', [RoleController::class, 'show'])->name('role.show');
+    Route::post('/role/edit', [RoleController::class, 'edit'])->name('role.edit');
+    Route::post('/role/update', [RoleController::class, 'update'])->name('role.update');
+    Route::delete('/role/{role}', [RoleController::class, 'destroy'])->name('role.destroy');
+    Route::post('/role/search', [RoleController::class, 'search'])->name('role.search');
 });

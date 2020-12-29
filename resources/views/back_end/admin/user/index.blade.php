@@ -50,11 +50,11 @@
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->username }}</td>
                                         <td>{{$user->phone}}</td>
-                                        <td style="width: 300px;">
+                                        <td style="width: 450px;">
                                             <div class="form-group">
                                                 <select id="{{$user->id}}" name="role_id[]" class="form-control select2_init select-roles" multiple>
                                                     @foreach($roles as $role)
-                                                    <option {{ $user->roles->contains('id', $role->id) ? 'selected' : '' }} value="{{ $role->id }}">{{ $role->name }}</option>
+                                                    <option title="{{ $role->display_name }}" {{ $user->roles->contains('id', $role->id) ? 'selected' : '' }} value="{{ $role->id }}">{{ $role->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

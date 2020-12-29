@@ -13,7 +13,7 @@ class CreatePremissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('premissions', function (Blueprint $table) {
+        Schema::create('permissions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('display_name');
@@ -31,6 +31,6 @@ class CreatePremissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('premissions');
+        Schema::dropIfExists('permissions');
     }
 }
