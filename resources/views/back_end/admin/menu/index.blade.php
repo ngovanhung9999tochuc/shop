@@ -1,13 +1,13 @@
 @extends('back_end.layout.layout')
 @section('content')
 @section('css')
-<link href="{{asset('Admin/admin/producttype/index/index.css')}}" rel="stylesheet" />
-<link href="{{asset('Admin/admin/producttype/index/index2.css')}}" rel="stylesheet" />
+<link href="{{asset('Admin/admin/menu/index/index.css')}}" rel="stylesheet" />
+<link href="{{asset('Admin/admin/menu/index/index2.css')}}" rel="stylesheet" />
 @endsection
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    @include("back_end.parials.content_header",['title'=>'Danh sách loại sản phẩm',
-    'name'=>'producttype','key'=>'list','route'=>route('producttype.index')])
+    @include("back_end.parials.content_header",['title'=>'Danh sách menu',
+    'name'=>'menu','key'=>'list','route'=>route('menu.index')])
     <!-- /.content-header -->
     <!-- Main content -->
     <section class="content">
@@ -16,12 +16,12 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <button id="btn-add-type" class="btn btn-success btn-sm" style="width: 100px;"><i class="fas fa-plus"> Thêm mới</i></button>
+                            <button id="btn-add-menu" class="btn btn-success btn-sm" style="width: 100px;"><i class="fas fa-plus"> Thêm mới</i></button>
                             <div class="card-tools">
-                                <form method="POST" action="{{route('producttype.search')}}">
+                                <form method="POST" action="{{route('menu.search')}}">
                                     @csrf @method('post')
                                     <div class="input-group input-group-sm" style="width: 300px;">
-                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Tìm mã hoặc tên loại sản phẩm">
+                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Tìm mã hoặc tên menu">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
                                         </div>
@@ -35,30 +35,23 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Tên loại</th>
-                                        <th>Hình ảnh</th>
-                                        <th>Thuộc loại</th>
+                                        <th>Tên menu</th>
+                                        <th>Thuộc menu</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody id="trbody">
-                                    @foreach($productTypes as $productType)
+                                    @foreach($menus as $menu)
                                     <tr>
-                                        <td id="id-{{$productType->id}}">{{$productType->id}}</td>
-                                        <td id="name-{{$productType->id}}">{{$productType->name}}</td>
-                                        <td id="icon-{{$productType->id}}">
-                                            @if($productType->icon)
-                                            <img src="{{$productType->icon}}" alt="icon" style="width:200px ; height: 50px;" />
-                                            @endif
-                                        </td>
-                                        <td id="parent-{{$productType->id}}">{{optional($productType->productTypeParent)->name}}</td>
+                                        <td id="id-{{$menu->id}}">{{$menu->id}}</td>
+                                        <td id="name-{{$menu->id}}">{{$menu->name}}</td>
+                                        <td id="parent-{{$menu->id}}">{{optional($menu->menuParent)->name}}</td>
                                         <td>
-                                            <button id="btn-edit-{{$productType->id}}" title="Sửa" onclick="editProductType(this)" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>
-                                            <button data-url="{{route('producttype.destroy',$productType->id)}}" value="{{$productType->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
+                                            <button id="btn-edit-{{$menu->id}}" title="Sửa" onclick="editMenu(this)"  class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>
+                                            <button title="Xóa" data-url="{{route('menu.destroy',$menu->id)}}" value="{{$menu->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
                                     @endforeach
-
                                 </tbody>
                             </table>
                         </div>
@@ -67,7 +60,7 @@
                     <!-- /.card -->
                 </div>
                 <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" />
-                {{$productTypes->links()}}
+                {{$menus->links()}}
                 <div id="id01" class="modal col-md-12">
                     <div class="modal-content animate">
                         <div class="imgcontainer">
@@ -79,32 +72,27 @@
                                 <div class="col-md-12">
                                     <div class="card card-info">
                                         <div class="card-header" style="background-color: #28a745;">
-                                            <h3 class="card-title"><b>Thêm loại sản phẩm</b></h3>
+                                            <h3 class="card-title"><b>Thêm menu</b></h3>
                                         </div>
                                         <div class="card-body">
-                                            <form id="form-add-type" method="POST">
+                                            <form id="form-add-menu" method="POST">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label>Tên loại sản phẩm</label>
-                                                    <input type="text" name="name" class="form-control" value="" placeholder="nhập tên loại sản phẩm">
+                                                    <label>Tên menu</label>
+                                                    <input type="text" name="name" class="form-control" value="" placeholder="nhập tên menu">
                                                     <div style="margin-top: 5px;" id="validation-add-name"></div>
                                                 </div>
+
                                                 <div class="form-group">
-                                                    <label>Thuộc loại</label>
-                                                    <select id="parent_id" class="form-control" name="parent_id">
+                                                    <label>Thuộc menu</label>
+                                                    <select id="parent-add" class="form-control" name="parent_id">
 
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Mã</label>
-                                                    <input type="text" name="key_code" class="form-control" value="" placeholder="nhập mã loại sản phẩm">
-                                                    <div style="margin-top: 10px;" id="validation-add-key_code"></div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Hình ảnh loại sản phẩm</label>
-                                                    <input type="file" id="image" name="image_file" class="form-control-file" value="">
-                                                    <img id="output-image" />
-                                                    <div style="margin-top: 10px;" id="validation-add-image_file"></div>
+                                                    <label> Liên kết loại sản phẩm</label>
+                                                    <select id="product-type-link-add" class="form-control" name="product_type_link">
+                                                    </select>
                                                 </div>
 
                                                 <button style="width: 100px; margin-left: 40%;" type="submit" class="btn btn-primary">Lưu</button>
@@ -130,33 +118,28 @@
                                 <div class="col-md-12">
                                     <div class="card card-info">
                                         <div class="card-header" style="background-color: #28a745;">
-                                            <h3 class="card-title"><b>Sửa loại sản phẩm</b></h3>
+                                            <h3 class="card-title"><b>Sửa menu</b></h3>
                                         </div>
                                         <div class="card-body">
-                                            <form id="form-edit-type" method="POST">
+                                            <form id="form-edit-menu" method="POST">
                                                 @csrf
-                                                <input type="hidden" name="id" value="" />
+                                                <input type="hidden" name="id" value=""/>
                                                 <div class="form-group">
-                                                    <label>Tên loại sản phẩm</label>
-                                                    <input type="text" name="name" class="form-control" value="" placeholder="nhập tên loại sản phẩm">
+                                                    <label>Tên menu</label>
+                                                    <input type="text" name="name" class="form-control" value="" placeholder="nhập tên menu">
                                                     <div style="margin-top: 5px;" id="validation-edit-name"></div>
                                                 </div>
+
                                                 <div class="form-group">
-                                                    <label>Thuộc loại</label>
+                                                    <label>Thuộc menu</label>
                                                     <select id="parent-edit" class="form-control" name="parent_id">
 
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Mã</label>
-                                                    <input type="text" name="key_code" class="form-control" value="" placeholder="nhập mã loại sản phẩm">
-                                                    <div style="margin-top: 10px;" id="validation-edit-key_code"></div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Hình ảnh loại sản phẩm</label>
-                                                    <input type="file" id="image-edit" name="image_file" class="form-control-file" value="">
-                                                    <img id="output-image-edit" />
-                                                    <div style="margin-top: 10px;" id="validation-edit-image_file"></div>
+                                                    <label>Liên kết loại sản phẩm</label>
+                                                    <select id="product-type-link-edit" class="form-control" name="product_type_link">
+                                                    </select>
                                                 </div>
                                                 <button style="width: 150px; margin-left: 37%;" type="submit" class="btn btn-primary">Cập Nhật</button>
                                             </form>
@@ -179,5 +162,5 @@
 @endsection
 @section('js')
 <script src="{{asset('Admin/admin/delete.js')}}"></script>
-<script src="{{asset('Admin/admin/producttype/index/index.js')}}"></script>
+<script src="{{asset('Admin/admin/menu/index/index.js')}}"></script>
 @endsection

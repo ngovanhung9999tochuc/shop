@@ -9,6 +9,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\SlideController;
+use App\Http\Controllers\MenuController;
+/*
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -122,4 +124,15 @@ Route::prefix('admin')->group(function () {
     Route::post('/slide/update', [SlideController::class, 'update'])->name('slide.update');
     Route::delete('/slide/{slide}', [SlideController::class, 'destroy'])->name('slide.destroy');
     Route::post('/slide/search', [SlideController::class, 'search'])->name('slide.search');
+
+    //menu
+    Route::post('/menu/parent', [MenuController::class, 'getParent'])->name('menu.parent');
+    Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
+    //Route::get('/menu/create', [MenuController::class, 'create'])->name('menu.create');
+    Route::post('/menu/store', [MenuController::class, 'store'])->name('menu.store');
+    //Route::get('/menu/{menu}', [MenuController::class, 'show'])->name('menu.show');
+    Route::post('/menu/edit', [MenuController::class, 'edit'])->name('menu.edit');
+    Route::post('/menu/update', [MenuController::class, 'update'])->name('menu.update');
+    Route::delete('/menu/{menu}', [MenuController::class, 'destroy'])->name('menu.destroy');
+    Route::post('/menu/search', [MenuController::class, 'search'])->name('menu.search');
 });

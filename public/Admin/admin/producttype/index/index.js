@@ -5,6 +5,7 @@ const btnAddType = document.getElementById('btn-add-type');
 const formAddType = document.getElementById('form-add-type');
 const formEditType = document.getElementById('form-edit-type');
 const trBody = document.getElementById('trbody');
+
 const image = document.getElementById('image');
 const imageEdit = document.getElementById('image-edit');
 const outputImageEdit = document.getElementById('output-image-edit');
@@ -196,7 +197,6 @@ function editProductType(edit) {
         const parentEdit = document.getElementById('parent-edit');
 
         data = JSON.parse(data);
-        console.log(data);
         if (data['success']) {
             let option = data['htmlOption'];
             let productType = data['productType'];

@@ -38,14 +38,16 @@ class ProductTypeRepository
             $rules = [
                 'name' => 'required',
                 'image_file' => 'mimes:jpg,jpeg,png,gif|max:10240',
-                'key_code' => 'required|size:2'
+                'key_code' => 'required|size:2|unique:product_types|regex:/^[a-zA-Z]+$/'
             ];
             $messages = [
                 'name.required' => 'Tên không được phép trống',
                 'image_file.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
                 'image_file.max' => 'Hình thẻ giới hạn dung lượng không quá 10M',
                 'key_code.required' => 'Mã không được phép trống',
-                'key_code.size' => 'Mã không được phép nhiều hơn 2 ký tự'
+                'key_code.size' => 'Mã không được phép nhiều hơn 2 ký tự',
+                'key_code.unique' => 'Mã không được phép trùng lặp',
+                'key_code.regex' => 'Mã phải là ký tự'
             ];
             $validator = Validator::make($request->all(), $rules, $messages);
             // Validate the input and return correct response
@@ -86,14 +88,16 @@ class ProductTypeRepository
             $rules = [
                 'name' => 'required',
                 'image_file' => 'mimes:jpg,jpeg,png,gif|max:10240',
-                'key_code' => 'required|size:2'
+                'key_code' => 'required|size:2|regex:/^[a-zA-Z]+$/'
             ];
             $messages = [
                 'name.required' => 'Tên không được phép trống',
                 'image_file.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
                 'image_file.max' => 'Hình thẻ giới hạn dung lượng không quá 10M',
                 'key_code.required' => 'Mã không được phép trống',
-                'key_code.size' => 'Mã không được phép nhiều hơn 2 ký tự'
+                'key_code.size' => 'Mã không được phép nhiều hơn 2 ký tự',
+                'key_code.regex' => 'Mã phải là ký tự'
+                
             ];
             $validator = Validator::make($request->all(), $rules, $messages);
             // Validate the input and return correct response
@@ -159,7 +163,7 @@ class ProductTypeRepository
     {
         try {
             DB::beginTransaction();
-            $htmlOption = '<option value="0">Không có loại cha</option>';
+            $htmlOption = '<option value="0">Không có thuộc loại</option>';
             $htmlOption .= $this->productTypeRecusive->ProductTypeLoopAdd();
             DB::commit();
             return response()->json(array('success' => true, 'htmlOption' => $htmlOption), 200);
@@ -175,7 +179,7 @@ class ProductTypeRepository
         try {
             DB::beginTransaction();
             $productType = $this->productType::find($request->id);
-            $htmlOption = '<option value="0">Không có loại cha</option>';
+            $htmlOption = '<option value="0">Không có thuộc loại</option>';
             $htmlOption .= $this->productTypeRecusive->ProductTypeLoopEdit($productType->parent_id);
             DB::commit();
             return response()->json(array('success' => true, 'htmlOption' => $htmlOption, 'productType' => $productType), 200);

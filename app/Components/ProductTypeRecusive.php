@@ -13,6 +13,33 @@ class ProductTypeRecusive
         $this->htmlOption = '';
     }
 
+    public function productTypeAdd($parent_id = 0, $subMark = '')
+    {
+        $data = ProductType::where('parent_id', $parent_id)->get();
+        foreach ($data as $key => $value) {
+            $this->htmlOption .= '<option  value="' . $value->key_code . '">' . $subMark . $value->name . '</option>';
+            $this->productTypeAdd($value->id, $subMark . '-- ');
+        }
+        return $this->htmlOption;
+    }
+    public function productTypeEdit($key_code, $parent_id = 0, $subMark = '')
+    {
+        $data = ProductType::where('parent_id', $parent_id)->get();
+        foreach ($data as $key => $value) {
+            if (!empty($key_code) && $key_code == $value['key_code']) {
+                $this->htmlOption .= '<option  selected value="' . $value->key_code . '">' . $subMark . $value->name . '</option>';
+            } else {
+                $this->htmlOption .= '<option  value="' . $value->key_code . '">' . $subMark . $value->name . '</option>';
+            }
+
+            $this->productTypeEdit($key_code, $value->id, $subMark . '-- ');
+        }
+        return $this->htmlOption;
+    }
+
+
+
+
     public function ProductTypeRecusiveAdd($parent_id = 0, $subMark = '')
     {
         $data = ProductType::where('parent_id', $parent_id)->get();
