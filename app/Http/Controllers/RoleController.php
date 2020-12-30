@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\RoleRepository;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+
+    protected $repository;
+
+    public function __construct(RoleRepository $repository)
+    {
+        $this->repository = $repository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +21,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $roles = $this->repository->getAll();
+        return view('back_end.admin.role.index', ['roles' => $roles]);
     }
 
     /**
@@ -21,9 +30,8 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
     }
 
     /**
@@ -34,7 +42,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $this->repository->create($request);
     }
 
     /**
@@ -54,9 +62,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        return $this->repository->edit($request);
     }
 
     /**
@@ -66,9 +74,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        return $this->repository->update($request);
     }
 
     /**
@@ -79,6 +87,23 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->repository->destroy($id);
+    }
+
+    public function search(Request $request)
+    {
+        $roles = $this->repository->search($request);
+        return view('back_end.admin.role.index', ['roles' => $roles]);
+    }
+
+
+    public function getListPermission(Request $request)
+    {
+        return $this->repository->getListPermission($request);
+    }
+
+    public function updateListPermission(Request $request)
+    {
+        return $this->repository->updateListPermission($request);
     }
 }

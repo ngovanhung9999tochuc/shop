@@ -3,6 +3,7 @@
 @section('css')
 <link href="{{asset('Admin/admin/role/index/index.css')}}" rel="stylesheet" />
 <link href="{{asset('Admin/admin/role/index/index2.css')}}" rel="stylesheet" />
+<link href="{{asset('Admin/admin/role/index/index3.css')}}" rel="stylesheet" />
 @endsection
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -46,10 +47,10 @@
                                     <tr>
                                         <td id="id-{{$role->id}}">{{$role->id}}</td>
                                         <td id="name-{{$role->id}}">{{$role->name}}</td>
-                                        <td id="parent-{{$role->id}}">{{$role->display_name}}</td>
-                                        <td><button id="btn-permission-{{$role->id}}" onclick="grantingPermission(this)" class="btn btn-success btn-sm btn-price" style="width: 100px;"><i class="fas fa-plus"> Phân quyền</i></button></td>
+                                        <td id="display-{{$role->id}}">{{$role->display_name}}</td>
+                                        <td><button id="btn-permission-{{$role->id}}" onclick="grantingPermission(this)" class="btn btn-success btn-sm btn-price" style="width: 120px;"><i class="fas fa-plus"> Phân quyền</i></button></td>
                                         <td>
-                                            <button id="btn-edit-{{$role->id}}" title="Sửa" onclick="editRole(this)"  class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>
+                                            <button id="btn-edit-{{$role->id}}" title="Sửa" onclick="editRole(this)" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>
                                             <button title="Xóa" data-url="{{route('role.destroy',$role->id)}}" value="{{$role->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
@@ -74,27 +75,20 @@
                                 <div class="col-md-12">
                                     <div class="card card-info">
                                         <div class="card-header" style="background-color: #28a745;">
-                                            <h3 class="card-title"><b>Thêm role</b></h3>
+                                            <h3 class="card-title"><b>Thêm vai trò</b></h3>
                                         </div>
                                         <div class="card-body">
                                             <form id="form-add-role" method="POST">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label>Tên role</label>
-                                                    <input type="text" name="name" class="form-control" value="" placeholder="nhập tên role">
+                                                    <label>Tên vai trò</label>
+                                                    <input type="text" name="name" class="form-control" value="" placeholder="nhập tên vai trò">
                                                     <div style="margin-top: 5px;" id="validation-add-name"></div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label>Thuộc role</label>
-                                                    <select id="parent-add" class="form-control" name="parent_id">
-
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label> Liên kết loại sản phẩm</label>
-                                                    <select id="product-type-link-add" class="form-control" name="product_type_link">
-                                                    </select>
+                                                    <label>Miêu tả vai trò</label>
+                                                    <input type="text" name="display_name" class="form-control" value="" placeholder="nhập miêu tả vai trò">
                                                 </div>
 
                                                 <button style="width: 100px; margin-left: 40%;" type="submit" class="btn btn-primary">Lưu</button>
@@ -120,30 +114,55 @@
                                 <div class="col-md-12">
                                     <div class="card card-info">
                                         <div class="card-header" style="background-color: #28a745;">
-                                            <h3 class="card-title"><b>Sửa role</b></h3>
+                                            <h3 class="card-title"><b>Sửa vai trò</b></h3>
                                         </div>
                                         <div class="card-body">
                                             <form id="form-edit-role" method="POST">
                                                 @csrf
-                                                <input type="hidden" name="id" value=""/>
+                                                <input type="hidden" name="id" value="" />
                                                 <div class="form-group">
-                                                    <label>Tên role</label>
-                                                    <input type="text" name="name" class="form-control" value="" placeholder="nhập tên role">
+                                                    <label>Tên vai trò</label>
+                                                    <input type="text" name="name" class="form-control" value="" placeholder="nhập tên vai trò">
                                                     <div style="margin-top: 5px;" id="validation-edit-name"></div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label>Thuộc role</label>
-                                                    <select id="parent-edit" class="form-control" name="parent_id">
-
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Liên kết loại sản phẩm</label>
-                                                    <select id="product-type-link-edit" class="form-control" name="product_type_link">
-                                                    </select>
+                                                    <label>Miêu tả vai trò</label>
+                                                    <input type="text" name="display_name" class="form-control" value="" placeholder="nhập miêu tả vai trò">
                                                 </div>
                                                 <button style="width: 150px; margin-left: 37%;" type="submit" class="btn btn-primary">Cập Nhật</button>
+                                            </form>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="id03" class="modal col-md-12">
+                    <div class="modal-content animate">
+                        <div class="imgcontainer">
+                            <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;</span>
+                        </div>
+
+                        <div class="container">
+                            <div class="container">
+                                <div class="col-md-12">
+                                    <div class="card card-info">
+                                        <div class="card-header" style="background-color: #28a745;">
+                                            <h3 class="card-title"><b>Phân quyền</b></h3>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <form id="form-permission-role" method="POST">
+                                                @csrf
+                                                <input type="hidden" id="role-id-permissions" name="id" value="" />
+                                                <div id="list-permissions" class="row my-4">
+                                                </div>
+                                                <button style="width: 100px; margin-left: 40%;" type="submit" class="btn btn-primary">Lưu</button>
                                             </form>
                                         </div>
                                         <!-- /.card-body -->

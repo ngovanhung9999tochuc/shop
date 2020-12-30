@@ -62,7 +62,6 @@ $(document).ready(function(e) {
             contentType: false,
             processData: false,
             success: (data) => {
-                console.log(data);
                 this.reset();
                 if (data['success']) {
                     Swal.fire({

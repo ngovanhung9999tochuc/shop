@@ -139,11 +139,13 @@ Route::prefix('admin')->group(function () {
 
     //role
     Route::get('/role', [RoleController::class, 'index'])->name('role.index');
-    Route::get('/role/create', [RoleController::class, 'create'])->name('role.create');
+    //Route::get('/role/create', [RoleController::class, 'create'])->name('role.create');
     Route::post('/role/store', [RoleController::class, 'store'])->name('role.store');
-    Route::get('/role/{role}', [RoleController::class, 'show'])->name('role.show');
+    //Route::get('/role/{role}', [RoleController::class, 'show'])->name('role.show');
     Route::post('/role/edit', [RoleController::class, 'edit'])->name('role.edit');
     Route::post('/role/update', [RoleController::class, 'update'])->name('role.update');
     Route::delete('/role/{role}', [RoleController::class, 'destroy'])->name('role.destroy');
     Route::post('/role/search', [RoleController::class, 'search'])->name('role.search');
+    Route::post('/role/permission', [RoleController::class, 'getListPermission'])->name('role.permission');
+    Route::post('/role/permission/update', [RoleController::class, 'updateListPermission'])->name('role.permission');
 });
