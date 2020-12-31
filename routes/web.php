@@ -24,8 +24,24 @@ use App\Http\Controllers\RoleController;
 */
 
 Route::get('/', function () {
-    return view('back_end.admin.admin');
+    return view('front_end.page.home');
 });
+Route::get('/cart', function () {
+    return view('front_end.page.cart');
+});
+
+Route::get('/checkout', function () {
+    return view('front_end.page.checkout');
+});
+
+Route::get('/shop', function () {
+    return view('front_end.page.shop');
+});
+
+Route::get('/products', function () {
+    return view('front_end.page.single_product');
+});
+
 
 Route::prefix('admin')->group(function () {
 
