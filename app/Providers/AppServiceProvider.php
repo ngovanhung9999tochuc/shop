@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Models\Menu;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Session;
+use App\Models\Cart;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,6 +30,8 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
 
         view()->composer('front_end.parials.mainmenu', function ($view) {
+
+            //menu
             $ul = '';
             $menus = Menu::where('parent_id', 0)->orderBy('id', 'asc')->get();
             $ul .= '<ul>';
@@ -42,7 +46,17 @@ class AppServiceProvider extends ServiceProvider
                 $ul .= '</li>';
             }
             $ul .= '</ul>';
-            $view->with('htmlMenu', $ul);
+
+            //cart
+
+            $oldCart = Session('cart') ? Session::get('cart') : null;
+            $cart = new Cart($oldCart);
+            $dataCart = [
+                'items' => $cart->items,
+                'totalPrice' => $cart->totalPrice,
+                'totalQty' => $cart->totalQty
+            ];
+            $view->with(['htmlMenu' => $ul, 'dataCart' => $dataCart]);
         });
     }
 }

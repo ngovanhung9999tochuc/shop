@@ -12,6 +12,7 @@ use App\Http\Controllers\SlideController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CartController;
 /*
 /*
 |--------------------------------------------------------------------------
@@ -28,17 +29,18 @@ Route::get('/', [HomeController::class, 'getHome'])->name('home');
 Route::get('/type/{type}/{id}', [HomeController::class, 'getPageTypeProduct'])->name('typeproduct');
 Route::get('/type/{id}', [HomeController::class, 'getTypeProduct'])->name('type.type');
 Route::get('/detail/{id}', [HomeController::class, 'getProductDetail'])->name('detail');
-Route::get('/cart', function () {
-    return view('front_end.page.cart');
-});
+
+
+
+Route::post('/cart/add', [CartController::class, 'addItemToCart'])->name('cart.add');
+Route::post('/cart/change', [CartController::class, 'changeQuantityItemToCart'])->name('cart.change');
+Route::post('/cart/delete', [CartController::class, 'deleteItemToCart'])->name('cart.delete');
+
 
 Route::get('/checkout', function () {
     return view('front_end.page.checkout');
 });
 
-Route::get('/single_product', function () {
-    return view('front_end.page.single_product');
-});
 
 
 Route::prefix('admin')->group(function () {

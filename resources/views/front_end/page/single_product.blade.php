@@ -33,7 +33,7 @@
                                             <div style="width: 180px;height: 220px;" class="product-f-image">
                                                 <img src="{{$similarproduct->image}}" alt="">
                                                 <div class="product-hover">
-                                                    <a href="#" class="add-to-cart-link"><i class="fa fa-plus-square"></i> chọn mua</a>
+                                                    <a id="item-cart-{{$similarproduct->id}}" class="add-product-to-cart add-to-cart-link"><i class="fa fa-plus-square"></i> chọn mua</a>
                                                     <a href="{{route('detail',$similarproduct->id)}}" class="view-details-link"><i class="fa fa-link"></i> chi tiết</a>
                                                 </div>
                                             </div>
@@ -65,7 +65,7 @@
                                 </div>
 
                                 <div class="cart" style="margin-bottom: 40px;">
-                                    <button class="add_to_cart_button" style="padding: 5px 20px;"><i class="fa fa-plus-square"></i> CHỌN MUA</button>
+                                    <button id="item-cart-{{$product->id}}" class="add-product-to-cart add_to_cart_button" style="padding: 5px 20px;"><i class="fa fa-plus-square"></i> CHỌN MUA</button>
                                 </div>
 
                                 <div role="tabpanel">

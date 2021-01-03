@@ -581,10 +581,11 @@ body {
     border-radius: 5px;
     border: 1px solid #ddd;
     float: right;
-    font-size: 18px;
-    margin-top: 10px;
+    font-size: 16px;
     padding: 10px;
     position: relative;
+    height: 40px;
+    margin-top: 10px;
 }
 
 .shopping-item a {
@@ -1508,8 +1509,8 @@ button[type=submit]:hover {
     padding: 6px 25px;
     display: inline-block;
     border-radius: 5px;
-    width: 200px;
-    height: 45px;
+    width: 140px;
+    height: 36px;
 }
 
 .add_to_cart_button:hover {

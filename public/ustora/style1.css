@@ -24,7 +24,7 @@
     display: block;
     position: fixed;
     left: 60%;
-    top: 16%;
+    top: 28%;
     width: 530px;
 }
 
@@ -251,4 +251,110 @@ p.sbmincart-empty-text {
     -ms-box-shadow: inset 0 0 6px #3c43a4;
     -webkit-box-shadow: inset 0 0 6px #3c43a4;
     box-shadow: inset 0 0 6px #3c43a4;
+}
+
+@media (max-width: 1280px) {
+    #w3lssbmincart {
+        left: 64%;
+    }
+}
+
+@media (max-width: 1080px) {
+    #w3lssbmincart {
+        left: 58%;
+    }
+}
+
+@media (max-width:991px) {
+    #w3lssbmincart {
+        left: 51%;
+    }
+}
+
+@media (max-width:800px) {
+    #w3lssbmincart {
+        left: 49%;
+        width: 370px;
+    }
+}
+
+@media (max-width:736px) {
+    #w3lssbmincart {
+        left: 47%;
+        width: 353px;
+    }
+}
+
+@media (max-width:640px) {
+    #w3lssbmincart {
+        left: 38%;
+        top: 11.5%;
+    }
+}
+
+@media (max-width:568px) {
+    #w3lssbmincart {
+        left: 32%;
+    }
+}
+
+@media (max-width:480px) {
+    #w3lssbmincart {
+        left: 21%;
+        width: 338px;
+        top: 24.5%;
+    }
+    #w3lssbmincart .sbmincart-closer {
+        margin: -15px -8px 0;
+        padding: 0 10px;
+        font-size: 20px;
+    }
+    #w3lssbmincart ul {
+        padding: 0.5em;
+        margin: 5px 0 15px;
+    }
+    #w3lssbmincart form {
+        padding: 1em 1em .7em;
+    }
+    #w3lssbmincart form ul {
+        max-height: 250px;
+    }
+    #w3lssbmincart .sbmincart-item {
+        font-size: 0.9em;
+    }
+    #w3lssbmincart .sbmincart-remove {
+        height: 18px;
+        font-size: 13px;
+    }
+    #w3lssbmincart .sbmincart-subtotal {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 414px) {
+    #w3lssbmincart {
+        left: 8%;
+    }
+}
+
+@media (max-width:375px) {
+    #w3lssbmincart .sbmincart-item a {
+        font-size: 0.9em;
+    }
+    #w3lssbmincart {
+        left: 3%;
+        width: 336px;
+    }
+}
+
+@media (max-width:320px) {
+    #w3lssbmincart .sbmincart-subtotal {
+        font-size: 13px;
+    }
+    #w3lssbmincart .sbmincart-submit {
+        font-size: 0.8em;
+    }
+    #w3lssbmincart ul {
+        margin: 5px 0 10px;
+    }
 }

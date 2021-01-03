@@ -59,7 +59,7 @@
                                 <i class="fa fa-star"></i>
                             </div>
                             <div class="product-option-shop">
-                                <a class="add_to_cart_button"  rel="nofollow" href="#"><i class="fa fa-plus-square"></i> chọn mua</a>
+                                <a id="item-cart-{{$product->id}}" class="add-product-to-cart add_to_cart_button"  rel="nofollow"><i class="fa fa-plus-square"></i> chọn mua</a>
                             </div>
                             <div class="cdt-product__config__param" style="margin-top: 5px; color: black; ">
                                 <span style="margin-left: 5px;" title="CPU"><i class="fas fa-microchip" ></i> {{$product->specifications['cpu']}}</span><br />

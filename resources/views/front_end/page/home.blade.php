@@ -56,7 +56,7 @@
                             <div style="height: 220px;" class="product-f-image">
                                 <img src="{{$product->image}}" alt="">
                                 <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-plus-square"></i> chọn mua</a>
+                                    <a id="item-cart-{{$product->id}}" class="add-product-to-cart add-to-cart-link"><i class="fa fa-plus-square"></i> Chọn mua</a>
                                     <a href="{{route('detail',$product->id)}}" class="view-details-link"><i class="fa fa-link"></i> chi tiết</a>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                             <div style="height: 220px;" class="product-f-image">
                                 <img src="{{$product->image}}" alt="">
                                 <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-plus-square"></i> Giỏ hàng</a>
+                                    <a id="item-cart-{{$product->id}}" class="add-product-to-cart add-to-cart-link"><i class="fa fa-plus-square"></i> Chọn mua</a>
                                     <a href="{{route('detail',$product->id)}}" class="view-details-link"><i class="fa fa-link"></i> chi tiết</a>
                                 </div>
                             </div>
@@ -166,7 +166,7 @@
                             <div style="height: 220px;" class="product-f-image">
                                 <img src="{{$product->image}}" alt="">
                                 <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-plus-square"></i> Giỏ hàng</a>
+                                    <a id="item-cart-{{$product->id}}" class="add-product-to-cart add-to-cart-link"><i class="fa fa-plus-square"></i> Chọn mua</a>
                                     <a href="{{route('detail',$product->id)}}" class="view-details-link"><i class="fa fa-link"></i> chi tiết</a>
                                 </div>
                             </div>
@@ -219,7 +219,7 @@
                             <div style="height: 220px;" class="product-f-image">
                                 <img src="{{$product->image}}" alt="">
                                 <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-plus-square"></i> Giỏ hàng</a>
+                                    <a id="item-cart-{{$product->id}}"  class="add-product-to-cart add-to-cart-link"><i class="fa fa-plus-square"></i> Chọn mua</a>
                                     <a href="{{route('detail',$product->id)}}" class="view-details-link"><i class="fa fa-link"></i> chi tiết</a>
                                 </div>
                             </div>
