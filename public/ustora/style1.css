@@ -1,0 +1,254 @@
+#w3lssbmincart form {
+    position: relative;
+    padding: 1em;
+    background: #fbfbfb;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+    color: #333;
+    -webkit-box-shadow: 0px 0px 5px 2px #9a9a9a;
+    -moz-box-shadow: 0px 0px 5px 2px #9a9a9a;
+    -o-box-shadow: 0px 0px 5px 2px #9a9a9a;
+    -ms-box-shadow: 0px 0px 5px 2px #9a9a9a;
+    box-shadow: 0px 0px 5px 2px #9a9a9a;
+}
+
+#w3lssbmincart form ul {
+    overflow-y: scroll;
+    max-height: 300px;
+}
+
+#w3lssbmincart {
+    display: block;
+    position: fixed;
+    left: 60%;
+    top: 16%;
+    width: 530px;
+}
+
+#w3lssbmincart {
+    display: none;
+    z-index: 9999;
+    -webkit-animation: zoomIn .3s ease;
+    -moz-animation: zoomIn .3s ease;
+    -o-animation: zoomIn .3s ease;
+    -ms-animation: zoomIn .3s ease;
+    animation: zoomIn .3s ease;
+}
+
+#w3lssbmincart form.sbmincart-empty {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#w3lssbmincart ul {
+    clear: both;
+    float: left;
+    width: 100%;
+    margin: 5px 0 20px;
+    padding: 1em;
+    list-style-type: none;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+#w3lssbmincart .sbmincart-empty ul {
+    display: none;
+}
+
+#w3lssbmincart .sbmincart-closer {
+    float: right;
+    margin: -8px -10px 0;
+    padding: 0 10px;
+    background: 0;
+    border: 0;
+    font-size: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    outline: none;
+}
+
+#w3lssbmincart .sbmincart-item {
+    clear: left;
+    padding: 7px 0;
+    min-height: 35px;
+    font-size: 0.85em;
+}
+
+#w3lssbmincart .sbmincart-item+.sbmincart-item {
+    border-top: 1px solid #f2f2f2;
+}
+
+#w3lssbmincart .sbmincart-item a {
+    color: #333;
+    text-decoration: none;
+}
+
+#w3lssbmincart .sbmincart-details-name {
+    float: left;
+    width: 58%;
+}
+
+#w3lssbmincart .sbmincart-details-quantity {
+    float: left;
+    width: 17%;
+}
+
+#w3lssbmincart .sbmincart-details-remove {
+    float: left;
+    width: 7%;
+}
+
+#w3lssbmincart .sbmincart-details-price {
+    float: left;
+    width: 18%;
+    text-align: right;
+}
+
+#w3lssbmincart .sbmincart-attributes {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    color: #999;
+    font-size: 12px;
+    line-height: 22px;
+    overflow: inherit;
+    height: inherit;
+}
+
+#w3lssbmincart .sbmincart-attributes li {
+    display: inline;
+}
+
+#w3lssbmincart .sbmincart-attributes li:after {
+    content: ",";
+}
+
+#w3lssbmincart .sbmincart-attributes li:last-child:after {
+    content: "";
+}
+
+#w3lssbmincart .sbmincart-quantity {
+    width: 50px;
+    height: 20px;
+    padding: 2px 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    font-size: 13px;
+    text-align: right;
+    transition: border linear 0.2s, box-shadow linear 0.2s;
+    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+}
+
+#w3lssbmincart .sbmincart-quantity:hover {
+    border-color: #0078C1;
+}
+
+#w3lssbmincart .sbmincart-quantity:focus {
+    border-color: #0078C1;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 3px rgba(0, 120, 193, 0.4);
+}
+
+#w3lssbmincart .sbmincart-remove {
+    width: 18px;
+    height: 19px;
+    margin: 2px 0 0;
+    padding: 0;
+    background: #b7b7b7;
+    border: 1px solid #a3a3a3;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 13px;
+    opacity: 0.70;
+    cursor: pointer;
+}
+
+#w3lssbmincart .sbmincart-remove:hover {
+    opacity: 1;
+}
+
+#w3lssbmincart .sbmincart-footer {
+    clear: left;
+    text-align: center;
+    margin-right: 1.5em;
+    position: relative;
+}
+
+p.sbmincart-empty-text {
+    color: #f44336;
+    font-weight: 500;
+}
+
+#w3lssbmincart .sbmincart-subtotal {
+    bottom: 3px;
+    padding-left: 0;
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    text-align: left;
+}
+
+#w3lssbmincart .sbmincart-submit {
+    margin-right: 6px;
+    padding: 0;
+    border: none;
+    color: #ff5063;
+    background: none;
+    outline: none;
+    font-size: 0.9em;
+    font-weight: 700;
+    position: absolute;
+    text-transform: uppercase;
+    right: 0;
+    top: 0;
+}
+
+
+/* Let's get this party started */
+
+#w3lssbmincart form ul::-webkit-scrollbar {
+    width: 5px;
+}
+
+
+/* Track */
+
+#w3lssbmincart form ul::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #999;
+    -moz-box-shadow: inset 0 0 6px #999;
+    -o-box-shadow: inset 0 0 6px #999;
+    -ms-box-shadow: inset 0 0 6px #999;
+    box-shadow: inset 0 0 6px #999;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -o-border-radius: 10px;
+    -ms-border-radius: 10px;
+    border-radius: 10px;
+}
+
+
+/* Handle */
+
+#w3lssbmincart form ul::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -o-border-radius: 10px;
+    -ms-border-radius: 10px;
+    border-radius: 10px;
+    background: #3c43a4;
+    -moz-box-shadow: inset 0 0 6px #3c43a4;
+    -o-box-shadow: inset 0 0 6px #3c43a4;
+    -ms-box-shadow: inset 0 0 6px #3c43a4;
+    -webkit-box-shadow: inset 0 0 6px #3c43a4;
+    box-shadow: inset 0 0 6px #3c43a4;
+}

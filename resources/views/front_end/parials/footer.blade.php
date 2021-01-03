@@ -1,6 +1,7 @@
     <div class="footer-top-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
+           
             <div class="row">
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-about-us">
@@ -14,7 +15,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-menu">
                         <h2 class="footer-wid-title">User Navigation </h2>
@@ -24,10 +25,10 @@
                             <li><a href="#">Wishlist</a></li>
                             <li><a href="#">Vendor contact</a></li>
                             <li><a href="#">Front page</a></li>
-                        </ul>                        
+                        </ul>
                     </div>
                 </div>
-                
+
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-menu">
                         <h2 class="footer-wid-title">Categories</h2>
@@ -37,10 +38,10 @@
                             <li><a href="#">LED TV</a></li>
                             <li><a href="#">Computer</a></li>
                             <li><a href="#">Gadets</a></li>
-                        </ul>                        
+                        </ul>
                     </div>
                 </div>
-                
+
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-newsletter">
                         <h2 class="footer-wid-title">Newsletter</h2>
@@ -56,5 +57,3 @@
             </div>
         </div>
     </div> <!-- End footer top area -->
-    
-  
