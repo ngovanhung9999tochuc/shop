@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SupplierAddRequest;
-use App\Models\Supplier;
-use App\Repositories\SupplierRepository;
+use App\Repositories\LoginRepository;
 use Illuminate\Http\Request;
-
-
-class SupplierController extends Controller
+use Illuminate\Support\Facades\Auth;
+class LoginController extends Controller
 {
+
 
     protected $repository;
 
-    public function __construct(SupplierRepository $repository)
+    public function __construct(LoginRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -22,10 +20,9 @@ class SupplierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function login(Request $request)
     {
-        $suppliers = $this->repository->getAll();
-        return view('back_end.admin.supplier.index', ['suppliers' => $suppliers]);
+        return $this->repository->login($request);
     }
 
     /**
@@ -33,6 +30,13 @@ class SupplierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function logout()
+    {
+        if (Auth::check()) {
+            Auth::logout();
+        }
+        return redirect()->route('home');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -40,9 +44,9 @@ class SupplierController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function register(Request $request)
     {
-       return $this->repository->create($request);
+        return $this->repository->register($request);
     }
 
     /**
@@ -51,16 +55,20 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function test()
+    {
+       
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit($id)
     {
-        $supplier = Supplier::find($request->id);
-        return json_encode((object) array('supplier' => $supplier));
+        //
     }
 
     /**
@@ -70,9 +78,9 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        return $this->repository->update($request);
+        //
     }
 
     /**
@@ -83,12 +91,6 @@ class SupplierController extends Controller
      */
     public function destroy($id)
     {
-        return $this->repository->destroy($id);
-    }
-
-    public function search(Request $request)
-    {
-        $suppliers = $this->repository->search($request);
-        return view('back_end.admin.supplier.index', ['suppliers' => $suppliers]);
+        //
     }
 }

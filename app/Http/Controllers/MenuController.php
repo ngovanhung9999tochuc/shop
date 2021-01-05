@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 class MenuController extends Controller
 {
 
-    
+
     protected $repository;
-   
+
     public function __construct(MenuRepository $repository)
     {
         $this->repository = $repository;
@@ -23,18 +23,9 @@ class MenuController extends Controller
     public function index()
     {
         $menus = $this->repository->getAll();
-        return view('back_end.admin.menu.index',['menus'=>$menus]);
+        return view('back_end.admin.menu.index', ['menus' => $menus]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -47,16 +38,6 @@ class MenuController extends Controller
         return $this->repository->create($request);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -66,7 +47,7 @@ class MenuController extends Controller
      */
     public function edit(Request $request)
     {
-       return $this->repository->edit($request);
+        return $this->repository->edit($request);
     }
 
     /**
@@ -100,6 +81,6 @@ class MenuController extends Controller
     public function search(Request $request)
     {
         $menus = $this->repository->search($request);
-        return view('back_end.admin.menu.index',['menus'=>$menus]);
+        return view('back_end.admin.menu.index', ['menus' => $menus]);
     }
 }

@@ -17,13 +17,18 @@
                 </div>
                 <div class="col-md-3">
                     <div id="btn-shopping-cart" class="shopping-item">
-                        <a>Giỏ hàng - <span id="total-price-1" class="cart-amunt">{{number_format($dataCart['totalPrice'])}}đ</span> <i class="fa fa-shopping-cart"></i></a>
+                        <a>Giỏ hàng - <span id="total-price-1" class="cart-amunt">
+                                @if(Session::has('cart'))
+                                {{number_format($dataCart['totalPrice'])}}đ
+                                @endif
+                            </span> <i class="fa fa-shopping-cart"></i></a>
                     </div>
                 </div>
                 <div id="w3lssbmincart">
                     <form method="post" class="" action="" target=""> <button id="btn-sbmincart-closer" type="button" class="sbmincart-closer">x</button>
                         <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" />
                         <ul id="ul-list-item">
+                            @if(Session::has('cart'))
                             @foreach($dataCart['items'] as $item)
                             <li id="item-{{$item['product']->id}}" class="sbmincart-item">
                                 <div class="sbmincart-details-name"> <a class="sbmincart-name" href="{{route('detail',$item['product']->id)}}">{{$item['product']->name}}</a></div>
@@ -32,9 +37,10 @@
                                 <div class="sbmincart-details-price"> <span id="total-product-{{$item['product']->id}}" class="sbmincart-price">{{number_format($item['quantity'] * ($item['product']->unit_price - $item['product']->unit_price * $item['product']->promotion_price / 100))}}đ</span> </div>
                             </li>
                             @endforeach
+                            @endif
                         </ul>
                         <div class="sbmincart-footer">
-                            <div class="sbmincart-subtotal">Tổng tiền:<span style="color: #5a88ca;" id="total-price-2">{{number_format($dataCart['totalPrice'])}}đ</span> &nbsp; &nbsp; &nbsp;số lượng:<span id="total-quantity" style="color: #5a88ca;">{{$dataCart['totalQty']}}</span></div> <a><button class="sbmincart-submit" type="button">Đặt hàng</button></a>
+                            <div class="sbmincart-subtotal">Tổng tiền:<span style="color: #5a88ca;" id="total-price-2">{{number_format($dataCart['totalPrice'])}}đ</span> &nbsp; &nbsp; &nbsp;số lượng:<span id="total-quantity" style="color: #5a88ca;">{{$dataCart['totalQty']}}</span></div> <a href="{{route('order')}}"><button class="sbmincart-submit" type="button">Đặt hàng</button></a>
                         </div>
                     </form>
                 </div>

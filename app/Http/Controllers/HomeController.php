@@ -46,19 +46,19 @@ class HomeController extends Controller
                     return redirect()->route('home');
             }
         } else {
-            
-            return view('front_end.page.products',$this->repository->getPageTypeProduct($type, $id));
+
+            return view('front_end.page.products', $this->repository->getPageTypeProduct($type, $id));
         }
     }
 
-    public function getTypeProduct( $id)
+    public function getTypeProduct($id)
     {
-        return view('front_end.page.products',$this->repository->getTypeProduct($id));
+        return view('front_end.page.products', $this->repository->getTypeProduct($id));
     }
 
-    public function getProductDetail( $id)
+    public function getProductDetail($id)
     {
-        return view('front_end.page.single_product',$this->repository->getProductDetail($id));
+        return view('front_end.page.single_product', $this->repository->getProductDetail($id));
     }
     /**
      * Store a newly created resource in storage.
@@ -77,9 +77,10 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getOrder()
     {
-        //
+        $cart = $this->repository->getOrder();
+        return view('front_end.page.cart',$cart);
     }
 
     /**

@@ -14,7 +14,6 @@
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="/ustora/css/bootstrap.min.css">
-
   <!-- Font Awesome -->
   <link rel="stylesheet" href="/ustora/css/font-awesome.min.css">
   <link rel="stylesheet" href="/admin/plugins/fontawesome-free/css/all.min.css">
@@ -23,13 +22,9 @@
   <link rel="stylesheet" href="/ustora/style.css">
   <link rel="stylesheet" href="/ustora/css/responsive.css">
   <link rel="stylesheet" href="/ustora/style1.css">
+  <link rel="stylesheet" href="/ustora/login.css">
+  <link rel="stylesheet" href="/ustora/login1.css">
 
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
   @yield('css')
 
 </head>
@@ -71,6 +66,7 @@
   <!-- Slider -->
   <script type="text/javascript" src="/ustora/js/bxslider.min.js"></script>
   <script type="text/javascript" src="/ustora/js/script.slider.js"></script>
+  <script src="{{asset('vendor/sweetalert2@10.js')}}"></script>
   <script>
     //shopping cart show form
     const base_url = window.location.origin;
@@ -86,13 +82,137 @@
     btnSbmincartCloser.addEventListener('click', function() {
       w3lssbmincart.style.display = 'none';
     });
-    //cart
+    //LOGIN
+    const modal = document.getElementById('id01');
+    const modal2 = document.getElementById('id02');
+    const btnLogin = document.getElementById('btn-login');
+    const btnRegister = document.getElementById('btn-register');
+    //event
+    window.onclick = function(event) {
+      if (event.target == modal || event.target == modal2) {
+        modal.style.display = "none";
+        modal2.style.display = "none";
+      }
+    }
+
+    btnLogin.addEventListener('click', function() {
+      clearErrorMessagesFormLogin();
+      document.getElementById('form-login').reset();
+      modal.style.display = "block";
+    });
+
+    btnRegister.addEventListener('click', function() {
+      clearErrorMessagesFormRegister();
+      document.getElementById('form-register').reset();
+      modal2.style.display = "block";
+    });
+
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $('#form-login').submit(function(e) {
+      e.preventDefault();
+      clearErrorMessagesFormLogin();
+      var formData = new FormData(this);
+      $.ajax({
+        type: 'POST',
+        url: base_url + '/login',
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: (data) => {
+          this.reset();
+          if (data['success']) {
+            //checkAdmin
+            document.getElementById('display-login-logout').style.display = 'none';
+            document.getElementById('header-right-login').style.display = 'block';
+            //name-user-login
+            if (data['checkAdmin']) {
+              document.getElementById('display-admin').style.display = 'block';
+            }
+            document.getElementById('name-user-login').innerHTML = data['user']['name'];
+
+            Swal.fire({
+              icon: 'success',
+              title: 'Bạn đăng nhập thành công',
+              showConfirmButton: false,
+              timer: 4000
+            });
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Tài khoản hoặc mật khẩu không đúng',
+              showConfirmButton: false,
+              timer: 4000
+            });
+          }
+
+        },
+        error: function(error) {
+          let errors = error.responseJSON['errors'];
+          for (const key in errors) {
+            $('#validation-login-' + key).html(errors[key][0]);
+          }
+        }
+      });
+    });
+
+    $('#form-register').submit(function(e) {
+      e.preventDefault();
+      clearErrorMessagesFormRegister();
+      var formData = new FormData(this);
+      $.ajax({
+        type: 'POST',
+        url: base_url + '/register',
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: (data) => {
+          this.reset();
+          console.log(data);
+          if (data['success']) {
+
+            document.getElementById('display-login-logout').style.display = 'none';
+            document.getElementById('header-right-login').style.display = 'block';
+            //name-user-login
+            document.getElementById('name-user-login').innerHTML = data['user']['name'];
+            Swal.fire({
+              icon: 'success',
+              title: 'Bạn đăng ký thành công',
+              showConfirmButton: false,
+              timer: 4000
+            });
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'bạn đăng ký thành công, đăng nhập không thành công',
+              showConfirmButton: false,
+              timer: 4000
+            });
+          }
+
+        },
+        error: function(error) {
+          let errors = error.responseJSON['errors'];
+          for (const key in errors) {
+            $('#validation-register-' + key).html(errors[key][0]);
+          }
+        }
+      });
+    });
+
+    //CART
     const btnAddCarts = document.querySelectorAll('.add-product-to-cart');
     const _token = document.getElementById('_token');
     const totalPrice1 = document.getElementById('total-price-1');
     const totalPrice2 = document.getElementById('total-price-2');
     const totalQuantity = document.getElementById('total-quantity');
     const ulListItem = document.getElementById('ul-list-item');
+
 
     //them item cart
     btnAddCarts.forEach(function(btnAdd) {
@@ -142,6 +262,19 @@
     });
 
     //function
+    function clearErrorMessagesFormLogin() {
+      document.getElementById('validation-login-email').innerHTML = '';
+      document.getElementById('validation-login-password').innerHTML = '';
+    }
+
+    function clearErrorMessagesFormRegister() {
+      document.getElementById('validation-register-fullname').innerHTML = '';
+      document.getElementById('validation-register-username').innerHTML = '';
+      document.getElementById('validation-register-password').innerHTML = '';
+      document.getElementById('validation-register-repassword').innerHTML = '';
+    }
+
+
     function changeQuantity(inputQuantity) {
       let [x, y, id] = inputQuantity.id.split('-');
       requestCart(base_url + '/cart/change', JSON.stringify({

@@ -57,7 +57,7 @@ class ProductRepository
                 'description' => $request->description,
                 'specifications_all' => $request->specifications_all,
                 'publisher' => $request->publisher,
-                'user_id' => 1,
+                'user_id' => auth()->user()->id,
                 'product_type_id' => $request->product_type
             ];
             $dataUploadFeatureImage = $this->storageTraitUpload($request, 'image_file', 'product', $id);

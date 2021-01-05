@@ -75,4 +75,27 @@ class User extends Authenticatable
     {
         return $this->hasMany(BillIn::class, 'user_id');
     }
+
+    public function checkCustomerRoleAccess()
+    {
+        $roles = auth()->user()->roles;
+        if ($roles->count() == 0) {
+            return false;
+        } else if ($roles->count() == 1) {
+            if ($roles[0]->name == 'customer') return false;
+        }
+        return true;
+    }
+
+    public function checkPermissionAccess($permissionKeyCode)
+    {
+        $roles = auth()->user()->roles;
+        foreach ($roles as $role) {
+            $permissions = $role->permissions;
+            if ($permissions->contains('key_code', $permissionKeyCode)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

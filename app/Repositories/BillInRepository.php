@@ -8,7 +8,6 @@ use App\Models\Supplier;
 use App\Traits\StorageImageTrait;
 use App\Traits\MessageTrait;
 use Exception;
-use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use DateTime;
@@ -58,7 +57,7 @@ class BillInRepository
                 'input_date' => $input_date,
                 'total_price' => $total_price,
                 'quantity' => $request->quantity,
-                'user_id' => 1
+                'user_id' => auth()->user()->id
             ];
             $bill_in = $this->bill_in->create($data_bill_in_create);
             $bill_in->products()->attach($bill_in_detail);

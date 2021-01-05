@@ -25,14 +25,6 @@ class RoleController extends Controller
         return view('back_end.admin.role.index', ['roles' => $roles]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -45,16 +37,6 @@ class RoleController extends Controller
         return $this->repository->create($request);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
