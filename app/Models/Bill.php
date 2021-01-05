@@ -10,8 +10,18 @@ class Bill extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $guarded = [];
-
+    protected $fillable = [
+        'user_id',
+        'email',
+        'address',
+        'phone',
+        'date_order',
+        'complete_order',
+        'total',
+        'quantity',
+        'payment',
+        'status',
+    ];
     public function products()
     {
         return $this->belongsToMany(Product::class, 'bill_details')->withPivot('quantity', 'unit_price')

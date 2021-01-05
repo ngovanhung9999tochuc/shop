@@ -15,6 +15,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminController;
+use App\Http\Middleware\CheckOut;
+
 /*
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +33,8 @@ Route::get('/', [HomeController::class, 'getHome'])->name('home');
 Route::get('/type/{type}/{id}', [HomeController::class, 'getPageTypeProduct'])->name('typeproduct');
 Route::get('/type/{id}', [HomeController::class, 'getTypeProduct'])->name('type.type');
 Route::get('/detail/{id}', [HomeController::class, 'getProductDetail'])->name('detail');
-Route::get('/order', [HomeController::class, 'getOrder'])->name('order');
-
+Route::get('/order', [HomeController::class, 'getOrder'])->name('order')->middleware(CheckOut::class);
+Route::post('/order/enter', [HomeController::class, 'enterAnOrder'])->name('order.enter');
 //login
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

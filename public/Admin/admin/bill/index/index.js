@@ -20,11 +20,13 @@
     const btnStatus = document.querySelectorAll('.btn-dropdown-status');
     const _token = document.getElementById('_token');
     let modal = document.getElementById('id01');
+    let modal2 = document.getElementById('id02');
     let btnShowInfo = document.querySelectorAll('.btn-show-info');
     //event
     window.onclick = function(event) {
-        if (event.target == modal) {
+        if (event.target == modal || event.target == modal2) {
             modal.style.display = "none";
+            modal2.style.display = "none";
         }
     }
 
@@ -125,9 +127,6 @@
                     modal.style.display = "block";
                 }
             });
-
-
-            //modal.style.display = "block";
         });
     });
 
@@ -137,21 +136,49 @@
         btn.addEventListener('click', function() {
             let [x, btnId, status] = this.id.split('-');
             let [y, id] = btnId.split('_');
+            let tableProductInventory = document.getElementById('table-product-inventory');
             request(base_url + '/admin/bill/status', JSON.stringify({
                 '_token': _token.value,
                 'status': status,
                 'id': id
             }), function(data) {
-                let status = JSON.parse(data)['status'];
-                const btnText = document.getElementById('btn-text-' + id);
-                const btnDropdown = document.getElementById('btn-dropdown-' + id);
-                for (const i of arrClass) {
-                    btnText.classList.remove(i['class']);
-                    btnDropdown.classList.remove(i['class']);
+                data = JSON.parse(data);
+                console.log(data);
+                if (data['success']) {
+                    let status = data['status'];
+                    const btnText = document.getElementById('btn-text-' + id);
+                    const btnDropdown = document.getElementById('btn-dropdown-' + id);
+                    for (const i of arrClass) {
+                        btnText.classList.remove(i['class']);
+                        btnDropdown.classList.remove(i['class']);
+                    }
+                    btnText.innerHTML = arrClass[status]['textStatus'];
+                    btnText.classList.add(arrClass[status]['class']);
+                    btnDropdown.classList.add(arrClass[status]['class']);
+                } else {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Kho không đủ sản phẩm để giao hàng',
+                        showConfirmButton: false,
+                        timer: 4000
+                    });
+                    let tr = '';
+                    let products = data['inventorys']
+                    for (const product in products) {
+
+                        let td = '';
+                        td += '<tr>';
+                        td += '<td>' + products[product]['id'] + '</td>';
+                        td += '<td>' + products[product]['name'] + '</td>';
+                        td += '<td>' + products[product]['quantityInventory'] + '</td>';
+                        td += '<td>' + products[product]['quantityRequired'] + '</td>';
+                        td += '<td><img src="' + products[product]['image'] + '" style="width:80px ; height: 80px;" /></td>';
+                        td += '</tr>';
+                        tr += td;
+                    }
+                    tableProductInventory.innerHTML = tr;
+                    modal2.style.display = "block";
                 }
-                btnText.innerHTML = arrClass[status]['textStatus'];
-                btnText.classList.add(arrClass[status]['class']);
-                btnDropdown.classList.add(arrClass[status]['class']);
             });
         });
     });

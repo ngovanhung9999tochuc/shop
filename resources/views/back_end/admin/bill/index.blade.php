@@ -1,8 +1,8 @@
 @extends('back_end.layout.layout')
 @section('content')
 @section('css')
-
 <link href="{{asset('Admin/admin/bill/index/index.css')}}" rel="stylesheet" />
+<link href="{{asset('Admin/admin/bill/index/index1.css')}}" rel="stylesheet" />
 @endsection
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -237,7 +237,41 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="table-product">
-                                                    
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="id02" class="modal col-md-12">
+
+                    <div class="modal-content animate">
+                        <div class="imgcontainer">
+                            <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+                        </div>
+
+                        <div class="container">
+                            <div class="container">
+                                <div class="main-body">
+                                    <div class="row">
+                                        <div class="card-body table-responsive p-0">
+                                            <table class="table table-hover text-nowrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Tên sản phẩm</th>
+                                                        <th>Tồn kho</th>
+                                                        <th>Số lượng trong đơn hàng</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="table-product-inventory">
+
                                                 </tbody>
                                             </table>
                                         </div>

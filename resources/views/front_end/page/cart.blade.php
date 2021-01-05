@@ -20,13 +20,13 @@
 <div class="container">
     <div id="content">
 
-        <form action="" method="post" class="beta-form-checkout">
+        <form action="{{route('order.enter')}}" method="post" class="beta-form-checkout">
             @csrf
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Họ tên*</label>
-                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}" placeholder="nhập họ tên">
+                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{auth()->user()->name}}" readonly placeholder="nhập họ tên">
                         @error('name')
                         <br />
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -35,7 +35,7 @@
 
                     <div class="form-group">
                         <label>Email*</label>
-                        <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" placeholder="nhập email">
+                        <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" value="{{auth()->user()->email}}" placeholder="nhập email">
                         @error('email')
                         <br />
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -44,7 +44,7 @@
 
                     <div class="form-group">
                         <label>Địa chỉ*</label>
-                        <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" value="{{old('address')}}" placeholder="nhập địa chỉ">
+                        <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" value="{{auth()->user()->address}}" placeholder="nhập địa chỉ">
                         @error('address')
                         <br />
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -54,24 +54,12 @@
 
                     <div class="form-group">
                         <label>Điện thoại*</label>
-                        <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{old('phone')}}" placeholder="nhập điện thoại">
+                        <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{auth()->user()->phone}}" placeholder="nhập điện thoại">
                         @error('phone')
                         <br />
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
-
-
-                    <div class="form-group">
-                        <label>Ghi chú</label>
-                        <textarea class="form-control @error('notes') is-invalid @enderror" name="notes">{{old('notes')}}</textarea>
-                        @error('notes')
-                        <br />
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-
 
                 </div>
                 <div class="col-sm-6">
@@ -119,23 +107,19 @@
                                 <div class="clearfix"></div>
                             </div>
                         </div>
-                        <div class="your-order-head">
-                            <h5>Hình thức thanh toán</h5>
+                        <div class="your-order-head" style="height: 32px; line-height: 32px; font-size: 16px;">
+                            <b>Hình thức thanh toán</b>
                         </div>
 
-                        <div class="your-order-body">
-                            <ul class="payment_methods methods">
+                        <div class="row your-order-body">
+                            <ul class="col-md-6 payment_methods methods">
                                 <li class="payment_method_bacs">
-                                    <input id="payment_method_bacs" type="radio" class="input-radio" name="payment_method" value="COD" checked="checked" data-order_button_text="">
-                                    <label for="payment_method_bacs">Thanh toán khi nhận hàng </label>
-                                    <div class="payment_box payment_method_bacs" style="display: block;">
-                                        Cửa hàng sẽ gửi hàng đến địa chỉ của bạn, bạn xem hàng rồi thanh toán tiền cho nhân viên giao hàng
-                                    </div>
+                                    <input type="radio" class="input-radio" name="payment_method" value="COD" checked="checked">
+                                    <label title="Cửa hàng sẽ gửi hàng đến địa chỉ của bạn, bạn xem hàng rồi thanh toán tiền cho nhân viên giao hàng" for="payment_method_bacs">Thanh toán khi nhận hàng</label>
                                 </li>
                             </ul>
+                            <div class="col-md-6 text-center"><button style="color: #5a88ca; border-radius: 3px;" class="beta-btn" type="submit">Đặt hàng</button></div>
                         </div>
-
-                        <div class="text-center"><button style="color: #5a88ca; border-radius: 3px;" class="beta-btn" type="submit">Đặt hàng</button></div>
                     </div> <!-- .your-order -->
                 </div>
             </div>

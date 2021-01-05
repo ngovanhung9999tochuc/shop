@@ -8,16 +8,17 @@
                     $displayAdmin='style="display: none;"';
 
                     if(Auth::check()){
-                        $displayUser='style="display: block;"';
-                        $displayLogin='style="display: none;"';
+                    $displayUser='style="display: block;"';
+                    $displayLogin='style="display: none;"';
                     }else{
-                        $displayUser='style="display: none;"';
-                        $displayLogin='style="display: block;"';
+                    $displayUser='style="display: none;"';
+                    $displayLogin='style="display: block;"';
                     }
                     if(Gate::allows('admin')){
-                        $displayAdmin='style="display: block;"';
+                    $displayAdmin='style="display: block;"';
                     }
                     @endphp
+
                     <div class="user-menu">
                         <ul class="row">
                             <div {!! $displayLogin !!} class="col-md-4" id="display-login-logout">
@@ -31,12 +32,17 @@
                     </div>
                 </div>
 
+
                 <div class="col-md-4">
 
                     <div id="header-right-login" {!! $displayUser !!} class="header-right">
                         <ul class="list-unstyled list-inline">
                             <li class="dropdown dropdown-small">
-                                <a style="font-size: 14px;" data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span id="name-user-login" class="key">Ngô Văn Hùng</span></a>
+                                <a style="font-size: 14px;" data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span id="name-user-login" class="key">
+                                        @if(Auth::check())
+                                        {{Auth::user()->name}}
+                                        @endif
+                                    </span></a>
                                 <ul class="dropdown-menu">
                                     <li><a id="a-link-profile" style="font-size: 14px;">Hồ sơ</a></li>
                                     <li><a href="{{route('logout')}}" id="a-link-logout" style="font-size: 14px;">Thoát</a></li>

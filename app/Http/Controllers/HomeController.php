@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderRequest;
 use App\Repositories\HomeRepository;
 use Illuminate\Http\Request;
 
@@ -66,9 +67,9 @@ class HomeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function enterAnOrder(OrderRequest $request)
     {
-        //
+        return  $this->repository->enterAnOrder($request);
     }
 
     /**
@@ -80,7 +81,7 @@ class HomeController extends Controller
     public function getOrder()
     {
         $cart = $this->repository->getOrder();
-        return view('front_end.page.cart',$cart);
+        return view('front_end.page.cart', $cart);
     }
 
     /**

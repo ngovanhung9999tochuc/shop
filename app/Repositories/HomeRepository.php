@@ -2,11 +2,13 @@
 
 namespace App\Repositories;
 
+use App\Models\Bill;
 use App\Models\Product;
 use App\Models\ProductType;
 use App\Models\Slide;
 use Illuminate\Support\Facades\Session;
 use App\Models\Cart;
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -74,7 +76,52 @@ class HomeRepository
         ];
     }
 
-    public function search($request)
+    public function enterAnOrder($request)
     {
+        try {
+            DB::beginTransaction();
+            $oldCart = Session('cart') ? Session::get('cart') : null;
+            $cart = new Cart($oldCart);
+            $data_bill_create = [
+                'user_id' => auth()->user()->id,
+                'email' => $request->email,
+                'address' => $request->address,
+                'phone' => $request->phone,
+                'date_order' => date('y-m-d'),
+                'total' => $cart->totalPrice,
+                'quantity' => $cart->totalQty,
+                'payment' => $request->payment_method,
+                'status' => 0
+            ];
+
+            $bill_detail = [];
+            foreach ($cart->items as $item) {
+                $bill_detail[$item['product']->id]['quantity'] = $item['quantity'];
+                $bill_detail[$item['product']->id]['unit_price'] = $item['product']->unit_price - $item['product']->unit_price * $item['product']->promotion_price / 100;
+            }
+            $bill = Bill::create($data_bill_create);
+            $bill->products()->attach($bill_detail);
+            Session::forget('cart');
+            DB::commit();
+            $request->session()->flash('messageCheckOut', "<script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Bạn đã đặt hàng thành công',
+                showConfirmButton: false,
+                timer: 4000
+            })</script>");
+            return redirect()->back();
+        } catch (Exception $exception) {
+            DB::rollBack();
+            Log::error('message: ' . $exception->getMessage() . 'line: ' . $exception->getLine());
+            $request->session()->flash('messageCheckOut', "<script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi hệ thống ! Bạn đặt hàng thất bại',
+                showConfirmButton: false,
+                timer: 4000
+            })</script>");
+            return redirect()->back();
+        }
     }
 }

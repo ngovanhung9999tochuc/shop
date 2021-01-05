@@ -342,7 +342,11 @@
     }
   </script>
   @yield('js')
-
+  @php
+  if(Session::has('messageCheckOut')){
+  echo Session::get('messageCheckOut');
+  }
+  @endphp
 </body>
 
 </html>
