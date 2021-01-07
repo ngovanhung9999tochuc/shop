@@ -36,6 +36,7 @@
                 <div class="col-md-4">
 
                     <div id="header-right-login" {!! $displayUser !!} class="header-right">
+                       
                         <ul class="list-unstyled list-inline">
                             <li class="dropdown dropdown-small">
                                 <a style="font-size: 14px;" data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span id="name-user-login" class="key">
@@ -44,7 +45,7 @@
                                         @endif
                                     </span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a id="a-link-profile" style="font-size: 14px;">Hồ sơ</a></li>
+                                    <li><a href="{{route('profile')}}" id="a-link-profile" style="font-size: 14px;">Hồ sơ</a></li>
                                     <li><a href="{{route('logout')}}" id="a-link-logout" style="font-size: 14px;">Thoát</a></li>
                                 </ul>
                             </li>

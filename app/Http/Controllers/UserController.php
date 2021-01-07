@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateUserInfoRequest;
+use App\Http\Requests\UpdateUserPasswordRequest;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
@@ -68,5 +70,15 @@ class UserController extends Controller
         $roles = $this->repository->getRoles();
         $users = $this->repository->search($request);
         return view('back_end.admin.user.index', ['users' => $users, 'roles' => $roles]);
+    }
+
+    public function updateInfo(UpdateUserInfoRequest $request)
+    {
+       return $this->repository->updateInfo($request);
+    }
+
+    public function updatePassword(UpdateUserPasswordRequest $request)
+    {
+       return $this->repository->updatePassword($request);
     }
 }

@@ -17,8 +17,14 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="/ustora/css/font-awesome.min.css">
   <link rel="stylesheet" href="/admin/plugins/fontawesome-free/css/all.min.css">
+
+  <!-- iCheck -->
+  <!-- JQVMap -->
+  <!-- Theme style -->
+  <!-- overlayScrollbars -->
+  <!-- Daterange picker -->
+  <!-- summernote -->
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="/ustora/css/owl.carousel.css">
   <link rel="stylesheet" href="/ustora/style.css">
   <link rel="stylesheet" href="/ustora/css/responsive.css">
   <link rel="stylesheet" href="/ustora/style1.css">
@@ -37,15 +43,9 @@
   @include('front_end.parials.header')
   <!-- site branding area -->
 
-  <!-- mainmenu area -->
-  @include('front_end.parials.mainmenu')
 
   <!-- content -->
   @yield('content')
-
-  <!-- footer top area -->
-  @include('front_end.parials.footer')
-  <!-- footer bottom area -->
 
 
   <!-- JQuery-->
@@ -53,19 +53,7 @@
   <script src="/ustora/jquery.min.js"></script>
   <!-- Bootstrap JS form CDN -->
   <script src="/ustora/bootstrap.min.js"></script>
-  <!-- jQuery sticky menu -->
-  <script src="/ustora/js/owl.carousel.min.js"></script>
-  <script src="/ustora/js/jquery.sticky.js"></script>
 
-  <!-- jQuery easing -->
-  <script src="/ustora/js/jquery.easing.1.3.min.js"></script>
-
-  <!-- Main Script -->
-  <script src="/ustora/js/main.js"></script>
-
-  <!-- Slider -->
-  <script type="text/javascript" src="/ustora/js/bxslider.min.js"></script>
-  <script type="text/javascript" src="/ustora/js/script.slider.js"></script>
   <script src="{{asset('vendor/sweetalert2@10.js')}}"></script>
   <script src="{{asset('font_end/layout.js')}}"></script>
  

@@ -16,6 +16,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminController;
 use App\Http\Middleware\CheckOut;
+use App\Http\Middleware\Profile;
 
 /*
 /*
@@ -39,6 +40,11 @@ Route::post('/order/enter', [HomeController::class, 'enterAnOrder'])->name('orde
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/register', [LoginController::class, 'register'])->name('register');
+Route::middleware([Profile::class])->group(function () {
+    Route::get('/profile', [HomeController::class, 'getProfile'])->name('profile');
+    Route::post('/profile/info', [UserController::class, 'updateInfo'])->name('profile.info');
+    Route::post('/profile/password', [UserController::class, 'updatePassword'])->name('profile.password');
+});
 Route::get('/test', [LoginController::class, 'test'])->name('test');
 //register
 Route::post('/cart/add', [CartController::class, 'addItemToCart'])->name('cart.add');

@@ -115,6 +115,11 @@ class HomeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+    }
+
+    public function getProfile()
+    {
+        return view('front_end.page.profile');
     }
 }
