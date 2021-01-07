@@ -21,8 +21,8 @@
 @endsection
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    @include("back_end.parials.content_header",['title'=>'Thêm mới phiếu nhập kho', 'name'=>'bill',
-    'key'=>'add','route'=>route('billin.index')])
+    @include("back_end.parials.content_header",['title'=>'Thêm mới phiếu nhập kho', 'name'=>'Nhập kho',
+    'key'=>'Thêm','route'=>route('billin.index')])
     <!-- /.content-header -->
     <div class="col-md-12">
 
@@ -73,7 +73,7 @@
                                     @csrf @method('post')
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label>Nhà cung ứng</label>
+                                            <label>Nhà cung cấp</label>
                                             <div class="row">
                                                 <div class="col-md-10">
                                                     <select id="select-supplers" class="form-control" name="supplier_id">

@@ -32,7 +32,7 @@ class BillInAddRequest extends FormRequest
     public function messages()
     {
         return [
-            'supplier_id.required' => 'Nhà cung ứng không được phép trống',
+            'supplier_id.required' => 'Nhà cung cấp không được phép trống',
             'input_date.required' => 'Ngày nhập không được phép trống',
         ];
     }

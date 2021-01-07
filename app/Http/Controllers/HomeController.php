@@ -122,4 +122,9 @@ class HomeController extends Controller
     {
         return view('front_end.page.profile');
     }
+
+    public function getBillProduct(Request $request)
+    {
+        return  $this->repository->getBillProduct($request);
+    }
 }

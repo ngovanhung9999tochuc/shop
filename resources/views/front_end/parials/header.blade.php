@@ -25,8 +25,8 @@
                                 <li><a id="btn-login"><i class="fa fa-user"></i> Đăng nhập</a></li>
                                 <li><a id="btn-register"><i class="fas fa-registered"></i></i> Đăng ký</a></li>
                             </div>
-                            <div {!! $displayAdmin !!} class="col-md-8" id="display-admin">
-                                <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-user"></i> Quản trị</a></li>
+                            <div  class="col-md-8">
+                               
                             </div>
                         </ul>
                     </div>
@@ -46,6 +46,7 @@
                                     </span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{route('profile')}}" id="a-link-profile" style="font-size: 14px;">Hồ sơ</a></li>
+                                    <li {!! $displayAdmin !!} id="display-admin"><a href="{{route('admin.dashboard')}}" style="font-size: 14px;">Quản trị</a></li>    
                                     <li><a href="{{route('logout')}}" id="a-link-logout" style="font-size: 14px;">Thoát</a></li>
                                 </ul>
                             </li>

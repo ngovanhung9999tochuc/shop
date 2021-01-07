@@ -6,8 +6,8 @@
 @endsection
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    @include("back_end.parials.content_header",['title'=>'Danh sách loại sản phẩm',
-    'name'=>'producttype','key'=>'list','route'=>route('producttype.index')])
+    @include("back_end.parials.content_header",['title'=>'Danh sách danh mục',
+    'name'=>'Danh mục','key'=>'Danh sách','route'=>route('producttype.index')])
     <!-- /.content-header -->
     <!-- Main content -->
     <section class="content">
@@ -21,7 +21,7 @@
                                 <form method="POST" action="{{route('producttype.search')}}">
                                     @csrf @method('post')
                                     <div class="input-group input-group-sm" style="width: 300px;">
-                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Tìm mã hoặc tên loại sản phẩm">
+                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Tìm mã hoặc tên danh mục">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
                                         </div>
@@ -35,9 +35,9 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Tên loại</th>
+                                        <th>Tên danh mục</th>
                                         <th>Hình ảnh</th>
-                                        <th>Thuộc loại</th>
+                                        <th>Danh mục cha</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </thead>
@@ -79,14 +79,14 @@
                                 <div class="col-md-12">
                                     <div class="card card-info">
                                         <div class="card-header" style="background-color: #28a745;">
-                                            <h3 class="card-title"><b>Thêm loại sản phẩm</b></h3>
+                                            <h3 class="card-title"><b>Thêm danh mục</b></h3>
                                         </div>
                                         <div class="card-body">
                                             <form id="form-add-type" method="POST">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label>Tên loại sản phẩm</label>
-                                                    <input type="text" name="name" class="form-control" value="" placeholder="nhập tên loại sản phẩm">
+                                                    <label>Tên danh mục</label>
+                                                    <input type="text" name="name" class="form-control" value="" placeholder="nhập tên danh mục">
                                                     <div style="margin-top: 5px;" id="validation-add-name"></div>
                                                 </div>
                                                 <div class="form-group">
@@ -97,11 +97,11 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Mã</label>
-                                                    <input type="text" name="key_code" class="form-control" value="" placeholder="nhập mã loại sản phẩm">
+                                                    <input type="text" name="key_code" class="form-control" value="" placeholder="nhập mã danh mục">
                                                     <div style="margin-top: 10px;" id="validation-add-key_code"></div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Hình ảnh loại sản phẩm</label>
+                                                    <label>Hình ảnh danh mục</label>
                                                     <input type="file" id="image" name="image_file" class="form-control-file" value="">
                                                     <img id="output-image" />
                                                     <div style="margin-top: 10px;" id="validation-add-image_file"></div>
@@ -130,15 +130,15 @@
                                 <div class="col-md-12">
                                     <div class="card card-info">
                                         <div class="card-header" style="background-color: #28a745;">
-                                            <h3 class="card-title"><b>Sửa loại sản phẩm</b></h3>
+                                            <h3 class="card-title"><b>Sửa danh mục</b></h3>
                                         </div>
                                         <div class="card-body">
                                             <form id="form-edit-type" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="id" value="" />
                                                 <div class="form-group">
-                                                    <label>Tên loại sản phẩm</label>
-                                                    <input type="text" name="name" class="form-control" value="" placeholder="nhập tên loại sản phẩm">
+                                                    <label>Tên danh mục</label>
+                                                    <input type="text" name="name" class="form-control" value="" placeholder="nhập tên danh mục">
                                                     <div style="margin-top: 5px;" id="validation-edit-name"></div>
                                                 </div>
                                                 <div class="form-group">
@@ -149,11 +149,11 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Mã</label>
-                                                    <input type="text" name="key_code" class="form-control" value="" placeholder="nhập mã loại sản phẩm">
+                                                    <input type="text" name="key_code" class="form-control" value="" placeholder="nhập mã danh mục">
                                                     <div style="margin-top: 10px;" id="validation-edit-key_code"></div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Hình ảnh loại sản phẩm</label>
+                                                    <label>Hình ảnh danh mục</label>
                                                     <input type="file" id="image-edit" name="image_file" class="form-control-file" value="">
                                                     <img id="output-image-edit" />
                                                     <div style="margin-top: 10px;" id="validation-edit-image_file"></div>

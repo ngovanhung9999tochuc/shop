@@ -6,7 +6,7 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     @include("back_end.parials.content_header",['title'=>'Danh sách sản phẩm',
-    'name'=>'product','key'=>'list','route'=>route('product.index')])
+    'name'=>'Sản phẩm','key'=>'Danh sách','route'=>route('product.index')])
     <!-- /.content-header -->
     <!-- Main content -->
     <section class="content">
@@ -38,7 +38,7 @@
                                         <th>Giá bán</th>
                                         <th>Khuyến mãi</th>
                                         <th>Hình ảnh</th>
-                                        <th>Loại sản phẩm</th>
+                                        <th>Danh mục</th>
                                         <th>Nhập giá</th>
                                         <th>Thao tác</th>
                                     </tr>

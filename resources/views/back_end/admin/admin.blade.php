@@ -7,7 +7,7 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   @include("back_end.parials.content_header",['title'=>'Quản trị',
-  'name'=>'dashboard','key'=>'list','route'=>route('admin.dashboard')])
+  'name'=>'Tổng quan','key'=>'Danh sách','route'=>route('admin.dashboard')])
   <!-- /.content-header -->
 
   <!-- Main content -->

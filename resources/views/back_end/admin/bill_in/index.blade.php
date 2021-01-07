@@ -7,7 +7,7 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     @include("back_end.parials.content_header",['title'=>'Danh sách phiếu nhập kho',
-    'name'=>'bill','key'=>'list','route'=>route('billin.index')])
+    'name'=>'Nhập kho','key'=>'Danh sách','route'=>route('billin.index')])
     <!-- /.content-header -->
     <!-- Main content -->
     <section class="content">
@@ -36,7 +36,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Ngày nhập</th>
-                                        <th>Nhà cung ứng</th>
+                                        <th>Nhà cung cấp</th>
                                         <th>Số Lượng</th>
                                         <th>Tổng tiền</th>
                                         <th>Người nhập</th>

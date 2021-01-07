@@ -1,7 +1,7 @@
 @extends('back_end.layout.layout') @section('content') @section('css') @endsection
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    @include("back_end.parials.content_header",['title'=>'Sửa sản phẩm', 'name'=>'product','key'=>'edit','route'=>route('product.index')])
+    @include("back_end.parials.content_header",['title'=>'Sửa sản phẩm', 'name'=>'Sản phẩm','key'=>'Sửa','route'=>route('product.index')])
     <!-- /.content-header -->
     <div class="col-md-12">
 
@@ -16,7 +16,7 @@
                     <form method="POST" action="{{route('product.update',$product->id)}}" enctype="multipart/form-data">
                         @csrf @method('put')
                         <div class="form-group">
-                            <label>Tên sản phẩm</label>
+                            <label>Tên sản phẩm*</label>
                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{$product->name}}" placeholder="nhập tên sản phẩm">
                             @error('name')
                             <br />
@@ -26,7 +26,7 @@
 
 
                         <div class="form-group">
-                            <label>CPU</label>
+                            <label>CPU*</label>
                             <input type="text" name="cpu" class="form-control @error('cpu') is-invalid @enderror" value="{{$product->specifications['cpu']}}" placeholder="nhập CPU">
                             @error('cpu')
                             <br />
@@ -35,7 +35,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>RAM</label>
+                            <label>RAM*</label>
                             <input type="text" name="ram" class="form-control @error('ram') is-invalid @enderror" value="{{$product->specifications['ram']}}" placeholder="nhập RAM">
                             @error('ram')
                             <br />
@@ -45,7 +45,7 @@
 
 
                         <div class="form-group">
-                            <label>Màn hình</label>
+                            <label>Màn hình*</label>
                             <input type="text" name="displayscreen" class="form-control @error('displayscreen') is-invalid @enderror" value="{{$product->specifications['displayscreen']}}" placeholder="nhập màn hình">
                             @error('displayscreen')
                             <br />
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Bộ nhớ trong/Ổ cứng</label>
+                            <label>Bộ nhớ trong/Ổ cứng*</label>
                             <input type="text" name="rom_harddrive" class="form-control @error('rom_harddrive') is-invalid @enderror" value="{{$product->specifications['rom_harddrive']}}" placeholder="nhập bộ nhớ trong/ổ cứng">
                             @error('rom_harddrive')
                             <br />
@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Hệ điều hành</label>
+                            <label>Hệ điều hành*</label>
                             <input type="text" name="operatingsystem" class="form-control @error('operatingsystem') is-invalid @enderror" value="{{$product->specifications['operatingsystem']}}" placeholder="nhập hệ điều hành">
                             @error('operatingsystem')
                             <br />
@@ -71,13 +71,13 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Loại sản phẩm</label>
+                            <label>Danh mục*</label>
                             <select class="form-control" name="product_type">
                                 {!!$htmlOption!!}
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Nhà sản xuất</label>
+                            <label>Nhà sản xuất*</label>
                             <input type="text" name="publisher" class="form-control @error('publisher') is-invalid @enderror" value="{{$product->publisher}}" placeholder="nhập tên nhà sản xuất">
                             @error('publisher')
                             <br />
@@ -85,7 +85,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Hình ảnh sản phẩm</label>
+                            <label>Hình ảnh sản phẩm*</label>
                             <input type="file" id="image-file" name="image_file" class="form-control-file @error('image_file') is-invalid @enderror" value=""> @error('image_file')
                             <br />
                             <div class="alert alert-danger">{{ $message }}</div>

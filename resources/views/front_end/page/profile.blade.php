@@ -1,6 +1,7 @@
 @extends('front_end.layout.layoutP')
 @section('content')
 @section('css')
+<link href="{{asset('font_end/profile/profile.css')}}" rel="stylesheet" />
 @endsection
 <di class="row">
     <div class="col-md-1"></div>
@@ -186,11 +187,93 @@
                                         </form>
                                     </div>
                                     <!-- /.tab-pane -->
-
                                     <div class="tab-pane" id="settings">
-
+                                        <div class="card-body">
+                                            <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" />
+                                            <table class="table table-hover text-nowrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Ngày đặt hàng</th>
+                                                        <th>Số Lượng</th>
+                                                        <th>Tổng tiền</th>
+                                                        <th>Trình trạng</th>
+                                                        <th>Thao tác</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach(auth()->user()->bills as $bill)
+                                                    <tr>
+                                                        @php
+                                                        $status='';
+                                                        switch ($bill->status) {
+                                                        case "0":
+                                                        case "1":
+                                                        $status='xác nhận';
+                                                        break;
+                                                        case "2":
+                                                        $status='đang giao';
+                                                        break;
+                                                        case "3":
+                                                        $status='hoàn thành';
+                                                        break;
+                                                        case "4":
+                                                        $status='thất bại';
+                                                        break;
+                                                        default:
+                                                        $status='thất bại';
+                                                        }
+                                                        @endphp
+                                                        <td>{{$bill->id}}</td>
+                                                        <td>{{$bill->date_order}}</td>
+                                                        <td>{{$bill->quantity}}</td>
+                                                        <td>{{number_format($bill->total)}}đ</td>
+                                                        <td>{{$status}}</td>
+                                                        <td>
+                                                            <a id="btn_info-{{$bill->id}}" onclick="showInfo(this)" class="btn-show-info btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                    <!-- /.tab-pane -->
+                                    <!-- /.tab-pane profile-info  -->
+                                    <div id="profile-info" class="modal col-md-12">
+                                        <div class="modal-content animate">
+                                            <div class="imgcontainer">
+                                                <span onclick="document.getElementById('profile-info').style.display='none'" class="close" title="Close Modal">&times;</span>
+                                            </div>
+
+                                            <div class="container">
+                                                <div class="container">
+                                                    <div class="col-md-12">
+                                                        <div id="profile-table">
+                                                            <div class="row">
+                                                                <div class="card-body table-responsive p-0">
+                                                                    <table class="table table-hover text-nowrap">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>ID</th>
+                                                                                <th>Tên sản phẩm</th>
+                                                                                <th>Số Lượng</th>
+                                                                                <th>Giá</th>
+                                                                                <th>Hình ảnh</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="table-product-bill">
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div> <!-- end login -->
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- /.tab-content -->
                             </div><!-- /.card-body -->
@@ -212,5 +295,62 @@
     @endsection
 
     @section('js')
+    <script>
+        const base_url1 = window.location.origin;
+        let profileInfo = document.getElementById('profile-info');
+        //event
+        window.onclick = function(event) {
+            if (event.target == profileInfo) {
+                profileInfo.style.display = "none";
+            }
+        }
 
+        //function
+        function showInfo(info) {
+            let [x, id] = info.id.split('-');
+            let tableProductBill = document.getElementById('table-product-bill');
+            let _token = document.getElementById('_token');
+            request(base_url1 + '/profile/show', JSON.stringify({
+                '_token': _token.value,
+                'id': id
+            }), function(data) {
+                data = JSON.parse(data);
+                if (data['success']) {
+                    let products = data['bill']['products'];
+                    let tr = '';
+                    for (const product of products) {
+
+                        let td = '';
+                        td += '<tr>';
+                        td += '<td>' + product['id'] + '</td>';
+                        td += '<td>' + product['name'] + '</td>';
+                        td += '<td>' + product['pivot']['quantity'] + '</td>';
+                        td += '<td>' + Number(product['pivot']['unit_price']).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ' + '</td>';
+                        td += '<td><img src="' + product['image'] + '" style="width:80px ; height: 80px;" /></td>';
+                        td += '</tr>';
+                        tr += td;
+                    }
+                    tableProductBill.innerHTML = tr;
+                    profileInfo.style.display = "block";
+                }
+            });
+        }
+
+
+        function request(url = "", para = "", callbackSuccess = function() {}, callbackError = function(err) {
+            console.log(err)
+        }) {
+            let xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    callbackSuccess(this.responseText);
+                } else if (this.readyState == 4 && this.status == 500) {
+                    callbackError(this.responseText);
+                }
+            }
+            xmlHttp.open("POST", url, true);
+            xmlHttp.setRequestHeader("Content-type", "application/json");
+            xmlHttp.send(para);
+        }
+    </script>
     @endsection

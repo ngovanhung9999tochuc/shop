@@ -4,7 +4,9 @@
 <head>
 
   <meta charset="utf-8">
-  <base href="http://localhost:8000/">
+  <base href="{{asset('')}}">
+ <!--  <base href="http://localhost:8000/"> -->
+ 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Quản Trị</title>

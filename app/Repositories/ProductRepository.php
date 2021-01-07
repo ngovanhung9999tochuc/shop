@@ -37,7 +37,7 @@ class ProductRepository
             DB::beginTransaction();
             $productType = ProductType::find($request->product_type);
             if ($productType->parent_id == 0) {
-                return $this->infoMessage("Bạn chưa chọn loại sản phẩm");
+                return $this->infoMessage("Bạn chưa chọn danh mục");
             }
             $number_id = str_pad(count($this->product->all()), 6, "0", STR_PAD_LEFT);
             $id = $productType->productTypeParent->key_code . $productType->key_code . $number_id;
@@ -92,7 +92,7 @@ class ProductRepository
             DB::beginTransaction();
             $productType = ProductType::find($request->product_type);
             if ($productType->parent_id == 0) {
-                return $this->infoMessage("Bạn chưa chọn loại sản phẩm");
+                return $this->infoMessage("Bạn chưa chọn danh mục");
             }
 
             $specifications = [

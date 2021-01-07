@@ -44,6 +44,7 @@ Route::middleware([Profile::class])->group(function () {
     Route::get('/profile', [HomeController::class, 'getProfile'])->name('profile');
     Route::post('/profile/info', [UserController::class, 'updateInfo'])->name('profile.info');
     Route::post('/profile/password', [UserController::class, 'updatePassword'])->name('profile.password');
+    Route::post('/profile/show', [HomeController::class, 'getBillProduct'])->name('profile.show');
 });
 Route::get('/test', [LoginController::class, 'test'])->name('test');
 //register

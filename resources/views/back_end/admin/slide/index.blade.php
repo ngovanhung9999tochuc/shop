@@ -6,8 +6,8 @@
 @endsection
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    @include("back_end.parials.content_header",['title'=>'Danh sách bìa',
-    'name'=>'slide','key'=>'list','route'=>route('slide.index')])
+    @include("back_end.parials.content_header",['title'=>'Danh sách banner',
+    'name'=>'banner','key'=>'Danh sách','route'=>route('slide.index')])
     <!-- /.content-header -->
     <!-- Main content -->
     <section class="content">
@@ -21,7 +21,7 @@
                                 <form method="POST" action="{{route('slide.search')}}">
                                     @csrf @method('post')
                                     <div class="input-group input-group-sm" style="width: 300px;">
-                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Tìm mã hoặc tiêu để bìa">
+                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Tìm mã hoặc tiêu đề banner">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
                                         </div>
@@ -49,7 +49,7 @@
                                         <td id="description-{{$slide->id}}">{{$slide->description}}</td>
                                         <td ><img id="image-{{$slide->id}}" src="{{$slide->image}}" alt="image" style="width:250px ; height: 80px;" /></td>
                                         <td>
-                                            <button id="btn-edit-{{$slide->id}}" title="Sửa bìa" onclick="editSlide(this)"  class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>
+                                            <button id="btn-edit-{{$slide->id}}" title="Sửa banner" onclick="editSlide(this)"  class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>
                                             <button title="Xóa" data-url="{{route('slide.destroy',$slide->id)}}" value="{{$slide->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
@@ -74,7 +74,7 @@
                                 <div class="col-md-12">
                                     <div class="card card-info">
                                         <div class="card-header" style="background-color: #28a745;">
-                                            <h3 class="card-title"><b>Thêm bìa</b></h3>
+                                            <h3 class="card-title"><b>Thêm banner</b></h3>
                                         </div>
                                         <div class="card-body">
                                             <form id="form-add-slide" method="POST">
@@ -99,7 +99,7 @@
 
                                                 <div class="form-group">
                                                     <label>Link</label>
-                                                    <input type="text" name="link" class="form-control" value="" placeholder="nhập link bìa">
+                                                    <input type="text" name="link" class="form-control" value="" placeholder="nhập link banner">
                                                 </div>
                                                 <button style="width: 100px; margin-left: 40%;" type="submit" class="btn btn-primary">Lưu</button>
                                             </form>
@@ -124,7 +124,7 @@
                                 <div class="col-md-12">
                                     <div class="card card-info">
                                         <div class="card-header" style="background-color: #28a745;">
-                                            <h3 class="card-title"><b>Sửa bìa</b></h3>
+                                            <h3 class="card-title"><b>Sửa banner</b></h3>
                                         </div>
                                         <div class="card-body">
                                             <form id="form-edit-slide" method="POST">
@@ -150,7 +150,7 @@
 
                                                 <div class="form-group">
                                                     <label>Link</label>
-                                                    <input type="text" name="link" class="form-control" value="" placeholder="nhập link bìa">
+                                                    <input type="text" name="link" class="form-control" value="" placeholder="nhập link banner">
                                                 </div>
                                                 <button style="width: 150px; margin-left: 37%;" type="submit" class="btn btn-primary">Cập Nhật</button>
                                             </form>

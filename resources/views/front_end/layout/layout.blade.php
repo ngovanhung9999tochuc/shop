@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <base href="{{asset('')}}">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -68,7 +69,7 @@
   <script type="text/javascript" src="/ustora/js/script.slider.js"></script>
   <script src="{{asset('vendor/sweetalert2@10.js')}}"></script>
   <script src="{{asset('font_end/layout.js')}}"></script>
- 
+
   @yield('js')
   @php
   if(Session::has('messageCheckOut')){

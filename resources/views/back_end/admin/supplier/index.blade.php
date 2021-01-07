@@ -8,7 +8,7 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     @include("back_end.parials.content_header",['title'=>'Danh sách nhà cung cấp',
-    'name'=>'supplier','key'=>'list','route'=>route('supplier.index')])
+    'name'=>'Nhà cung cấp','key'=>'Danh sách','route'=>route('supplier.index')])
     <!-- /.content-header -->
     <!-- Main content -->
     <section class="content">

@@ -77,7 +77,7 @@
                 data = JSON.parse(data);
                 if (data['success']) {
                     let suppliers = data['suppliers'];
-                    let dataSupplier = '<option value="">Chọn nhà cung ứng</option>';
+                    let dataSupplier = '<option value="">Chọn nhà cung cấp</option>';
                     for (const supplier of suppliers) {
                         dataSupplier += '<option value="' + supplier['id'] + '">' + supplier['name'] + '</option>';
                     }

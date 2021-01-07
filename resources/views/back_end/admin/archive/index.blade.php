@@ -7,7 +7,7 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     @include("back_end.parials.content_header",['title'=>'Danh sách sản phẩm tồn kho',
-    'name'=>'archive','key'=>'list','route'=>route('archive.index')])
+    'name'=>'Kho','key'=>'Danh sách','route'=>route('archive.index')])
     <!-- /.content-header -->
     <!-- Main content -->
     <section class="content">
@@ -82,7 +82,7 @@
                                             @csrf @method('post')
                                             <div class=" input-group input-group-sm">
                                                 <select name="product_type" class="form-control">
-                                                    <option value="0">Tìm kiếm loại sản phẩm</option>
+                                                    <option value="0">Tìm kiếm danh mục</option>
                                                     {!!$archives['htmlOption']!!}
                                                 </select>
                                                 <div class="input-group-append">

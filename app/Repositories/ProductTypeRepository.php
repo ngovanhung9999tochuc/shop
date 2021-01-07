@@ -163,7 +163,7 @@ class ProductTypeRepository
     {
         try {
             DB::beginTransaction();
-            $htmlOption = '<option value="0">Không có thuộc loại</option>';
+            $htmlOption = '<option value="0">Không có danh mục cha</option>';
             $htmlOption .= $this->productTypeRecusive->ProductTypeLoopAdd();
             DB::commit();
             return response()->json(array('success' => true, 'htmlOption' => $htmlOption), 200);
@@ -179,7 +179,7 @@ class ProductTypeRepository
         try {
             DB::beginTransaction();
             $productType = $this->productType::find($request->id);
-            $htmlOption = '<option value="0">Không có thuộc loại</option>';
+            $htmlOption = '<option value="0">Không có danh mục cha</option>';
             $htmlOption .= $this->productTypeRecusive->ProductTypeLoopEdit($productType->parent_id);
             DB::commit();
             return response()->json(array('success' => true, 'htmlOption' => $htmlOption, 'productType' => $productType), 200);

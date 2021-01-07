@@ -40,7 +40,7 @@ class BillInRepository
         try {
             DB::beginTransaction();
             if (empty((array)json_decode($request->data_product_bill))) {
-                return $this->infoMessage("Lưu không thành công, phiếu không có sản phẩm nào !");
+                return $this->infoMessage("Lưu không thành công, phiếu nhập không có sản phẩm nào !");
             }
             $bill_in_detail = [];
             $date = new DateTime($request->input_date);

@@ -124,4 +124,16 @@ class HomeRepository
             return redirect()->back();
         }
     }
+
+    public function getBillProduct($request)
+    {
+        try {
+            $bill = Bill::find($request->id);
+            $products = $bill->products;
+            return response()->json(array('success' => true, 'bill' => $bill), 200);
+        } catch (Exception $exception) {
+            Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
+            return response()->json(array('fail' => false), 200);
+        }
+    }
 }
