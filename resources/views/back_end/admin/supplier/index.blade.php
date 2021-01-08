@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
+                        <!--  <div class="card-header">
                             <button id="btn-add-supplier" class="btn btn-success btn-sm" style="width: 100px;"><i class="fas fa-plus"> Thêm mới</i></button>
                             <div class="card-tools">
                                 <form method="POST" action="{{route('supplier.search')}}">
@@ -29,10 +29,11 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0">
-                            <table class="table table-hover text-nowrap">
+                        <div style="margin-top: 5px;" class="card-body table-responsive p-0">
+                            <button id="btn-add-supplier" class="btn btn-success btn-sm float-right" style="width: 100px; margin: 0px 20px;"><i class="fas fa-plus"> Thêm mới</i></button>
+                            <table id="table-supplier" class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -53,7 +54,7 @@
                                         <td id="phone-{{$supplier->id}}">{{$supplier->phone}}</td>
                                         <td>
                                             <button id="btn-edit-{{$supplier->id}}" title="Sửa nhà cung cấp" onclick="editSupplier(this)" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>
-                                            
+
                                             <button title="Xóa" data-url="{{route('supplier.destroy',$supplier->id)}}" value="{{$supplier->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
@@ -63,8 +64,7 @@
                         </div>
                     </div>
                 </div>
-                <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}"/>
-                {{$suppliers->links()}}
+                <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" />
                 <div id="id01" class="modal col-md-12">
                     <div class="modal-content animate">
                         <div class="imgcontainer">
@@ -83,25 +83,25 @@
                                                 @csrf
                                                 <div class="form-group">
                                                     <label>Tên nhà cung cấp</label>
-                                                    <input type="text" id="name" name="name" class="form-control" value=""  placeholder="nhập tên nhà cung cấp">
+                                                    <input type="text" id="name" name="name" class="form-control" value="" placeholder="nhập tên nhà cung cấp">
                                                     <div id="validation-name"></div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Email</label>
-                                                    <input type="email" id="email" name="email" class="form-control" value=""  placeholder="nhập email">
+                                                    <input type="email" id="email" name="email" class="form-control" value="" placeholder="nhập email">
                                                     <div id="validation-email"></div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Địa chỉ</label>
-                                                    <input type="text" id="address" name="address" class="form-control" value=""  placeholder="nhập địa chỉ">
+                                                    <input type="text" id="address" name="address" class="form-control" value="" placeholder="nhập địa chỉ">
                                                     <div id="validation-address"></div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Số điện thoại</label>
-                                                    <input type="text" id="phone" name="phone" class="form-control" value=""  placeholder="nhập số điện thoại">
+                                                    <input type="text" id="phone" name="phone" class="form-control" value="" placeholder="nhập số điện thoại">
                                                     <div id="validation-phone"></div>
                                                 </div>
                                                 <button style="width: 100px; margin-left: 40%;" type="submit" class="btn btn-primary">Lưu</button>
@@ -112,7 +112,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
                 <div id="id02" class="modal col-md-12">
@@ -131,28 +131,28 @@
                                         <div class="card-body">
                                             <form id="form-supplier-edit" method="POST">
                                                 @csrf
-                                                <input type="hidden" name="id" value=""/>
+                                                <input type="hidden" name="id" value="" />
                                                 <div class="form-group">
                                                     <label>Tên nhà cung cấp</label>
-                                                    <input type="text"  name="name" class="form-control" value=""  placeholder="nhập tên nhà cung cấp">
+                                                    <input type="text" name="name" class="form-control" value="" placeholder="nhập tên nhà cung cấp">
                                                     <div id="validation-edit-name"></div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Email</label>
-                                                    <input type="email"  name="email" class="form-control" value=""  placeholder="nhập email">
+                                                    <input type="email" name="email" class="form-control" value="" placeholder="nhập email">
                                                     <div id="validation-edit-email"></div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Địa chỉ</label>
-                                                    <input type="text"  name="address" class="form-control" value=""  placeholder="nhập địa chỉ">
+                                                    <input type="text" name="address" class="form-control" value="" placeholder="nhập địa chỉ">
                                                     <div id="validation-edit-address"></div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Số điện thoại</label>
-                                                    <input type="text"  name="phone" class="form-control" value=""  placeholder="nhập số điện thoại">
+                                                    <input type="text" name="phone" class="form-control" value="" placeholder="nhập số điện thoại">
                                                     <div id="validation-edit-phone"></div>
                                                 </div>
                                                 <button style="width: 150px; margin-left: 37%;" type="submit" class="btn btn-primary">Cập Nhật</button>
@@ -171,6 +171,17 @@
 </div>
 @endsection
 @section('js')
+<script>
+    $('#table-supplier').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": true,
+        "ordering": true,
+        "info": false,
+        "autoWidth": false,
+        "responsive": true,
+    });
+</script>
 <script src="{{asset('vendor/jquery-2.2.0.min.js')}}"></script>
 <script src="{{asset('Admin/admin/delete.js')}}"></script>
 <script src="{{asset('Admin/admin/supplier/index/index.js')}}"></script>

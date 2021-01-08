@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderRequest;
+use App\Models\ProductType;
 use App\Repositories\HomeRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -87,12 +89,12 @@ class HomeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function test()
     {
-        //
+        
     }
 
     /**
@@ -115,7 +117,6 @@ class HomeController extends Controller
      */
     public function destroy($id)
     {
-        
     }
 
     public function getProfile()

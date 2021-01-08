@@ -135,7 +135,7 @@ formSupplier.addEventListener('submit', function(event) {
 
 function editSupplier(edit) {
     const _token = document.getElementById('_token');
-    modal2.style.display = "block";
+
     clearErrorMessagesEdit();
     formSupplierEdit.reset();
     let [x, y, id] = edit.id.split('-');
@@ -149,6 +149,7 @@ function editSupplier(edit) {
         formSupplierEdit['email'].value = data['email'];
         formSupplierEdit['address'].value = data['address'];
         formSupplierEdit['phone'].value = data['phone'];
+        modal2.style.display = "block";
     });
 }
 

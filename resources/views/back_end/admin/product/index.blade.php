@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
+                        <!-- <div class="card-header">
                             <a class="btn btn-success btn-sm" style="width: 100px;" href="{{route('product.create')}}"><i class="fas fa-plus"> Thêm mới</i></a>
                             <div class="card-tools">
                                 <form method="POST" action="{{route('product.search')}}">
@@ -27,10 +27,11 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0">
-                            <table class="table table-hover text-nowrap">
+                        </div> -->
+
+                        <div style="margin-top: 5px;" class="card-body table-responsive p-0">
+                            <a class="btn btn-success btn-sm float-right" href="{{route('product.create')}}" style="width: 100px; margin: 0px 20px;"><i class="fas fa-plus"> Thêm mới</i></a>
+                            <table id="table-product" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -48,11 +49,11 @@
                                     <tr>
                                         <td>{{$product->id}}</td>
                                         <td>{{$product->name}}</td>
-                                        <td id="td-unit-price-{{$product->id}}">{{number_format($product->unit_price)}}đ</td>
+                                        <td id="td-unit-price-{{$product->id}}">{{number_format($product->unit_price)}}</td>
                                         <td id="td-promotion-price-{{$product->id}}">{{$product->promotion_price}}%</td>
                                         <td><img src="{{$product->image}}" style="width:100px ; height: 100px;" /></td>
                                         <td>{{$product->productType->productTypeParent->name." ".$product->productType->name}}</td>
-                                        <td><button id="price_{{$product->id}}" class="btn btn-success btn-sm btn-price" style="width: 100px;"><i class="fas fa-plus"> Nhập giá</i></button></td>
+                                        <td><button id="price_{{$product->id}}" onclick="enterPrice(this)" class="btn btn-success btn-sm btn-price" style="width: 100px;"><i class="fas fa-plus"> Nhập giá</i></button></td>
                                         <td>
                                             <a title="Sửa sản phẩm" class="btn btn-info btn-sm" href="{{route('product.edit',$product->id)}}"><i class="fas fa-pencil-alt"></i></a>
                                             <button title="Xóa" data-url="{{route('product.destroy',$product->id)}}" value="{{$product->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
@@ -67,7 +68,6 @@
                     </div>
                     <!-- /.card -->
                 </div>
-                {{$products->links()}}
                 <div id="id01" class="modal col-md-12">
                     <div class="modal-content animate">
                         <div class="imgcontainer">
@@ -109,7 +109,7 @@
                                 </div>
                             </div>
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
@@ -122,7 +122,20 @@
 </div>
 @endsection
 @section('js')
+<script>
+    $('#table-product').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": true,
+        "ordering": true,
+        "info": false,
+        "autoWidth": false,
+        "responsive": true,
+    });
+</script>
 <script src="{{asset('vendor/jquery-2.2.0.min.js')}}"></script>
 <script src="{{asset('Admin/admin/delete.js')}}"></script>
 <script src="{{asset('Admin/admin/product/index/index.js')}}"></script>
+
+</script>
 @endsection

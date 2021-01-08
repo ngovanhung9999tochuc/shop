@@ -77,7 +77,7 @@ $(document).ready(function(e) {
                 if (data['success']) {
                     Swal.fire({
                         icon: 'success',
-                        title: 'Bạn thêm loại sản phẩm thành công',
+                        title: 'Bạn thêm danh mục thành công',
                         showConfirmButton: false,
                         timer: 4000
                     });
@@ -108,7 +108,7 @@ $(document).ready(function(e) {
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Lỗi hệ thống ! bạn thêm loại sản phẩm không thành công',
+                        title: 'Lỗi hệ thống ! bạn thêm danh mục không thành công',
                         showConfirmButton: false,
                         timer: 4000
                     });
@@ -141,7 +141,7 @@ $(document).ready(function(e) {
                 if (data['success']) {
                     Swal.fire({
                         icon: 'success',
-                        title: 'Bạn sửa loại sản phẩm thành công',
+                        title: 'Bạn sửa danh mục thành công',
                         showConfirmButton: false,
                         timer: 4000
                     });
@@ -162,7 +162,7 @@ $(document).ready(function(e) {
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Lỗi hệ thống ! bạn sửa bìa không thành công',
+                        title: 'Lỗi hệ thống !',
                         showConfirmButton: false,
                         timer: 4000
                     });
@@ -186,7 +186,7 @@ $(document).ready(function(e) {
 function editProductType(edit) {
     const _token = document.getElementById('_token');
     let [x, y, id] = edit.id.split('-');
-    modal2.style.display = "block";
+
     clearErrorMessagesEdit();
     formEditType.reset();
 
@@ -203,10 +203,10 @@ function editProductType(edit) {
             parentEdit.innerHTML = option;
             formEditType['id'].value = productType['id'];
             formEditType['name'].value = productType['name'];
-            formEditType['key_code'].value = productType['key_code'];
             outputImageEdit.src = productType['icon'];
             outputImageEdit.style.height = '60px';
             outputImageEdit.style.marginTop = '10px';
+            modal2.style.display = "block";
         } else {
             Swal.fire({
                 icon: 'error',
@@ -220,13 +220,11 @@ function editProductType(edit) {
 
 
 function clearErrorMessagesAdd() {
-    document.getElementById('validation-add-key_code').innerHTML = '';
     document.getElementById('validation-add-name').innerHTML = '';
     document.getElementById('validation-add-image_file').innerHTML = '';
 }
 
 function clearErrorMessagesEdit() {
-    document.getElementById('validation-edit-key_code').innerHTML = '';
     document.getElementById('validation-edit-name').innerHTML = '';
     document.getElementById('validation-edit-image_file').innerHTML = '';
 }

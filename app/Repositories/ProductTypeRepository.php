@@ -27,27 +27,23 @@ class ProductTypeRepository
 
     public function getAll()
     {
-        return $this->productType->latest()->paginate(10);
+        return $this->productType->latest()->get();
     }
 
 
     public function create($request)
     {
         try {
-            DB::beginTransaction();
             $rules = [
-                'name' => 'required',
+                'name' => 'required|unique:product_types',
                 'image_file' => 'mimes:jpg,jpeg,png,gif|max:10240',
-                'key_code' => 'required|size:2|unique:product_types|regex:/^[a-zA-Z]+$/'
             ];
             $messages = [
                 'name.required' => 'Tên không được phép trống',
+                'name.unique' => 'Tên danh mục không được phép trùng lặp',
                 'image_file.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
                 'image_file.max' => 'Hình thẻ giới hạn dung lượng không quá 10M',
-                'key_code.required' => 'Mã không được phép trống',
-                'key_code.size' => 'Mã không được phép nhiều hơn 2 ký tự',
-                'key_code.unique' => 'Mã không được phép trùng lặp',
-                'key_code.regex' => 'Mã phải là ký tự'
+
             ];
             $validator = Validator::make($request->all(), $rules, $messages);
             // Validate the input and return correct response
@@ -59,22 +55,34 @@ class ProductTypeRepository
                 ), 500); // 500 being the HTTP code for an invalid request.
             }
 
-            $dataProductTypeCreate = [
-                'name' => $request->name,
-                'parent_id' => $request->parent_id,
-                'key_code' => strtoupper($request->key_code)
-            ];
-            $dataUploadFeatureImage = $this->storageTraitUpload($request, 'image_file', 'producttype', 'type');
-            if (!empty($dataUploadFeatureImage)) {
-                $dataProductTypeCreate['icon'] = $dataUploadFeatureImage['file_path'];
+            $random = '';
+            for ($i = 0; $i < 1000000; $i++) {
+                $randomletter = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz"), 0, 2);
+                $randomletter = strtoupper($randomletter);
+                $count = DB::select('SELECT * FROM product_types WHERE key_code=?', [$randomletter]);
+                if (count($count) == 0) {
+                    $random = $randomletter;
+                    break;
+                }
             }
-            $id = $this->productType->create($dataProductTypeCreate)->id;
-            $productType = $this->productType->find($id);
-            $productType->productTypeParent;
-            DB::commit();
-            return response()->json(array('success' => true, 'productType' => $productType), 200);
+            if ($random != '') {
+                $dataProductTypeCreate = [
+                    'name' => $request->name,
+                    'parent_id' => $request->parent_id,
+                    'key_code' => $random
+                ];
+                $dataUploadFeatureImage = $this->storageTraitUpload($request, 'image_file', 'producttype', 'type');
+                if (!empty($dataUploadFeatureImage)) {
+                    $dataProductTypeCreate['icon'] = $dataUploadFeatureImage['file_path'];
+                }
+                $id = $this->productType->create($dataProductTypeCreate)->id;
+                $productType = $this->productType->find($id);
+                $productType->productTypeParent;
+                return response()->json(array('success' => true, 'productType' => $productType), 200);
+            } else {
+                return response()->json(array('success' => false), 200);
+            }
         } catch (Exception $exception) {
-            DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
             return response()->json(array('fail' => false), 200);
         }
@@ -87,17 +95,12 @@ class ProductTypeRepository
             DB::beginTransaction();
             $rules = [
                 'name' => 'required',
-                'image_file' => 'mimes:jpg,jpeg,png,gif|max:10240',
-                'key_code' => 'required|size:2|regex:/^[a-zA-Z]+$/'
+                'image_file' => 'mimes:jpg,jpeg,png,gif|max:10240'
             ];
             $messages = [
                 'name.required' => 'Tên không được phép trống',
                 'image_file.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
-                'image_file.max' => 'Hình thẻ giới hạn dung lượng không quá 10M',
-                'key_code.required' => 'Mã không được phép trống',
-                'key_code.size' => 'Mã không được phép nhiều hơn 2 ký tự',
-                'key_code.regex' => 'Mã phải là ký tự'
-                
+                'image_file.max' => 'Hình thẻ giới hạn dung lượng không quá 10M'
             ];
             $validator = Validator::make($request->all(), $rules, $messages);
             // Validate the input and return correct response
@@ -112,7 +115,6 @@ class ProductTypeRepository
             $dataProductTypeUpdate = [
                 'name' => $request->name,
                 'parent_id' => $request->parent_id,
-                'key_code' => strtoupper($request->key_code)
             ];
             $p = $this->productType->find($request->id);
             $dataUploadFeatureImage = $this->storageTraitUpload($request, 'image_file', 'producttype', 'type');
@@ -138,12 +140,37 @@ class ProductTypeRepository
     public function destroy($id)
     {
         try {
-            $productType = $this->productType->find($id);
-            $productType->delete();
-            return response()->json([
-                'code' => 200,
-                'message' => "success",
-            ], 200);
+
+            $anchor = true;
+            $message = '';
+            $type = ProductType::find($id);
+            if ($type->parent_id == 0) {
+                $types = $type->productTypeChildrents;
+                if (count($types) != 0) {
+                    $count = count($types);
+                    $anchor = false;
+                    $message = 'Bạn không thể xóa, danh mục hiện tại có ' . $count . ' danh mục con';
+                }
+            } else {
+                $products = $type->products;
+                if (count($products) != 0) {
+                    $count = count($products);
+                    $anchor = false;
+                    $message = 'Bạn không thể xóa, danh mục hiện tại có ' . $count . ' sản phẩm';
+                }
+            }
+            if ($anchor) {
+                $type->delete();
+                return response()->json([
+                    'code' => 200,
+                    'message' => "success",
+                ], 200);
+            } else {
+                return response()->json([
+                    'code' => 500,
+                    'message' => $message,
+                ], 200);
+            }
         } catch (Exception $exception) {
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
             return response()->json([
@@ -162,13 +189,10 @@ class ProductTypeRepository
     public function getParent()
     {
         try {
-            DB::beginTransaction();
             $htmlOption = '<option value="0">Không có danh mục cha</option>';
             $htmlOption .= $this->productTypeRecusive->ProductTypeLoopAdd();
-            DB::commit();
             return response()->json(array('success' => true, 'htmlOption' => $htmlOption), 200);
         } catch (Exception $exception) {
-            DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
             return response()->json(array('fail' => false), 200);
         }

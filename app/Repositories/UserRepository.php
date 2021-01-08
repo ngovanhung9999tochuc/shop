@@ -30,7 +30,7 @@ class UserRepository
     }
     public function getAll()
     {
-        return $this->user->latest()->paginate(10);
+        return $this->user->latest()->get();
     }
 
 

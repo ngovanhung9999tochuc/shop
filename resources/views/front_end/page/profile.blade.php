@@ -104,7 +104,7 @@
                                                     @endphp
                                                     <select class="form-control" name="gender" id="exampleSelect1">
                                                         <option {{$nam}} value="1">Nam</option>
-                                                        <option {{$nu}} value="2">Nữ</option>
+                                                        <option {{$nu}} value="0">Nữ</option>
                                                     </select>
                                                 </div>
                                             </div>

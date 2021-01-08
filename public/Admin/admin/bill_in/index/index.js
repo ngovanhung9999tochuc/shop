@@ -32,7 +32,7 @@
                         td += '<td>' + product['id'] + '</td>';
                         td += '<td>' + product['name'] + '</td>';
                         td += '<td>' + product['pivot']['quantity'] + '</td>';
-                        td += '<td>' + Number(product['pivot']['original_price']).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ' + '</td>';
+                        td += '<td>' + Number(product['pivot']['original_price']).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + '</td>';
                         td += '<td><img src="' + product['image'] + '" style="width:80px ; height: 80px;" /></td>';
                         td += '</tr>';
                         tr += td;

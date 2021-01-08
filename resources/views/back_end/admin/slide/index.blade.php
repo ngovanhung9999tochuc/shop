@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
+                        <!-- <div class="card-header">
                             <button id="btn-add-slide" class="btn btn-success btn-sm" style="width: 100px;"><i class="fas fa-plus"> Thêm mới</i></button>
                             <div class="card-tools">
                                 <form method="POST" action="{{route('slide.search')}}">
@@ -28,10 +28,11 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0">
-                            <table class="table table-hover text-nowrap">
+                        <div style="margin-top: 5px;" class="card-body table-responsive p-0">
+                            <button id="btn-add-slide" class="btn btn-success btn-sm float-right" style="width: 100px; margin: 0px 20px;"><i class="fas fa-plus"> Thêm mới</i></button>
+                            <table id="table-slide" class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -47,9 +48,9 @@
                                         <td id="id-{{$slide->id}}">{{$slide->id}}</td>
                                         <td id="title-{{$slide->id}}">{{$slide->title}}</td>
                                         <td id="description-{{$slide->id}}">{{$slide->description}}</td>
-                                        <td ><img id="image-{{$slide->id}}" src="{{$slide->image}}" alt="image" style="width:250px ; height: 80px;" /></td>
+                                        <td><img id="image-{{$slide->id}}" src="{{$slide->image}}" alt="image" style="width:250px ; height: 80px;" /></td>
                                         <td>
-                                            <button id="btn-edit-{{$slide->id}}" title="Sửa banner" onclick="editSlide(this)"  class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>
+                                            <button id="btn-edit-{{$slide->id}}" title="Sửa banner" onclick="editSlide(this)" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>
                                             <button title="Xóa" data-url="{{route('slide.destroy',$slide->id)}}" value="{{$slide->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
@@ -62,7 +63,6 @@
                     <!-- /.card -->
                 </div>
                 <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" />
-                {{$slides->links()}}
                 <div id="id01" class="modal col-md-12">
                     <div class="modal-content animate">
                         <div class="imgcontainer">
@@ -129,7 +129,7 @@
                                         <div class="card-body">
                                             <form id="form-edit-slide" method="POST">
                                                 @csrf
-                                                <input type="hidden" name="id" value=""/>
+                                                <input type="hidden" name="id" value="" />
                                                 <div class="form-group">
                                                     <label>Tiêu đề</label>
                                                     <input type="text" name="title" class="form-control" value="" placeholder="nhập tiêu đề">
@@ -174,4 +174,17 @@
 @section('js')
 <script src="{{asset('Admin/admin/delete.js')}}"></script>
 <script src="{{asset('Admin/admin/slide/index/index.js')}}"></script>
+<script>
+    $(function() {
+        $('#table-slide').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": false,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
 @endsection

@@ -27,7 +27,7 @@ class BillInRepository
 
     public function getAll()
     {
-        return $this->bill_in->latest()->paginate(10);
+        return $this->bill_in->latest()->get();
     }
 
 

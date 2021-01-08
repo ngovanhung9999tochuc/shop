@@ -21,7 +21,7 @@ class SlideRepository
 
     public function getAll()
     {
-        return $this->slide->latest()->paginate(10);
+        return $this->slide->latest()->get();
     }
 
 

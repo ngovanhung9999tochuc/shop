@@ -79,8 +79,8 @@
                             </div>
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body">
-                            <table class="table table-hover text-nowrap">
+                        <div style="margin-top: 5px;" class="card-body table-responsive p-0">
+                            <table id="table-bill" class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -101,7 +101,7 @@
                                         <td>{{$bill->user->name}}</td>
                                         <td>{{$bill->phone}}</td>
                                         <td>{{$bill->quantity}}</td>
-                                        <td>{{number_format($bill->total)}}đ</td>
+                                        <td>{{number_format($bill->total)}}</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button style="width: 110px;" type="button" id="btn-text-{{$bill->id}}" class="btn 
@@ -171,16 +171,16 @@
                                                     @endswitch btn-sm btn-flat dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
                                                     <span class="sr-only">Toggle Dropdown</span>
                                                     <div class="dropdown-menu" role="menu">
-                                                        <a id="status-billid_{{$bill->id}}-1" class="btn-dropdown-status dropdown-item">Xác nhận</a>
-                                                        <a id="status-billid_{{$bill->id}}-2" class="btn-dropdown-status dropdown-item">Đang chuyển</a>
-                                                        <a id="status-billid_{{$bill->id}}-3" class="btn-dropdown-status dropdown-item">Thành công</a>
-                                                        <a id="status-billid_{{$bill->id}}-4" class="btn-dropdown-status dropdown-item">Thất bại</a>
+                                                        <a id="status-billid_{{$bill->id}}-1" onclick="changeStatus(this)" class="btn-dropdown-status dropdown-item">Xác nhận</a>
+                                                        <a id="status-billid_{{$bill->id}}-2" onclick="changeStatus(this)" class="btn-dropdown-status dropdown-item">Đang chuyển</a>
+                                                        <a id="status-billid_{{$bill->id}}-3" onclick="changeStatus(this)" class="btn-dropdown-status dropdown-item">Thành công</a>
+                                                        <a id="status-billid_{{$bill->id}}-4" onclick="changeStatus(this)" class="btn-dropdown-status dropdown-item">Thất bại</a>
                                                     </div>
                                                 </button>
                                             </div>
                                         </td>
                                         <td>
-                                            <a id="btn_info-{{$bill->id}}" class="btn-show-info btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
+                                            <a id="btn_info-{{$bill->id}}" onclick="showInfo(this)" class="btn-show-info btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
                                             <button data-url="{{route('bill.destroy',$bill->id)}}" value="{{$bill->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
@@ -191,7 +191,6 @@
                         </div>
                     </div>
                 </div>
-                {{$bills->links()}}
                 <div id="id01" class="modal col-md-12">
 
                     <div class="modal-content animate">
@@ -268,6 +267,7 @@
                                                         <th>Tên sản phẩm</th>
                                                         <th>Tồn kho</th>
                                                         <th>Số lượng trong đơn hàng</th>
+                                                        <th>Hình ảnh</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="table-product-inventory">
@@ -289,4 +289,15 @@
 @section('js')
 <script src="{{asset('Admin/admin/delete.js')}}"></script>
 <script src="{{asset('Admin/admin/bill/index/index.js')}}"></script>
+<script>
+    $('#table-bill').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": false,
+        "autoWidth": false,
+        "responsive": true,
+    });
+</script>
 @endsection

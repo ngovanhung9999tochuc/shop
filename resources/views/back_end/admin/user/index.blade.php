@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
+                       <!--  <div class="card-header">
                             <div class="card-tools">
                                 <form method="POST" action="{{route('user.search')}}">
                                     @csrf @method('post')
@@ -28,10 +28,10 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0">
-                            <table class="table table-hover text-nowrap">
+                        <div style="margin-top: 5px;" class="card-body table-responsive p-0">
+                            <table id="table-user" class="table table-hover text-nowrap">
                                 <thead>
                                     <tr style="font-size: 15px; font-weight: bold;">
                                         <th>ID</th>
@@ -71,8 +71,7 @@
                         </div>
                     </div>
                 </div>
-                {{$users->links()}}
-
+                <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" />
                 <div id="id01" class="modal col-md-12">
 
                     <div class="modal-content animate">
@@ -96,7 +95,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                           <!-- fb -->
+                                            <!-- fb -->
                                         </div>
                                         <div class="col-md-8">
                                             <div id="content" class="card mb-3">
@@ -118,6 +117,17 @@
 </div>
 @endsection
 @section('js')
+<script>
+    $('#table-user').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": true,
+        "ordering": true,
+        "info": false,
+        "autoWidth": false,
+        "responsive": true,
+    });
+</script>
 <script src="{{asset('vendor/jquery-2.2.0.min.js')}}"></script>
 <script src="{{asset('vendor/select2/select2.min.js')}}"></script>
 <script src="{{asset('Admin/admin/delete.js')}}"></script>

@@ -23,7 +23,7 @@ class SupplierRepository
 
     public function getAll()
     {
-        return $this->supplier->latest()->paginate(10);
+        return $this->supplier->latest()->get();
     }
 
 

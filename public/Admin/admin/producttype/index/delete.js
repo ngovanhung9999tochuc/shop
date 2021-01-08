@@ -34,6 +34,13 @@ function actionDelete(event) {
                             'Dữ liệu đã bị xóa',
                             'success'
                         );
+                    } else {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: data.message,
+                            showConfirmButton: false,
+                            timer: 5000
+                        });
                     }
                 },
                 error: function(e) {

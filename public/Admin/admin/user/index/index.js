@@ -73,7 +73,7 @@
                     textContent += '<h6 class="mb-0">Địa Chỉ</h6>';
                     textContent += '</div>';
                     textContent += '<div class="col-sm-9 text-secondary">';
-                    textContent += data[0]['address'];
+                    textContent += data[0]['address'] ? data[0]['address'] : '--';
                     textContent += '</div>';
                     textContent += '</div>';
                     textContent += '<hr>';
@@ -82,7 +82,7 @@
                     textContent += '<h6 class="mb-0">Số Điện Thoại</h6>';
                     textContent += '</div>';
                     textContent += '<div class="col-sm-9 text-secondary">';
-                    textContent += data[0]['phone'];
+                    textContent += data[0]['phone'] ? data[0]['phone'] : '--';
                     textContent += '</div>';
                     textContent += '</div>';
                     textContent += '<hr>';
@@ -91,7 +91,7 @@
                     textContent += '<h6 class="mb-0">Ngày Sinh</h6>';
                     textContent += '</div>';
                     textContent += '<div class="col-sm-9 text-secondary">';
-                    textContent += data[0]['date_of_birth'];
+                    textContent += data[0]['date_of_birth'] ? data[0]['date_of_birth'] : '--';
                     textContent += '</div>';
                     textContent += '</div>';
                     textContent += '<hr>';
@@ -100,7 +100,7 @@
                     textContent += '<h6 class="mb-0">Giới Tính</h6>';
                     textContent += '</div>';
                     textContent += '<div class="col-sm-9 text-secondary">';
-                    textContent += data[0]['gender'] == 1 ? 'Nam' : 'Nữ';
+                    textContent += data[0]['gender'] == null ? '--' : data[0]['gender'] == 1 ? 'Nam' : 'Nữ';
                     textContent += '</div>';
                     textContent += '</div>';
                     textContent += '<hr>';

@@ -114,7 +114,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table class="table table-hover text-nowrap">
+                            <table id="archive" class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -130,8 +130,8 @@
                                         <td>{{$product->product_id}}</td>
                                         <td>{{$product->name}}</td>
                                         <td>{{$product->quantity}}</td>
-                                        <td>{{number_format($product->total_original_price)}}đ</td>
-                                        <td>{{number_format($product->total_unit_price)}}đ</td>
+                                        <td>{{number_format($product->total_original_price)}}</td>
+                                        <td>{{number_format($product->total_unit_price)}}</td>
                                     </tr>
                                     @endforeach
                                     <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" />
@@ -146,5 +146,17 @@
 </div>
 @endsection
 @section('js')
-
+<script>
+    $(function() {
+        $('#archive').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": false,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
 @endsection

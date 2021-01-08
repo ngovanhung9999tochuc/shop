@@ -27,7 +27,7 @@ class ProductRepository
 
     public function getAll()
     {
-        return $this->product->latest()->paginate(10);
+        return $this->product->latest()->get();
     }
 
 

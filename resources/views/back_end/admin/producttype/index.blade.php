@@ -15,10 +15,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
+                        <!-- <div class="card-header">
                             <button id="btn-add-type" class="btn btn-success btn-sm" style="width: 100px;"><i class="fas fa-plus"> Thêm mới</i></button>
                             <div class="card-tools">
-                                <form method="POST" action="{{route('producttype.search')}}">
+                               <form method="POST" action="{{route('producttype.search')}}">
                                     @csrf @method('post')
                                     <div class="input-group input-group-sm" style="width: 300px;">
                                         <input type="text" name="table_search" class="form-control float-right" placeholder="Tìm mã hoặc tên danh mục">
@@ -26,12 +26,13 @@
                                             <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
                                         </div>
                                     </div>
-                                </form>
+                                </form> 
                             </div>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0">
-                            <table class="table table-hover text-nowrap">
+                        </div> -->
+
+                        <div style="margin-top: 5px;" class="card-body table-responsive p-0">
+                            <button id="btn-add-type" class="btn btn-success btn-sm float-right " style="width: 100px; margin: 0px 20px;"><i class="fas fa-plus"> Thêm mới</i></button>
+                            <table id="table-product-type" class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -67,7 +68,6 @@
                     <!-- /.card -->
                 </div>
                 <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" />
-                {{$productTypes->links()}}
                 <div id="id01" class="modal col-md-12">
                     <div class="modal-content animate">
                         <div class="imgcontainer">
@@ -90,15 +90,10 @@
                                                     <div style="margin-top: 5px;" id="validation-add-name"></div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Thuộc loại</label>
+                                                    <label>Danh mục cha</label>
                                                     <select id="parent_id" class="form-control" name="parent_id">
 
                                                     </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Mã</label>
-                                                    <input type="text" name="key_code" class="form-control" value="" placeholder="nhập mã danh mục">
-                                                    <div style="margin-top: 10px;" id="validation-add-key_code"></div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Hình ảnh danh mục</label>
@@ -142,15 +137,10 @@
                                                     <div style="margin-top: 5px;" id="validation-edit-name"></div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Thuộc loại</label>
+                                                    <label>danh mục cha</label>
                                                     <select id="parent-edit" class="form-control" name="parent_id">
 
                                                     </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Mã</label>
-                                                    <input type="text" name="key_code" class="form-control" value="" placeholder="nhập mã danh mục">
-                                                    <div style="margin-top: 10px;" id="validation-edit-key_code"></div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Hình ảnh danh mục</label>
@@ -178,6 +168,19 @@
 </div>
 @endsection
 @section('js')
-<script src="{{asset('Admin/admin/delete.js')}}"></script>
+<script src="{{asset('Admin/admin/producttype/index/delete.js')}}"></script>
 <script src="{{asset('Admin/admin/producttype/index/index.js')}}"></script>
+<script>
+    $(function() {
+        $('#table-product-type').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": false,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
 @endsection

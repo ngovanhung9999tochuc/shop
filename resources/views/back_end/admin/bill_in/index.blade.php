@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
+                        <!-- <div class="card-header">
                             <a class="btn btn-success btn-sm" style="width: 100px;" href="{{route('billin.create')}}"><i class="fas fa-plus"> Thêm mới</i></a>
                             <div class="card-tools">
                                 <form method="POST" action="{{route('billin.search')}}">
@@ -28,10 +28,11 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0">
-                            <table class="table table-hover text-nowrap">
+                        </div> -->
+                     
+                        <div style="margin-top: 5px;" class="card-body table-responsive p-0">
+                            <a class="btn btn-success btn-sm float-right" style="width: 100px; margin: 0px 20px;" href="{{route('billin.create')}}"><i class="fas fa-plus"> Thêm mới</i></a>
+                            <table id="table-bill-in" class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -50,7 +51,7 @@
                                         <td>{{date("m/d/y g:i A", strtotime($bill->input_date))}}</td>
                                         <td>{{$bill->supplier->name}}</td>
                                         <td>{{$bill->quantity}}</td>
-                                        <td>{{number_format($bill->total_price)}}đ</td>
+                                        <td>{{number_format($bill->total_price)}}</td>
                                         <td>{{$bill->user->name}}</td>
                                         <td>
                                             <a id="btn_info-{{$bill->id}}" class="btn-show-info btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
@@ -64,7 +65,6 @@
                     </div>
                 </div>
                 <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}" />
-                {{$bill_ins->links()}}
                 <div id="id01" class="modal col-md-12">
 
                     <div class="modal-content animate">
@@ -80,7 +80,7 @@
                                             <table class="table table-hover text-nowrap">
                                                 <thead>
                                                     <tr>
-                                                    <th>ID</th>
+                                                        <th>ID</th>
                                                         <th>Tên sản phẩm</th>
                                                         <th>Số Lượng</th>
                                                         <th>Giá nhập</th>
@@ -106,4 +106,17 @@
 @section('js')
 <script src="{{asset('Admin/admin/delete.js')}}"></script>
 <script src="{{asset('Admin/admin/bill_in/index/index.js')}}"></script>
+<script>
+    $(function() {
+        $('#table-bill-in').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": false,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
 @endsection
