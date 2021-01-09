@@ -152,7 +152,7 @@ $(document).ready(function(e) {
 function editSlide(edit) {
     const _token = document.getElementById('_token');
     let [x, y, id] = edit.id.split('-')
-    modal2.style.display = "block";
+
     clearErrorMessagesEdit();
     formEditSlide.reset();
 
@@ -168,6 +168,7 @@ function editSlide(edit) {
         outputImageEdit.src = data['image'];
         outputImageEdit.style.height = '150px';
         outputImageEdit.style.marginTop = '10px';
+        modal2.style.display = "block";
     });
 }
 

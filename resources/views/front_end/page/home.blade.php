@@ -56,7 +56,7 @@
                             <div style="height: 220px;" class="product-f-image">
                                 <img src="{{$product->image}}" alt="">
                                 <div class="product-hover">
-                                    <a id="item-cart-{{$product->id}}" class="add-product-to-cart add-to-cart-link"><i class="fa fa-plus-square"></i> Chọn mua</a>
+                                    <a id="item-cart-{{$product->id}}" onclick="addItemCart(this)" class="add-product-to-cart add-to-cart-link"><i class="fa fa-plus-square"></i> Chọn mua</a>
                                     <a href="{{route('detail',$product->id)}}" class="view-details-link"><i class="fa fa-link"></i> chi tiết</a>
                                 </div>
                             </div>
@@ -67,22 +67,22 @@
                                 @if($product->promotion_price==0)
                                 <ins style="color: #bf081f;">{{number_format($product->unit_price)}} đ</ins>
                                 @else
-                                <ins style="color: #bf081f;">{{number_format($product->unit_price - $product->unit_price*$product->promotion_price/100)}} đ</ins> <del>{{number_format($product->unit_price)}} đ</del>
+                                <ins style="color: #bf081f;">{{number_format($product->unit_price - $product->unit_price*$product->promotion_price/100)}} đ</ins> <del>{{number_format($product->unit_price)}} đ</del><span style="margin-left: 5px; color: #d0021b;">-{{$product->promotion_price}}%</span>
                                 @endif
                             </div>
-                            <div class="rating-wrap-post" style="font-size: 14px; margin-top: 5px;">
+                            <div class="rating-wrap-post" style="font-size: 14px; margin-bottom: 10px; margin-top: 5px;">
                                 <i style="color: yellow;" class="fa fa-star"></i>
                                 <i style="color: yellow;" class="fa fa-star"></i>
                                 <i style="color: yellow;" class="fa fa-star"></i>
                                 <i style="color: yellow;" class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="cdt-product__config__param" style="margin-top: 5px;">
+                           <!--  <div class="cdt-product__config__param" style="margin-top: 5px;">
                                 <span title="CPU"><i class="fas fa-microchip"></i> {{$product->specifications['cpu']}}</span>
                                 <span style="margin-left: 5px;" title="Ram"><i class="fas fa-microchip"></i> {{$product->specifications['ram']}}</span>
                                 <span style="margin-left: 5px;" title="Bộ nhớ"><i class="fas fa-hdd"></i> {{$product->specifications['rom_harddrive']}}</span>
                                 <span style="margin-left: 5px;" title="Màn hình"><i class="fas fa-tv"></i> {{$product->specifications['displayscreen']}}</span>
-                            </div>
+                            </div> -->
 
                         </div>
                         @endforeach
@@ -111,7 +111,7 @@
                             <div style="height: 220px;" class="product-f-image">
                                 <img src="{{$product->image}}" alt="">
                                 <div class="product-hover">
-                                    <a id="item-cart-{{$product->id}}" class="add-product-to-cart add-to-cart-link"><i class="fa fa-plus-square"></i> Chọn mua</a>
+                                    <a id="item-cart-{{$product->id}}" onclick="addItemCart(this)" class="add-product-to-cart add-to-cart-link"><i class="fa fa-plus-square"></i> Chọn mua</a>
                                     <a href="{{route('detail',$product->id)}}" class="view-details-link"><i class="fa fa-link"></i> chi tiết</a>
                                 </div>
                             </div>
@@ -122,22 +122,22 @@
                                 @if($product->promotion_price==0)
                                 <ins style="color: #bf081f;">{{number_format($product->unit_price)}} đ</ins>
                                 @else
-                                <ins style="color: #bf081f;">{{number_format($product->unit_price - $product->unit_price*$product->promotion_price/100)}} đ</ins> <del>{{number_format($product->unit_price)}} đ</del>
+                                <ins style="color: #bf081f;">{{number_format($product->unit_price - $product->unit_price*$product->promotion_price/100)}} đ</ins> <del>{{number_format($product->unit_price)}} đ</del> <span style="margin-left: 5px; color: #d0021b;">-{{$product->promotion_price}}%</span>
                                 @endif
                             </div>
-                            <div class="rating-wrap-post" style="font-size: 14px; margin-top: 5px;">
+                            <div class="rating-wrap-post" style="font-size: 14px; margin-bottom: 10px; margin-top: 5px;">
                                 <i style="color: yellow;" class="fa fa-star"></i>
                                 <i style="color: yellow;" class="fa fa-star"></i>
                                 <i style="color: yellow;" class="fa fa-star"></i>
                                 <i style="color: yellow;" class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="cdt-product__config__param" style="margin-top: 5px;">
+                         <!--    <div class="cdt-product__config__param" style="margin-top: 5px;">
                                 <span title="CPU"><i class="fas fa-microchip"></i> {{$product->specifications['cpu']}}</span>
                                 <span style="margin-left: 5px;" title="Ram"><i class="fas fa-microchip"></i> {{$product->specifications['ram']}}</span>
                                 <span style="margin-left: 5px;" title="Bộ nhớ"><i class="fas fa-hdd"></i> {{$product->specifications['rom_harddrive']}}</span>
                                 <span style="margin-left: 5px;" title="Màn hình"><i class="fas fa-tv"></i> {{$product->specifications['displayscreen']}}</span>
-                            </div>
+                            </div> -->
 
                         </div>
                         @endforeach
@@ -166,7 +166,7 @@
                             <div style="height: 220px;" class="product-f-image">
                                 <img src="{{$product->image}}" alt="">
                                 <div class="product-hover">
-                                    <a id="item-cart-{{$product->id}}" class="add-product-to-cart add-to-cart-link"><i class="fa fa-plus-square"></i> Chọn mua</a>
+                                    <a id="item-cart-{{$product->id}}" onclick="addItemCart(this)" class="add-product-to-cart add-to-cart-link"><i class="fa fa-plus-square"></i> Chọn mua</a>
                                     <a href="{{route('detail',$product->id)}}" class="view-details-link"><i class="fa fa-link"></i> chi tiết</a>
                                 </div>
                             </div>
@@ -177,22 +177,22 @@
                                 @if($product->promotion_price==0)
                                 <ins style="color: #bf081f;">{{number_format($product->unit_price)}} đ</ins>
                                 @else
-                                <ins style="color: #bf081f;">{{number_format($product->unit_price - $product->unit_price*$product->promotion_price/100)}} đ</ins> <del>{{number_format($product->unit_price)}} đ</del>
+                                <ins style="color: #bf081f;">{{number_format($product->unit_price - $product->unit_price*$product->promotion_price/100)}} đ</ins> <del>{{number_format($product->unit_price)}} đ</del><span style="margin-left: 5px; color: #d0021b;">-{{$product->promotion_price}}%</span>
                                 @endif
                             </div>
-                            <div class="rating-wrap-post" style="font-size: 14px; margin-top: 5px;">
+                            <div class="rating-wrap-post" style="font-size: 14px; margin-bottom: 10px; margin-top: 5px;">
                                 <i style="color: yellow;" class="fa fa-star"></i>
                                 <i style="color: yellow;" class="fa fa-star"></i>
                                 <i style="color: yellow;" class="fa fa-star"></i>
                                 <i style="color: yellow;" class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="cdt-product__config__param" style="margin-top: 5px;">
+                           <!--  <div class="cdt-product__config__param" style="margin-top: 5px;">
                                 <span title="CPU"><i class="fas fa-microchip"></i> {{$product->specifications['cpu']}}</span>
                                 <span style="margin-left: 5px;" title="Ram"><i class="fas fa-microchip"></i> {{$product->specifications['ram']}}</span>
                                 <span style="margin-left: 5px;" title="Bộ nhớ"><i class="fas fa-hdd"></i> {{$product->specifications['rom_harddrive']}}</span>
                                 <span style="margin-left: 5px;" title="Màn hình"><i class="fas fa-tv"></i> {{$product->specifications['displayscreen']}}</span>
-                            </div>
+                            </div> -->
                         </div>
                         @endforeach
                     </div>
@@ -219,7 +219,7 @@
                             <div style="height: 220px;" class="product-f-image">
                                 <img src="{{$product->image}}" alt="">
                                 <div class="product-hover">
-                                    <a id="item-cart-{{$product->id}}"  class="add-product-to-cart add-to-cart-link"><i class="fa fa-plus-square"></i> Chọn mua</a>
+                                    <a id="item-cart-{{$product->id}}" onclick="addItemCart(this)" class="add-product-to-cart add-to-cart-link"><i class="fa fa-plus-square"></i> Chọn mua</a>
                                     <a href="{{route('detail',$product->id)}}" class="view-details-link"><i class="fa fa-link"></i> chi tiết</a>
                                 </div>
                             </div>
@@ -230,22 +230,22 @@
                                 @if($product->promotion_price==0)
                                 <ins style="color: #bf081f;">{{number_format($product->unit_price)}} đ</ins>
                                 @else
-                                <ins style="color: #bf081f;">{{number_format($product->unit_price - $product->unit_price*$product->promotion_price/100)}} đ</ins> <del>{{number_format($product->unit_price)}} đ</del>
+                                <ins style="color: #bf081f;">{{number_format($product->unit_price - $product->unit_price*$product->promotion_price/100)}} đ</ins> <del>{{number_format($product->unit_price)}} đ</del><span style="margin-left: 5px; color: #d0021b;">-{{$product->promotion_price}}%</span>
                                 @endif
                             </div>
-                            <div class="rating-wrap-post" style="font-size: 14px; margin-top: 5px;">
+                            <div class="rating-wrap-post" style="font-size: 14px; margin-bottom: 10px; margin-top: 5px;">
                                 <i style="color: yellow;" class="fa fa-star"></i>
                                 <i style="color: yellow;" class="fa fa-star"></i>
                                 <i style="color: yellow;" class="fa fa-star"></i>
                                 <i style="color: yellow;" class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="cdt-product__config__param" style="margin-top: 5px;">
+                         <!--    <div class="cdt-product__config__param" style="margin-top: 5px;">
                                 <span title="CPU"><i class="fas fa-microchip"></i> {{$product->specifications['cpu']}}</span>
                                 <span style="margin-left: 5px;" title="Ram"><i class="fas fa-microchip"></i> {{$product->specifications['ram']}}</span>
                                 <span style="margin-left: 5px;" title="Bộ nhớ"><i class="fas fa-hdd"></i> {{$product->specifications['rom_harddrive']}}</span>
                                 <span style="margin-left: 5px;" title="Màn hình"><i class="fas fa-tv"></i> {{$product->specifications['displayscreen']}}</span>
-                            </div>
+                            </div> -->
                         </div>
                         @endforeach
                     </div>

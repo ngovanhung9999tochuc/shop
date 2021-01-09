@@ -166,7 +166,7 @@ $('#form-permission-role').submit(function(e) {
 function editRole(edit) {
     const _token = document.getElementById('_token');
     let [x, y, id] = edit.id.split('-');
-    modal2.style.display = "block";
+
     clearErrorMessagesEdit();
     formEditRole.reset();
     request(base_url + '/admin/role/edit', JSON.stringify({
@@ -179,6 +179,7 @@ function editRole(edit) {
             formEditRole['id'].value = role['id'];
             formEditRole['name'].value = role['name'];
             formEditRole['display_name'].value = role['display_name'];
+            modal2.style.display = "block";
         } else {
             Swal.fire({
                 icon: 'error',
@@ -196,7 +197,7 @@ function grantingPermission(btnPermission) {
     const _token = document.getElementById('_token');
     const listPermission = document.getElementById('list-permissions');
     const roleIdPermissions = document.getElementById('role-id-permissions');
-    modal3.style.display = "block";
+
     request(base_url + '/admin/role/permission', JSON.stringify({
         '_token': _token.value,
         'id': id
@@ -206,7 +207,8 @@ function grantingPermission(btnPermission) {
         if (data['success']) {
             let htmlList = data['htmlList'];
             listPermission.innerHTML = htmlList;
-            roleIdPermissions.value = data['id']
+            roleIdPermissions.value = data['id'];
+            modal3.style.display = "block";
         } else {
             Swal.fire({
                 icon: 'error',

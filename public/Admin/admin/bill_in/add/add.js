@@ -14,7 +14,7 @@
 
 
     btnSearchProducts.addEventListener('keyup', function() {
-        request("http://localhost:8000/admin/billin/products", JSON.stringify({
+        request(base_url + "/admin/billin/products", JSON.stringify({
                 '_token': _token,
                 'table_search': btnSearchProducts.value
             }),

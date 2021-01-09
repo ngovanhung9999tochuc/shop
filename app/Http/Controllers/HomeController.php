@@ -94,7 +94,6 @@ class HomeController extends Controller
      */
     public function test()
     {
-        
     }
 
     /**
@@ -115,8 +114,10 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function searchProduct(Request $request)
     {
+        $products = $this->repository->searchProduct($request);
+        return view('front_end.page.search', ['products' => $products]);
     }
 
     public function getProfile()

@@ -22,7 +22,7 @@ class RoleRepository
 
     public function getAll()
     {
-        return $this->role->latest()->paginate(10);
+        return $this->role->latest()->get();
     }
 
 
@@ -31,10 +31,12 @@ class RoleRepository
         try {
             DB::beginTransaction();
             $rules = [
-                'name' => 'required',
+                'name' => 'required|unique:roles|regex:/(^[\pL0-9 ]+$)/u',
             ];
             $messages = [
-                'name.required' => 'Tên không được phép trống',
+                'name.required' => 'Tên vai trò không được phép trống',
+                'name.unique' => 'Tên vai trò đã được sử dụng',
+                'name.regex' => 'Tên vai trò không được phép có kí tự đặc biệt',
             ];
             $validator = Validator::make($request->all(), $rules, $messages);
             // Validate the input and return correct response
@@ -68,10 +70,11 @@ class RoleRepository
         try {
             DB::beginTransaction();
             $rules = [
-                'name' => 'required',
+                'name' => 'required|regex:/(^[\pL0-9 ]+$)/u',
             ];
             $messages = [
-                'name.required' => 'Tên không được phép trống',
+                'name.required' => 'Tên vai trò không được phép trống',
+                'name.regex' => 'Tên vai trò không được phép có kí tự đặc biệt',
             ];
             $validator = Validator::make($request->all(), $rules, $messages);
             // Validate the input and return correct response
@@ -144,8 +147,8 @@ class RoleRepository
             DB::beginTransaction();
             $htmlList = '';
             $permissions = $this->permission->all();
-            $role=$this->role->find($request->id);
-            $permissions_roles =$role->permissions;
+            $role = $this->role->find($request->id);
+            $permissions_roles = $role->permissions;
             $length = count($permissions);
             $mid = round($length / 2, 0, PHP_ROUND_HALF_UP);
             $i = 0;

@@ -35,12 +35,13 @@ class ProductTypeRepository
     {
         try {
             $rules = [
-                'name' => 'required|unique:product_types',
+                'name' => 'required|unique:product_types|regex:/(^[\pL0-9 ]+$)/u',
                 'image_file' => 'mimes:jpg,jpeg,png,gif|max:10240',
             ];
             $messages = [
-                'name.required' => 'Tên không được phép trống',
-                'name.unique' => 'Tên danh mục không được phép trùng lặp',
+                'name.regex' => 'Tên danh mục không được phép có kí tự đặc biệt',
+                'name.required' => 'Tên danh mục không được phép trống',
+                'name.unique' => 'Tên danh mục đã được sử dụng',
                 'image_file.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
                 'image_file.max' => 'Hình thẻ giới hạn dung lượng không quá 10M',
 
@@ -94,13 +95,15 @@ class ProductTypeRepository
         try {
             DB::beginTransaction();
             $rules = [
-                'name' => 'required',
-                'image_file' => 'mimes:jpg,jpeg,png,gif|max:10240'
+                'name' => 'required|regex:/(^[\pL0-9 ]+$)/u',
+                'image_file' => 'mimes:jpg,jpeg,png,gif|max:10240',
             ];
             $messages = [
-                'name.required' => 'Tên không được phép trống',
+                'name.regex' => 'Tên danh mục không được phép có kí tự đặc biệt',
+                'name.required' => 'Tên danh mục không được phép trống',
                 'image_file.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
-                'image_file.max' => 'Hình thẻ giới hạn dung lượng không quá 10M'
+                'image_file.max' => 'Hình thẻ giới hạn dung lượng không quá 10M',
+
             ];
             $validator = Validator::make($request->all(), $rules, $messages);
             // Validate the input and return correct response
@@ -149,14 +152,14 @@ class ProductTypeRepository
                 if (count($types) != 0) {
                     $count = count($types);
                     $anchor = false;
-                    $message = 'Bạn không thể xóa, danh mục hiện tại có ' . $count . ' danh mục con';
+                    $message = 'Bạn không thể xóa, danh mục hiện tại đang có ' . $count . ' danh mục con';
                 }
             } else {
                 $products = $type->products;
                 if (count($products) != 0) {
                     $count = count($products);
                     $anchor = false;
-                    $message = 'Bạn không thể xóa, danh mục hiện tại có ' . $count . ' sản phẩm';
+                    $message = 'Bạn không thể xóa, danh mục hiện tại đang có ' . $count . ' sản phẩm';
                 }
             }
             if ($anchor) {

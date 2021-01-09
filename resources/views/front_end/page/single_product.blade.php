@@ -33,7 +33,7 @@
                                             <div style="width: 180px;height: 220px;" class="product-f-image">
                                                 <img src="{{$similarproduct->image}}" alt="">
                                                 <div class="product-hover">
-                                                    <a id="item-cart-{{$similarproduct->id}}" class="add-product-to-cart add-to-cart-link"><i class="fa fa-plus-square"></i> chọn mua</a>
+                                                    <a id="item-cart-{{$similarproduct->id}}" onclick="addItemCart(this)" class="add-product-to-cart add-to-cart-link"><i class="fa fa-plus-square"></i> chọn mua</a>
                                                     <a href="{{route('detail',$similarproduct->id)}}" class="view-details-link"><i class="fa fa-link"></i> chi tiết</a>
                                                 </div>
                                             </div>
@@ -42,7 +42,7 @@
                                                 @if($similarproduct->promotion_price==0)
                                                 <ins style="color: #bf081f;">{{number_format($similarproduct->unit_price)}} đ</ins>
                                                 @else
-                                                <ins style="color: #bf081f;">{{number_format($similarproduct->unit_price - $similarproduct->unit_price*$similarproduct->promotion_price/100)}} đ</ins> <del>{{number_format($similarproduct->unit_price)}} đ</del>
+                                                <ins style="color: #bf081f;">{{number_format($similarproduct->unit_price - $similarproduct->unit_price*$similarproduct->promotion_price/100)}} đ</ins> <del>{{number_format($similarproduct->unit_price)}} đ</del><span style="margin-left: 5px; color: #d0021b;">-{{$product->promotion_price}}%</span>
                                                 @endif
                                             </div>
                                         </div>
@@ -60,12 +60,12 @@
                                     @if($product->promotion_price==0)
                                     <ins style="color: #bf081f;">{{number_format($product->unit_price)}} đ</ins>
                                     @else
-                                    <ins style="color: #bf081f;">{{number_format($product->unit_price - $product->unit_price*$product->promotion_price/100)}} đ</ins> <del>{{number_format($product->unit_price)}} đ</del>
+                                    <ins style="color: #bf081f;">{{number_format($product->unit_price - $product->unit_price*$product->promotion_price/100)}} đ</ins> <del>{{number_format($product->unit_price)}} đ</del><span style="margin-left: 5px; color: #d0021b;">-{{$product->promotion_price}}%</span>
                                     @endif
                                 </div>
 
                                 <div class="cart" style="margin-bottom: 40px;">
-                                    <button id="item-cart-{{$product->id}}" class="add-product-to-cart add_to_cart_button" style="padding: 5px 20px;"><i class="fa fa-plus-square"></i> CHỌN MUA</button>
+                                    <button id="item-cart-{{$product->id}}" onclick="addItemCart(this)" class="add-product-to-cart add_to_cart_button" style="padding: 5px 20px;"><i class="fa fa-plus-square"></i> CHỌN MUA</button>
                                 </div>
 
                                 <div role="tabpanel">
@@ -73,7 +73,7 @@
                                         <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Miêu tả</a></li>
                                         <li role="presentation"><a href="#details" aria-controls="home" role="tab" data-toggle="tab">Thông số</a></li>
                                         <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Đánh giá</a></li>
-                                        <li role="presentation"><a href="#comment" aria-controls="profile" role="tab" data-toggle="tab">Bình Luận</a></li>
+                                      <!--   <li role="presentation"><a href="#comment" aria-controls="profile" role="tab" data-toggle="tab">Bình Luận</a></li> -->
 
                                     </ul>
                                     <div class="tab-content">
@@ -104,9 +104,9 @@
                                             {!! $product->specifications_all !!}
                                         </div>
 
-                                        <div role="tabpanel" class="tab-pane fade" id="comment">
+                                        <!-- <div role="tabpanel" class="tab-pane fade" id="comment">
 
-                                        </div>
+                                        </div> -->
                                     </div>
 
                                 </div>

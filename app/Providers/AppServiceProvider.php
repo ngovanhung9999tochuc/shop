@@ -7,6 +7,8 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Session;
 use App\Models\Cart;
+use App\Models\Product;
+use App\Models\ProductType;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,20 +35,24 @@ class AppServiceProvider extends ServiceProvider
 
             //menu
             $ul = '';
-            $menus = Menu::where('parent_id', 0)->orderBy('id', 'asc')->get();
+            $menus = ProductType::where('parent_id', 0)->orderBy('id', 'asc')->limit(4)->get();
             $ul .= '<ul>';
             foreach ($menus as $menu) {
-                $childrens = Menu::where('parent_id', $menu->id)->orderBy('id', 'asc')->get();
-                $ul .= '<li><a href="' . route('typeproduct', [$menu->product_type_link, $menu->id]) . '">' . $menu->name . '</a>';
+                $childrens = ProductType::where('parent_id', $menu->id)->orderBy('id', 'asc')->get();
+                $ul .= '<li><a href="' . route('typeproduct', [$menu->key_code, $menu->id]) . '">' . $menu->name . '</a>';
                 $ul .= '<ul>';
                 foreach ($childrens as  $children) {
-                    $ul .= '<li><a href="' . route('typeproduct', [$children->product_type_link, $children->id]) . '">' . $children->name . '</a>';
+                    $ul .= '<li><a href="' . route('typeproduct', [$children->key_code, $children->id]) . '">' . $children->name . '</a>';
                 }
                 $ul .= '</ul>';
                 $ul .= '</li>';
             }
+            $ul .= '<li><a></a></li>';
+            $ul .= ' <li><a></a></li>';
+            $ul .= ' <li><a></a></li>';
             $ul .= '</ul>';
-
+              
+           
             //cart
 
             $oldCart = Session('cart') ? Session::get('cart') : null;

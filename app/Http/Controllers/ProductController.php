@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Components\ProductTypeRecusive;
 use App\Http\Requests\ProductAddRequest;
+use App\Http\Requests\ProductEditRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Repositories\ProductRepository;
@@ -85,7 +86,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductAddRequest $request, $id)
+    public function update(ProductEditRequest $request, $id)
     {
         $result = $this->repository->update($request, $id);
         return redirect()->back()->with('message', $result);

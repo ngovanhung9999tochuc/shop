@@ -86,7 +86,7 @@
                                                 @csrf
                                                 <h6 class="mt-3 "><b>Giá bán</b></h6>
                                                 <div class="input-group mb-3">
-                                                    <input type="number" min="0" class="form-control" value="0" name="unit_price">
+                                                    <input type="number" min="0" class="form-control" max="5000000000" value="0" name="unit_price">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">Đồng</span>
                                                     </div>
@@ -95,7 +95,7 @@
 
                                                 <h6 class="mt-3 "><b>Khuyến mãi</b></h6>
                                                 <div class="input-group mb-3">
-                                                    <input type="number" min="0" class="form-control" value="0" name="promotion_price">
+                                                    <input type="number" min="0" class="form-control" max="100" value="0" name="promotion_price">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text">%</span>
                                                     </div>

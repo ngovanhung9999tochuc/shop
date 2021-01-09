@@ -25,8 +25,8 @@
                                 <li><a id="btn-login"><i class="fa fa-user"></i> Đăng nhập</a></li>
                                 <li><a id="btn-register"><i class="fas fa-registered"></i></i> Đăng ký</a></li>
                             </div>
-                            <div  class="col-md-8">
-                               
+                            <div class="col-md-8">
+
                             </div>
                         </ul>
                     </div>
@@ -36,18 +36,18 @@
                 <div class="col-md-4">
 
                     <div id="header-right-login" {!! $displayUser !!} class="header-right">
-                       
+
                         <ul class="list-unstyled list-inline">
                             <li class="dropdown dropdown-small">
                                 <a style="font-size: 14px;" data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span id="name-user-login" class="key">
-                                        @if(Auth::check())
-                                        {{Auth::user()->name}}
-                                        @endif
+                                        <b> @if(Auth::check())
+                                            {{Auth::user()->name}}
+                                            @endif</b>
                                     </span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{route('profile')}}" id="a-link-profile" style="font-size: 14px;">Hồ sơ</a></li>
-                                    <li {!! $displayAdmin !!} id="display-admin"><a href="{{route('admin.dashboard')}}" style="font-size: 14px;">Quản trị</a></li>    
-                                    <li><a href="{{route('logout')}}" id="a-link-logout" style="font-size: 14px;">Thoát</a></li>
+                                    <li><a href="{{route('profile')}}" id="a-link-profile" style="font-size: 14px;"><b>Hồ sơ</b></a></li>
+                                    <li {!! $displayAdmin !!} id="display-admin"><a href="{{route('admin.dashboard')}}" style="font-size: 14px;"><b>Quản trị</b></a></li>
+                                    <li><a href="{{route('logout')}}" id="a-link-logout" style="font-size: 14px;"><b>Thoát</b></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -60,9 +60,26 @@
     <div class="site-branding-area">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-md-6">
                     <div class="logo">
                         <h1><a href="{{route('home')}}"><img style="width: 176px; height: 64px;" src="/logo/logo.png"></a></h1>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div style="margin-top: 4%;" class="card">
+                        <form method="POST" action="{{route('search')}}">
+                            @csrf @method('post')
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" style="border-radius: 5px;" name="table_search" class="col-md-12" placeholder="Tìm mã hoặc tên sản phẩm">
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-info"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

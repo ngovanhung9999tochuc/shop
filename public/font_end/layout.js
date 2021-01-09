@@ -145,7 +145,55 @@ const ulListItem = document.getElementById('ul-list-item');
 
 
 //them item cart
-btnAddCarts.forEach(function(btnAdd) {
+function addItemCart(add) {
+    let [x, y, id] = add.id.split('-');
+    requestCart(base_url + '/cart/add', JSON.stringify({
+        '_token': _token.value,
+        'id': id
+    }), function(data) {
+        data = JSON.parse(data);
+        if (data['success']) {
+            let product = data['item']['product'];
+            let itemExists = document.getElementById("item-" + product['id']);
+            let price = data['item']['quantity'] * (product['unit_price'] - product['unit_price'] * product['promotion_price'] / 100);
+
+
+            totalPrice1.innerHTML = Number(data['totalPrice']).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ';
+            totalPrice2.innerHTML = Number(data['totalPrice']).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ';
+            totalQuantity.innerHTML = data['totalQty'];
+
+            if (itemExists !== null) {
+                document.getElementById("input-quantity-" + product['id']).value = data['item']['quantity'];
+                document.getElementById("total-product-" + product['id']).innerHTML = Number(price).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ';
+            } else {
+                let li = document.createElement('li');
+                let dataLi = '';
+                li.setAttribute("id", "item-" + product['id']);
+                li.classList.add("sbmincart-item");
+                dataLi += '<div class="sbmincart-details-name"> <a class="sbmincart-name" href="' + base_url + '/detail/' + product['id'] + '">' + product['name'] + '</a></div>';
+                dataLi += '<div class="sbmincart-details-quantity"> <input id="input-quantity-' + product['id'] + '" onchange="changeQuantity(this)" class="sbmincart-quantity" name="quantity" type="number" min="1" value="' + data['item']['quantity'] + '" autocomplete="off"> </div>';
+                dataLi += '<div class="sbmincart-details-remove"> <button id="btn-close-' + product['id'] + '" onclick="deleteItem(this)" type="button" class="sbmincart-remove" data-sbmincart-idx="0">×</button> </div>';
+                dataLi += '<div class="sbmincart-details-price"> <span id="total-product-' + product['id'] + '" class="sbmincart-price">' + Number(price).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ'; + '</span> </div>';
+                li.innerHTML = dataLi;
+                ulListItem.appendChild(li);
+            }
+            w3lssbmincart.style.display = 'block';
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi hệ thống !',
+                showConfirmButton: false,
+                timer: 4000
+            });
+        }
+    });
+}
+
+
+
+
+
+/* btnAddCarts.forEach(function(btnAdd) {
     btnAdd.addEventListener('click', function() {
         let [x, y, id] = this.id.split('-');
         requestCart(base_url + '/cart/add', JSON.stringify({
@@ -190,7 +238,7 @@ btnAddCarts.forEach(function(btnAdd) {
         });
     });
 });
-
+ */
 //function
 function clearErrorMessagesFormLogin() {
     document.getElementById('validation-login-email').innerHTML = '';

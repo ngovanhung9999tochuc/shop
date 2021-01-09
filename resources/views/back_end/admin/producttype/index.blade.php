@@ -85,7 +85,7 @@
                                             <form id="form-add-type" method="POST">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label>Tên danh mục</label>
+                                                    <label>Tên danh mục*</label>
                                                     <input type="text" name="name" class="form-control" value="" placeholder="nhập tên danh mục">
                                                     <div style="margin-top: 5px;" id="validation-add-name"></div>
                                                 </div>
@@ -132,7 +132,7 @@
                                                 @csrf
                                                 <input type="hidden" name="id" value="" />
                                                 <div class="form-group">
-                                                    <label>Tên danh mục</label>
+                                                    <label>Tên danh mục*</label>
                                                     <input type="text" name="name" class="form-control" value="" placeholder="nhập tên danh mục">
                                                     <div style="margin-top: 5px;" id="validation-edit-name"></div>
                                                 </div>

@@ -205,6 +205,7 @@ function editProductType(edit) {
             formEditType['name'].value = productType['name'];
             outputImageEdit.src = productType['icon'];
             outputImageEdit.style.height = '60px';
+            outputImageEdit.style.width = '200px';
             outputImageEdit.style.marginTop = '10px';
             modal2.style.display = "block";
         } else {

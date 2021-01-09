@@ -7,7 +7,7 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     @include("back_end.parials.content_header",['title'=>'Danh sách banner',
-    'name'=>'banner','key'=>'Danh sách','route'=>route('slide.index')])
+    'name'=>'Banner','key'=>'Danh sách','route'=>route('slide.index')])
     <!-- /.content-header -->
     <!-- Main content -->
     <section class="content">

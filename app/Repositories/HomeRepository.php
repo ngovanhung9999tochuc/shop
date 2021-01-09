@@ -136,4 +136,10 @@ class HomeRepository
             return response()->json(array('fail' => false), 200);
         }
     }
+
+    public function searchProduct($request)
+    {
+        return Product::where('name', 'like', '%' . $request->table_search . '%')
+            ->orWhere('id', 'like', '%' . $request->table_search . '%')->get();
+    }
 }
