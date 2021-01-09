@@ -1,7 +1,44 @@
 @extends('front_end.layout.layout')
 @section('content')
 @section('css')
+<style>
+    .rating1 {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center;
+    }
 
+    .rating1>input {
+        display: none
+    }
+
+    .rating1>label {
+        position: relative;
+        width: 1em;
+        font-size: 36px;
+        color: #FFD600;
+        cursor: pointer
+    }
+
+    .rating1>label::before {
+        content: "\2605";
+        position: absolute;
+        opacity: 0
+    }
+
+    .rating1>label:hover:before,
+    .rating1>label:hover~label:before {
+        opacity: 1 !important
+    }
+
+    .rating1>input:checked~label:before {
+        opacity: 1
+    }
+
+    .rating1:hover>input:checked~label:before {
+        opacity: 0.4
+    }
+</style>
 @endsection
 
 <div class="single-product-area">
@@ -70,33 +107,46 @@
 
                                 <div role="tabpanel">
                                     <ul class="product-tab" role="tablist">
-                                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Miêu tả</a></li>
+                                        <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Đánh giá</a></li>
+                                        <li role="presentation"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Miêu tả</a></li>
                                         <li role="presentation"><a href="#details" aria-controls="home" role="tab" data-toggle="tab">Thông số</a></li>
-                                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Đánh giá</a></li>
-                                      <!--   <li role="presentation"><a href="#comment" aria-controls="profile" role="tab" data-toggle="tab">Bình Luận</a></li> -->
+
+                                        <!--   <li role="presentation"><a href="#comment" aria-controls="profile" role="tab" data-toggle="tab">Bình Luận</a></li> -->
 
                                     </ul>
                                     <div class="tab-content">
-                                        <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                        <div role="tabpanel" class="tab-pane fade " id="home">
                                             {!! $product->description !!}
                                         </div>
-                                        <div role="tabpanel" class="tab-pane fade" id="profile">
-                                            <h2>Reviews</h2>
+                                        <div role="tabpanel" class="tab-pane fade in active" id="profile">
+                                            <h2>Đánh giá</h2>
                                             <div class="submit-review">
-                                                <p><label for="name">Name</label> <input name="name" type="text"></p>
-                                                <p><label for="email">Email</label> <input name="email" type="email"></p>
-                                                <div class="rating-chooser">
-                                                    <p>Your rating</p>
-
-                                                    <div class="rating-wrap-post">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
+                                                <form method="POST" action="">
+                                                    @csrf
+                                                    @if(Auth::check())
+                                                    <input name="id" class="form-control" type="hidden" value="{{Auth::user()->id}}">
+                                                    @else
+                                                    <p><label>Tài khoản:</label> <input style="border-radius: 5px;" name="username" type="email"></p>
+                                                    <p><label>Mật khẩu:</label> <input style="border-radius: 5px;" name="password" type="password"></p>
+                                                    @endif
+                                                    <div class="rating-chooser">
+                                                        <p>Chọn đánh giá của bạn:</p>
+                                                        <div class="rating1">
+                                                            <input type="radio" name="rating" value="5" id="5">
+                                                            <label title="Tuyệt vời quá" for="5">☆</label>
+                                                            <input type="radio" name="rating" value="4" id="4">
+                                                            <label title="Rất tốt" for="4">☆</label>
+                                                            <input type="radio" name="rating" value="3" id="3">
+                                                            <label title="Bình thường" for="3">☆</label>
+                                                            <input type="radio" name="rating" value="2" id="2">
+                                                            <label title="Tạm được" for="2">☆</label>
+                                                            <input type="radio" name="rating" value="1" id="1">
+                                                            <label title="Không thích" for="1">☆</label>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <p><label for="review">Your review</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
+                                                </form>
+
+                                                <p><label for="review">Nhập đánh giá của bạn:</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
                                                 <p><input type="submit" value="Submit"></p>
                                             </div>
                                         </div>

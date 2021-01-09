@@ -8,14 +8,14 @@
         <div class="brands-area">
             <div class="container">
                 @php
-                    $re='';
-                    if(count($products)==0){
-                        $re='Không tìm thấy kết quả';
-                    }
+                $re='';
+                if(count($products)==0){
+                $re='Không tìm thấy kết quả';
+                }
                 @endphp
-               
+
                 <div class="row" style=" color: black; text-align: center; margin: 20px 0px 20px -30px; width: 1170px; height: 30px; background-color: #f0f1f5;">
-                {{$re}}
+                    {{$re}}
                 </div>
                 <div class="row">
                     @foreach ($products as $product)
@@ -56,6 +56,7 @@
                     @endforeach
                 </div>
                 <div class="row">
+                    {{ $products->appends(request()->query())->links() }}
                 </div>
             </div>
         </div> <!-- End brands area -->

@@ -136,15 +136,13 @@ class MenuRepository
     public function getParent()
     {
         try {
-            DB::beginTransaction();
+           
             $option_parents = '<option value="0">Không thuộc menu</option>';
             $option_parents .= $this->menuRecusive->menuLoopAdd();
             $option_product_type = '<option value="11">Không liên kết loại sản phẩm</option>';
             $option_product_type .= $this->productTypeRecusive->productTypeAdd();
-            DB::commit();
             return response()->json(array('success' => true, 'optionParents' => $option_parents, 'optionProductType' => $option_product_type), 200);
         } catch (Exception $exception) {
-            DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
             return response()->json(array('fail' => false), 200);
         }

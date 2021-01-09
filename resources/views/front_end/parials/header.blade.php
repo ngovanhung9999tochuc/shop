@@ -67,8 +67,8 @@
                 </div>
                 <div class="col-md-6">
                     <div style="margin-top: 4%;" class="card">
-                        <form method="POST" action="{{route('search')}}">
-                            @csrf @method('post')
+                        <form method="GET" action="{{route('search')}}">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-4">
                                 </div>
@@ -101,7 +101,6 @@
                             <form id="form-login" action="" method="POST">
                                 @csrf
                                 <fieldset>
-
                                     <p><label for="email">Tài khoản</label></p>
                                     <p><input type="email" id="email" value="" name="email" placeholder="mail@gmail.com"></p>
                                     <p id="validation-login-email" style="background-color: #dc3545;color: white;border-radius:3px; font-size: 14px;"></p>

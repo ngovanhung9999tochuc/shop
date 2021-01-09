@@ -36,7 +36,7 @@ Route::get('/type/{id}', [HomeController::class, 'getTypeProduct'])->name('type.
 Route::get('/detail/{id}', [HomeController::class, 'getProductDetail'])->name('detail');
 Route::get('/order', [HomeController::class, 'getOrder'])->name('order')->middleware(CheckOut::class);
 Route::post('/order/enter', [HomeController::class, 'enterAnOrder'])->name('order.enter');
-Route::post('/search', [HomeController::class, 'searchProduct'])->name('search');
+Route::get('/search', [HomeController::class, 'searchProduct'])->name('search');
 
 
 Route::get('/testhung', [HomeController::class, 'test'])->name('test');

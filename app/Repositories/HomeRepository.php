@@ -140,6 +140,6 @@ class HomeRepository
     public function searchProduct($request)
     {
         return Product::where('name', 'like', '%' . $request->table_search . '%')
-            ->orWhere('id', 'like', '%' . $request->table_search . '%')->get();
+            ->orWhere('id', 'like', '%' . $request->table_search . '%')->paginate(12);
     }
 }
