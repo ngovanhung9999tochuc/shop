@@ -37,7 +37,8 @@ Route::get('/detail/{id}', [HomeController::class, 'getProductDetail'])->name('d
 Route::get('/order', [HomeController::class, 'getOrder'])->name('order')->middleware(CheckOut::class);
 Route::post('/order/enter', [HomeController::class, 'enterAnOrder'])->name('order.enter');
 Route::get('/search', [HomeController::class, 'searchProduct'])->name('search');
-
+Route::post('/detail/rating', [HomeController::class, 'rating'])->name('detail.rating');
+//rating
 
 Route::get('/testhung', [HomeController::class, 'test'])->name('test');
 //login
@@ -138,7 +139,7 @@ Route::middleware('can:admin')->prefix('admin')->group(function () {
         Route::post('/slide/search', [SlideController::class, 'search'])->name('slide.search');
     });
     //menu
-    Route::middleware('can:menu')->group(function () {
+  /*   Route::middleware('can:menu')->group(function () {
         Route::post('/menu/parent', [MenuController::class, 'getParent'])->name('menu.parent');
         Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
         Route::post('/menu/store', [MenuController::class, 'store'])->name('menu.store');
@@ -146,7 +147,7 @@ Route::middleware('can:admin')->prefix('admin')->group(function () {
         Route::post('/menu/update', [MenuController::class, 'update'])->name('menu.update');
         Route::delete('/menu/{menu}', [MenuController::class, 'destroy'])->name('menu.destroy');
         Route::post('/menu/search', [MenuController::class, 'search'])->name('menu.search');
-    });
+    }); */
     //role
     Route::middleware('can:role')->group(function () {
         Route::get('/role', [RoleController::class, 'index'])->name('role.index');

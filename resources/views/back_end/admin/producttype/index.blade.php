@@ -55,7 +55,7 @@
                                         <td id="parent-{{$productType->id}}">{{optional($productType->productTypeParent)->name}}</td>
                                         <td>
                                             <button id="btn-edit-{{$productType->id}}" title="Sửa" onclick="editProductType(this)" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>
-                                            <button data-url="{{route('producttype.destroy',$productType->id)}}" value="{{$productType->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
+                                            <button title="Xóa" data-url="{{route('producttype.destroy',$productType->id)}}" value="{{$productType->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
                                     @endforeach

@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public function ratings()
     {
-        return $this->belongsToMany(Product::class, 'ratings', 'user_id', 'product_id')->withPivot('stars')
+        return $this->belongsToMany(Product::class, 'ratings', 'user_id', 'product_id')->withPivot('stars','text_rating')
             ->withTimestamps();
     }
 

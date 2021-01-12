@@ -52,11 +52,23 @@
                                 @endif
                             </div>
                             <div class="rating-wrap-post" style="font-size:  14px;color: black; margin-top: 5px;">
-                                <i style="color: yellow;" class="fa fa-star"></i>
-                                <i style="color: yellow;" class="fa fa-star"></i>
-                                <i style="color: yellow;" class="fa fa-star"></i>
-                                <i style="color: yellow;" class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                            @php
+                                if($product->userReview!=null){
+                                $average = (float) $product->userReview->average;
+                                $average = $average * 10;
+                                $residual = (int)($average / 10);
+                                $division = $average % 10;
+                                $i = 1;
+                                while ($i <= $residual) 
+                                    { echo '<i style="color: yellow;" class="fa fa-star"></i>' ; $i++; }
+                                if($division!=0)
+                                    { echo '<i style="color: #d0d000;" class="fa fa-star"></i>' ; $i++; }
+                                while ($i <=5) 
+                                    { echo '<i class="fa fa-star"></i>' ; $i++; }
+
+                                    echo '<span style="margin-left: 5px;">'.$product->userReview->quantity_rating.' đánh giá</span>';
+                                } 
+                            @endphp
                             </div>
                             <div class="product-option-shop">
                                 <a id="item-cart-{{$product->id}}" onclick="addItemCart(this)" class="add-product-to-cart add_to_cart_button"  rel="nofollow"><i class="fa fa-plus-square"></i> chọn mua</a>

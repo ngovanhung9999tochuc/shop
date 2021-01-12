@@ -100,7 +100,14 @@
                                     <ins style="color: #bf081f;">{{number_format($product->unit_price - $product->unit_price*$product->promotion_price/100)}} đ</ins> <del>{{number_format($product->unit_price)}} đ</del><span style="margin-left: 5px; color: #d0021b;">-{{$product->promotion_price}}%</span>
                                     @endif
                                 </div>
-
+                                <div class="cart" style="margin-bottom: 10px;font-size: 16px;">
+                                @php
+                                if($product->userReview!=null){
+                                $average = (float) $product->userReview->average;
+                                echo number_format($average, 1, '.', ',').'<i style="color: yellow;" class="fa fa-star"></i>';
+                                } 
+                                @endphp
+                                </div>
                                 <div class="cart" style="margin-bottom: 40px;">
                                     <button id="item-cart-{{$product->id}}" onclick="addItemCart(this)" class="add-product-to-cart add_to_cart_button" style="padding: 5px 20px;"><i class="fa fa-plus-square"></i> CHỌN MUA</button>
                                 </div>
@@ -119,20 +126,50 @@
                                             {!! $product->description !!}
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade in active" id="profile">
-                                            <h2>Đánh giá</h2>
+                                            <div>
+                                                @foreach($user_ratings as $user_rating)
+                                                <div class="card">
+                                                    <div style="font-size: 14px; font-weight: bold; background-color: #F2F2F2;" class="card-header">
+                                                        {{$user_rating->name}}
+                                                    </div>
+                                                    <div class="card-body" style="margin-top: 10px;">
+                                                        <h5 class="card-title">
+                                                            @php
+                                                            $stars = (int) $user_rating->pivot->stars;
+                                                            $i = 1;
+                                                            while ($i <= $stars) { echo '<i style="color: yellow;" class="fa fa-star"></i>' ; $i++; }
+                                                            while ($i <=5) { echo '<i class="fa fa-star"></i>' ; $i++; }; @endphp <span style="margin-left: 10px;">{{$user_rating->pivot->created_at->format('d/m/Y')}}</span>
+                                                        </h5>
+                                                        <p class="card-text">{{$user_rating->pivot->text_rating}}</p>
+                                                    </div>
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                            <div class="row">
+                                                {{ $user_ratings->links() }}
+                                            </div>
+
+                                            <h2 style="margin-top: 30px; font-size: 18px; font-weight: bold;text-align: center;">Đánh giá</h2>
                                             <div class="submit-review">
-                                                <form method="POST" action="">
+                                                <form method="POST" action="{{route('detail.rating')}}">
                                                     @csrf
                                                     @if(Auth::check())
                                                     <input name="id" class="form-control" type="hidden" value="{{Auth::user()->id}}">
                                                     @else
-                                                    <p><label>Tài khoản:</label> <input style="border-radius: 5px;" name="username" type="email"></p>
-                                                    <p><label>Mật khẩu:</label> <input style="border-radius: 5px;" name="password" type="password"></p>
+                                                    <p><label>Tài khoản:</label> <input style="border-radius: 5px;" name="email" class="@error('email') is-invalid @enderror" value="{{old('email')}}" type="email"></p>
+                                                    @error('email')
+                                                    <div style="margin-top: 10px;" class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
+                                                    <p><label>Mật khẩu:</label> <input style="border-radius: 5px;" class="@error('password') is-invalid @enderror" name="password" type="password"></p>
+                                                    @error('password')
+                                                    <div style="margin-top: 10px;" class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
                                                     @endif
                                                     <div class="rating-chooser">
+                                                        <input name="product_id" class="form-control" type="hidden" value="{{$product->id}}">
                                                         <p>Chọn đánh giá của bạn:</p>
                                                         <div class="rating1">
-                                                            <input type="radio" name="rating" value="5" id="5">
+                                                            <input type="radio" checked name="rating" value="5" id="5">
                                                             <label title="Tuyệt vời quá" for="5">☆</label>
                                                             <input type="radio" name="rating" value="4" id="4">
                                                             <label title="Rất tốt" for="4">☆</label>
@@ -144,14 +181,19 @@
                                                             <label title="Không thích" for="1">☆</label>
                                                         </div>
                                                     </div>
+                                                    <p><label for="review">Nhập đánh giá của bạn:</label> <textarea style="border-radius: 5px;" name="review" class="@error('review') is-invalid @enderror" cols="30" rows="10" placeholder="nhập đánh giá về sản phẩm (tối thiểu 60 ký tự)">{{old('review')}}</textarea></p>
+                                                    @error('review')
+                                                    <div style="margin-top: 10px;" class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
+                                                    <p><input style="margin-left: 45%; border-radius: 5px; " type="submit" value="Gửi"></p>
                                                 </form>
-
-                                                <p><label for="review">Nhập đánh giá của bạn:</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
-                                                <p><input type="submit" value="Submit"></p>
                                             </div>
+
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade" id="details">
-                                            {!! $product->specifications_all !!}
+                                            <div style="padding-left: 8%;">
+                                                {!! $product->specifications_all !!}
+                                            </div>
                                         </div>
 
                                         <!-- <div role="tabpanel" class="tab-pane fade" id="comment">

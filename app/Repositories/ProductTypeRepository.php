@@ -39,7 +39,7 @@ class ProductTypeRepository
                 'image_file' => 'mimes:jpg,jpeg,png,gif|max:10240',
             ];
             $messages = [
-                'name.regex' => 'Tên danh mục không được phép có kí tự đặc biệt',
+                'name.regex' => 'Tên danh mục không được phép có ký tự đặc biệt',
                 'name.required' => 'Tên danh mục không được phép trống',
                 'name.unique' => 'Tên danh mục đã được sử dụng',
                 'image_file.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
@@ -99,7 +99,7 @@ class ProductTypeRepository
                 'image_file' => 'mimes:jpg,jpeg,png,gif|max:10240',
             ];
             $messages = [
-                'name.regex' => 'Tên danh mục không được phép có kí tự đặc biệt',
+                'name.regex' => 'Tên danh mục không được phép có ký tự đặc biệt',
                 'name.required' => 'Tên danh mục không được phép trống',
                 'image_file.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
                 'image_file.max' => 'Hình thẻ giới hạn dung lượng không quá 10M',

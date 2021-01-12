@@ -60,7 +60,7 @@
               <a href="{{route('slide.index')}}" class="nav-link">
                 <i class="nav-icon fab fa-bootstrap"></i>
                 <p>
-                  Banner
+                Khuyến mãi
                 </p>
               </a>
             </li>

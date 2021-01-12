@@ -36,7 +36,7 @@ class RoleRepository
             $messages = [
                 'name.required' => 'Tên vai trò không được phép trống',
                 'name.unique' => 'Tên vai trò đã được sử dụng',
-                'name.regex' => 'Tên vai trò không được phép có kí tự đặc biệt',
+                'name.regex' => 'Tên vai trò không được phép có ký tự đặc biệt',
             ];
             $validator = Validator::make($request->all(), $rules, $messages);
             // Validate the input and return correct response
@@ -74,7 +74,7 @@ class RoleRepository
             ];
             $messages = [
                 'name.required' => 'Tên vai trò không được phép trống',
-                'name.regex' => 'Tên vai trò không được phép có kí tự đặc biệt',
+                'name.regex' => 'Tên vai trò không được phép có ký tự đặc biệt',
             ];
             $validator = Validator::make($request->all(), $rules, $messages);
             // Validate the input and return correct response

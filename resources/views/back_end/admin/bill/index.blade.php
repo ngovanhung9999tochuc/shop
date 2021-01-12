@@ -97,7 +97,7 @@
                                     @foreach($bills as $bill)
                                     <tr>
                                         <td>{{$bill->id}}</td>
-                                        <td>{{$bill->date_order}}</td>
+                                        <td>{{date("d-m-Y", strtotime($bill->date_order))}}</td>
                                         <td>{{$bill->user->name}}</td>
                                         <td>{{$bill->phone}}</td>
                                         <td>{{$bill->quantity}}</td>
@@ -180,8 +180,8 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <a id="btn_info-{{$bill->id}}" onclick="showInfo(this)" class="btn-show-info btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
-                                            <button data-url="{{route('bill.destroy',$bill->id)}}" value="{{$bill->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
+                                            <a id="btn_info-{{$bill->id}}" title="Xem" onclick="showInfo(this)" class="btn-show-info btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
+                                            <button title="Xóa" data-url="{{route('bill.destroy',$bill->id)}}" value="{{$bill->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
                                     @endforeach
