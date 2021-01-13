@@ -97,7 +97,7 @@
                                     @foreach($bills as $bill)
                                     <tr>
                                         <td>{{$bill->id}}</td>
-                                        <td>{{date("d-m-Y", strtotime($bill->date_order))}}</td>
+                                        <td>{{$bill->date_order}}</td>
                                         <td>{{$bill->user->name}}</td>
                                         <td>{{$bill->phone}}</td>
                                         <td>{{$bill->quantity}}</td>
@@ -298,6 +298,7 @@
         "info": false,
         "autoWidth": false,
         "responsive": true,
+        'order': [[0, 'desc']]
     });
 </script>
 @endsection

@@ -48,7 +48,7 @@
                                     @foreach($bill_ins as $bill)
                                     <tr>
                                         <td>{{$bill->id}}</td>
-                                        <td>{{date("m/d/Y", strtotime($bill->input_date))}}</td>
+                                        <td>{{date("Y/m/d", strtotime($bill->input_date))}}</td>
                                         <td>{{$bill->supplier->name}}</td>
                                         <td>{{$bill->quantity}}</td>
                                         <td>{{number_format($bill->total_price)}}</td>
@@ -116,6 +116,7 @@
             "info": false,
             "autoWidth": false,
             "responsive": true,
+            'order': [[0, 'desc']]
         });
     });
 </script>

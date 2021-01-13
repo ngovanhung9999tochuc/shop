@@ -63,7 +63,7 @@ class HomeRepository
         $similarProduct = Product::where('product_type_id', $product->product_type_id)->limit(8)->get();
         $productType = $product->productType->productTypeParent;
         $productImage = $product->productImages;
-        $user_ratings = $product->ratings()->orderBy('created_at', 'DESC')->paginate(5);
+        $user_ratings = $product->ratings()->orderBy('stars', 'DESC')->paginate(5);
         return ['product' => $product, 'similarProduct' => $similarProduct, 'productType' => $productType, 'productImage' => $productImage, 'user_ratings' => $user_ratings];
     }
 

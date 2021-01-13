@@ -30,10 +30,9 @@
                         <div class="card card-primary card-outline">
                             <div class="card-body box-profile">
                                 <div class="text-center">
-                                    <img class="profile-user-img img-fluid img-circle" src="{{auth()->user()->image_icon}}" alt="User profile picture">
+                                    <img class="profile-user-img img-fluid img-circle" id="image-icon-profile-user" src="{{auth()->user()->image_icon}}" alt="hình ảnh người dùng">
                                 </div>
-
-                                <h3 class="profile-username text-center">{{auth()->user()->name}}</h3>
+                                <h3 style="margin-top: 10px;" class="profile-username text-center">{{auth()->user()->name}}</h3>
                                 @php
                                 $textRole='';
                                 $roles=auth()->user()->roles;
@@ -42,6 +41,22 @@
                                 }
                                 @endphp
                                 <p class="text-muted text-center">{{substr($textRole,0,-2)}}</p>
+                                <div style="text-align: center; color: black;">
+                                    <button title="Chọn ảnh" id="btn-update-image" class="btn btn-info"><i class="fas fa-camera-retro"></i></button>
+                                </div>
+                                <br />
+                                <div id="image-icon-user" style="display: none;" class="row form-group">
+
+                                    <div class="col-sm-12">
+                                        <form id="form-update-image-icon" method="post">
+                                            @csrf
+                                            <input type="hidden" value="{{auth()->user()->id}}" name="id" />
+                                            <input type="file" onchange="changeImage(this)" class="form-control-file" name="image_icon">
+                                            <div id="validation-update-image_icon"></div>
+                                            <button title="Cập nhật" style="margin-top: 10px; " class="btn btn-info"><i class="fas fa-upload"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -298,12 +313,70 @@
     <script>
         const base_url1 = window.location.origin;
         let profileInfo = document.getElementById('profile-info');
+        const btnUpdateImage = document.getElementById('btn-update-image');
+        const imageIcon = document.getElementById('image-icon-profile-user')
+        const imageIconUser = document.getElementById('image-icon-user');
         //event
+        btnUpdateImage.addEventListener('click', function() {
+
+            if (imageIconUser.style.display == 'none') {
+                imageIconUser.style.display = 'block';
+            } else {
+                imageIconUser.style.display = 'none';
+            }
+        });
+
+        function changeImage(inputImage) {
+            imageIcon.src = URL.createObjectURL(inputImage.files[0]);
+        }
+
         window.onclick = function(event) {
             if (event.target == profileInfo) {
                 profileInfo.style.display = "none";
             }
         }
+
+        $('#form-update-image-icon').submit(function(e) {
+            e.preventDefault();
+            clearErrorMessagesFormUpdateImage();
+            var formData = new FormData(this);
+            $.ajax({
+                type: 'POST',
+                url: base_url + '/profile/image',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: (data) => {
+                    this.reset();
+                    if (data['success']) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Bạn cập nhật ảnh thành công',
+                            showConfirmButton: false,
+                            timer: 4000
+                        });
+                        imageIcon.src = data['image'];
+                        imageIconUser.style.display = 'none';
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi ! bạn cập nhật ảnh không thành công',
+                            showConfirmButton: false,
+                            timer: 4000
+                        });
+                    }
+
+                },
+                error: function(error) {
+                    let errors = error.responseJSON['errors'];
+                    for (const key in errors) {
+                        $('#validation-update-' + key).append('<div class="alert alert-danger">' + errors[key][0] + '</div');
+                    }
+                }
+            });
+        });
+
 
         //function
         function showInfo(info) {
@@ -336,6 +409,9 @@
             });
         }
 
+        function clearErrorMessagesFormUpdateImage() {
+            document.getElementById('validation-update-image_icon').innerHTML = '';
+        }
 
         function request(url = "", para = "", callbackSuccess = function() {}, callbackError = function(err) {
             console.log(err)

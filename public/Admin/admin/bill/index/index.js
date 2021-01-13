@@ -104,7 +104,7 @@ function showInfo(info) {
             textContent += '<h6 class="mb-0">Tổng Tiền</h6>';
             textContent += '</div>';
             textContent += '<div class="col-sm-9 text-secondary">';
-            textContent += Number(bill['total']).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+            textContent += Number(bill['total']).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ';
             textContent += '</div>';
             textContent += '</div>';
             textContent += '</div>';
@@ -118,7 +118,7 @@ function showInfo(info) {
                 td += '<td>' + product['id'] + '</td>';
                 td += '<td>' + product['name'] + '</td>';
                 td += '<td>' + product['pivot']['quantity'] + '</td>';
-                td += '<td>' + Number(product['pivot']['unit_price']).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + '</td>';
+                td += '<td>' + Number(product['pivot']['unit_price']).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ' + '</td>';
                 td += '<td><img src="' + product['image'] + '" style="width:80px ; height: 80px;" /></td>';
                 td += '</tr>';
                 tr += td;

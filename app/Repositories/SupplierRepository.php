@@ -143,6 +143,6 @@ class SupplierRepository
     public function search($request)
     {
         return $this->supplier->where('name', 'like', '%' . $request->table_search . '%')
-            ->orWhere('id', 'like', '%' . $request->table_search . '%')->paginate(10);
+            ->orWhere('id', 'like', '%' . $request->table_search . '%')->get();
     }
 }

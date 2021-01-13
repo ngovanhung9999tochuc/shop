@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class UserRepository
 {
@@ -67,7 +68,7 @@ class UserRepository
     {
         return $this->user->where('name', 'like', '%' . $request->table_search . '%')
             ->orWhere('id', 'like', '%' . $request->table_search . '%')
-            ->orWhere('phone', 'like', '%' . $request->table_search . '%')->paginate(10);
+            ->orWhere('phone', 'like', '%' . $request->table_search . '%')->get();
     }
 
     public function updateRole($request)
@@ -166,6 +167,48 @@ class UserRepository
                     timer: 4000
                 })</script>");
             return redirect()->route('profile');
+        }
+    }
+
+    public function updateImageUser($request)
+    {
+        try {
+            $rules = [
+                'image_icon' => 'required|mimes:jpg,jpeg,png,gif|max:10240',
+            ];
+            $messages = [
+                'image_icon.required' => 'Bạn chưa chọn hình ảnh',
+                'image_icon.mimes' => 'Chỉ chấp nhận hình với đuôi .jpg .jpeg .png .gif',
+                'image_icon.max' => 'Hình giới hạn dung lượng không quá 10M',
+
+            ];
+            $validator = Validator::make($request->all(), $rules, $messages);
+            // Validate the input and return correct response
+            if ($validator->fails()) {
+                return response()->json(array(
+                    'success' => false,
+                    'errors' => $validator->getMessageBag()->toArray()
+
+                ), 500); // 500 being the HTTP code for an invalid request.
+            }
+
+            $dataImageUpdate = [];
+            $user = User::find($request->id);
+            $dataUploadFeatureImage = $this->storageTraitUpload($request, 'image_icon', 'user', 'user');
+            if (!empty($dataUploadFeatureImage)) {
+                $dataImageUpdate['image_icon'] = $dataUploadFeatureImage['file_path'];
+                ///storage/user/user/KreoWWLtLf3ZhBQGwu1p.png
+                if ('/storage/user/user/KreoWWLtLf3ZhBQGwu1p.png' != $user->image_icon) {
+                    $filename = str_replace('/storage/user/user/', '', $user->image_icon);
+                    // remove old image
+                    unlink(storage_path('app/public/user/user/' . $filename));
+                }
+            }
+            $user->update($dataImageUpdate);
+            return response()->json(array('success' => true, 'image' => $user->image_icon), 200);
+        } catch (Exception $exception) {
+            Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
+            return response()->json(array('fail' => false), 200);
         }
     }
 }

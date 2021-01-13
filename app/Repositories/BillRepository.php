@@ -77,12 +77,12 @@ class BillRepository
             $table_search = "abc";
         }
         return $this->bill->where('id', 'like', '%' . $table_search . '%')
-            ->orWhereBetween('date_order', [$request->from, $request->to])->paginate(10);
+            ->orWhereBetween('date_order', [$request->from, $request->to])->get();
     }
 
     public function searchStatus($request)
     {
-        return $this->bill->where('status', 'like', '%' . $request->status . '%')->paginate(10);
+        return $this->bill->where('status', 'like', '%' . $request->status . '%')->get(10);
     }
 
     public function changeStatus($request)

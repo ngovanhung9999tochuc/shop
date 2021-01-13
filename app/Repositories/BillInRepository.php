@@ -106,7 +106,7 @@ class BillInRepository
 
     public function search($request)
     {
-        return $this->bill_in->Where('id', 'like', '%' . $request->table_search . '%')->paginate(10);
+        return $this->bill_in->Where('id', 'like', '%' . $request->table_search . '%')->get();
     }
 
     public function searchProducts($request)

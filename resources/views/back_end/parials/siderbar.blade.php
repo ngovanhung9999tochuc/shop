@@ -36,7 +36,7 @@
           <ul class="nav nav-treeview">
             @can('producttype')
             <li class="nav-item">
-              <a href="{{route('producttype.index')}}" class="nav-link">
+              <a style="padding-left: 30px;" href="{{route('producttype.index')}}" class="nav-link">
                 <i class="nav-icon fas fa-th"></i>
                 <p>
                   Danh mục
@@ -46,7 +46,7 @@
             @endcan
             @can('product')
             <li class="nav-item">
-              <a href="{{route('product.index')}}" class="nav-link">
+              <a style="padding-left: 30px;" href="{{route('product.index')}}" class="nav-link">
                 <i class="nav-icon fa fa-barcode"></i>
                 <p>
                   Sản phẩm
@@ -57,7 +57,7 @@
 
             @can('slide')
             <li class="nav-item">
-              <a href="{{route('slide.index')}}" class="nav-link">
+              <a style="padding-left: 30px;" href="{{route('slide.index')}}" class="nav-link">
                 <i class="nav-icon fab fa-bootstrap"></i>
                 <p>
                 Khuyến mãi
@@ -96,7 +96,7 @@
           <ul class="nav nav-treeview">
             @can('bill')
             <li class="nav-item">
-              <a href="{{route('bill.index')}}" class="nav-link">
+              <a style="padding-left: 30px;" href="{{route('bill.index')}}" class="nav-link">
                 <i class="nav-icon fa fa-shopping-cart"></i>
                 <p>
                   Đơn hàng
@@ -108,7 +108,7 @@
 
             @can('billin')
             <li class="nav-item">
-              <a href="{{route('billin.index')}}" class="nav-link">
+              <a style="padding-left: 30px;" href="{{route('billin.index')}}" class="nav-link">
                 <i class="nav-icon fa fa-truck"></i>
                 <p>
                   Nhập kho
@@ -119,7 +119,7 @@
 
             @can('archive')
             <li class="nav-item">
-              <a href="{{route('archive.index')}}" class="nav-link">
+              <a style="padding-left: 30px;" href="{{route('archive.index')}}" class="nav-link">
                 <i class="nav-icon fa fa-list-alt"></i>
                 <p>
                   Tồn kho
@@ -130,7 +130,7 @@
 
             @can('supplier')
             <li class="nav-item">
-              <a href="{{route('supplier.index')}}" class="nav-link">
+              <a style="padding-left: 30px;" href="{{route('supplier.index')}}" class="nav-link">
                 <i class="nav-icon fas fa-industry"></i>
                 <p>
                   Nhà cung cấp
@@ -152,8 +152,8 @@
           </a>
           <ul class="nav nav-treeview">
             @can('user')
-            <li class="nav-item">
-              <a href="{{route('user.index')}}" class="nav-link">
+            <li  class="nav-item">
+              <a style="padding-left: 30px;" href="{{route('user.index')}}" class="nav-link">
                 <i class="nav-icon fa fa-users"></i>
                 <p>
                   Người dùng
@@ -164,7 +164,7 @@
 
             @can('role')
             <li class="nav-item">
-              <a href="{{route('role.index')}}" class="nav-link">
+              <a style="padding-left: 30px;" href="{{route('role.index')}}" class="nav-link">
                 <i class="nav-icon fas fa-users-cog"></i>
                 <p>
                   Vai trò
