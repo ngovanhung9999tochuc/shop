@@ -79,7 +79,7 @@
                                                 @if($similarproduct->promotion_price==0)
                                                 <ins style="color: #bf081f;">{{number_format($similarproduct->unit_price)}} đ</ins>
                                                 @else
-                                                <ins style="color: #bf081f;">{{number_format($similarproduct->unit_price - $similarproduct->unit_price*$similarproduct->promotion_price/100)}} đ</ins> <del>{{number_format($similarproduct->unit_price)}} đ</del><span style="margin-left: 5px; color: #d0021b;">-{{$product->promotion_price}}%</span>
+                                                <ins style="color: #bf081f;">{{number_format($similarproduct->unit_price - $similarproduct->unit_price*$similarproduct->promotion_price/100)}} đ</ins> <del>{{number_format($similarproduct->unit_price)}} đ</del><span style="margin-left: 5px; color: #d0021b;">-{{$similarproduct->promotion_price}}%</span>
                                                 @endif
                                             </div>
                                         </div>

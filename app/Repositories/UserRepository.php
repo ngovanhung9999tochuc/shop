@@ -124,49 +124,42 @@ class UserRepository
     public function updatePassword($request)
     {
         try {
+            $rules = [
+                'password_new' => 'required|min:6|max:30',
+                'password_old' => 'required',
+                'repassword_new' => 'required|same:password_new'
+            ];
+            $messages = [
+                'password_new.required' => 'Bạn chưa nhập mật khẩu mới',
+                'password_new.min' => 'Mật khẩu mới không ít hơn 6 ký tự',
+                'password_new.max' => 'Mật khẩu mới không lớn hơn 30 ký tự',
+                'password_old.required' => 'Bạn chưa nhập mật khẩu cũ',
+                'repassword_new.required' => 'Bạn chưa nhập mật khẩu mới lần 2',
+                'repassword_new.same' => 'Mật khẩu không khớp'
+            ];
+            $validator = Validator::make($request->all(), $rules, $messages);
+            // Validate the input and return correct response
+            if ($validator->fails()) {
+                return response()->json(array(
+                    'success' => false,
+                    'errors' => $validator->getMessageBag()->toArray()
+
+                ), 500); // 500 being the HTTP code for an invalid request.
+            }
+
             $s = User::find($request->id);
             $dataUserUpdate = [
                 'password' => bcrypt($request->password_new),
             ];
             if (Hash::check($request->password_old, $s->password)) {
-                $status = $s->update($dataUserUpdate);
-                if ($status) {
-                    $request->session()->flash('messageCheckOut', "<script>
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Bạn cập nhật mật khẩu thành công',
-                    showConfirmButton: false,
-                    timer: 4000
-                })</script>");
-                } else {
-                    $request->session()->flash('messageCheckOut', "<script>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Bạn cập nhật mật khẩu không thành công',
-                    showConfirmButton: false,
-                    timer: 4000
-                })</script>");
-                }
+                $s->update($dataUserUpdate);
+                return response()->json(array('success' => true), 200);
             } else {
-                $request->session()->flash('messageCheckOut', "<script>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Mật khẩu cũ không đúng',
-                    showConfirmButton: false,
-                    timer: 4000
-                })</script>");
+                return response()->json(array('success' => false), 200);
             }
-            return redirect()->route('profile');
         } catch (Exception $exception) {
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
-            $request->session()->flash('messageCheckOut', "<script>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Lỗi hệ thống !',
-                    showConfirmButton: false,
-                    timer: 4000
-                })</script>");
-            return redirect()->route('profile');
+            return response()->json(array('fail' => false), 200);
         }
     }
 

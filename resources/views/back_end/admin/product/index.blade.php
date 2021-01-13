@@ -53,7 +53,7 @@
                                         <td id="td-promotion-price-{{$product->id}}">{{$product->promotion_price}}%</td>
                                         <td><img src="{{$product->image}}" style="width:100px ; height: 100px;" /></td>
                                         <td>{{$product->productType->productTypeParent->name." ".$product->productType->name}}</td>
-                                        <td><button id="price_{{$product->id}}" onclick="enterPrice(this)" class="btn btn-success btn-sm btn-price" style="width: 100px;"><i class="fas fa-plus"> Nhập giá</i></button></td>
+                                        <td><button id="price_{{$product->id}}" onclick="enterPrice(this)" class="btn btn-success btn-sm btn-price" style="width: 120px;"><i class="fas fa-plus"> Cập nhật giá</i></button></td>
                                         <td>
                                             <a title="Sửa sản phẩm" class="btn btn-info btn-sm" href="{{route('product.edit',$product->id)}}"><i class="fas fa-pencil-alt"></i></a>
                                             <button title="Xóa" data-url="{{route('product.destroy',$product->id)}}" value="{{$product->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
@@ -127,7 +127,7 @@
         "paging": true,
         "lengthChange": false,
         "searching": true,
-        "ordering": true,
+        "order": [],
         "info": false,
         "autoWidth": false,
         "responsive": true,

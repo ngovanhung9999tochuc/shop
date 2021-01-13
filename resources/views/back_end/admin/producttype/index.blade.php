@@ -3,6 +3,7 @@
 @section('css')
 <link href="{{asset('Admin/admin/producttype/index/index.css')}}" rel="stylesheet" />
 <link href="{{asset('Admin/admin/producttype/index/index2.css')}}" rel="stylesheet" />
+<link href="{{asset('Admin/admin/producttype/index/index3.css')}}" rel="stylesheet" />
 @endsection
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -158,6 +159,38 @@
                         </div>
                     </div>
                 </div>
+
+
+                <div id="id03" class="modal col-md-12">
+
+                    <div class="modal-content animate">
+                        <div class="imgcontainer">
+                            <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;</span>
+                        </div>
+
+                        <div class="container">
+                            <div class="container">
+                                <div class="main-body">
+                                    <div class="row">
+                                        <div class="card-body table-responsive p-0">
+                                            <table class="table table-hover text-nowrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Tên</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="table-product-or-product-type">
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -176,7 +209,7 @@
             "paging": true,
             "lengthChange": false,
             "searching": true,
-            "ordering": true,
+            "order": [],
             "info": false,
             "autoWidth": false,
             "responsive": true,

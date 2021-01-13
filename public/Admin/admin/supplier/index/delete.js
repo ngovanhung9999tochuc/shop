@@ -48,7 +48,8 @@ function actionDelete(event) {
                             let td = '';
                             td += '<tr>';
                             td += '<td>' + products[product]['id'] + '</td>';
-                            td += '<td>' + products[product]['name'] + '</td>';
+                            td += '<td>' + products[product]['input_date'] + '</td>';
+                            td += '<td>' + products[product]['user_name'] + '</td>';
                             td += '</tr>';
                             tr += td;
                         }

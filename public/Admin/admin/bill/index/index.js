@@ -46,7 +46,7 @@ function showInfo(info) {
         if (data['success']) {
             let bill = data['bill'];
             let user = bill['user'];
-            let products = bill['products'];
+            let products = data['dataProduct'];
 
             //su ly user
             imageAvata.src = user['image_icon'];
@@ -111,15 +111,20 @@ function showInfo(info) {
             content.innerHTML = textContent;
 
             let tr = '';
-            for (const product of products) {
 
+            for (const product in products) {
+                let color = '';
+                if (products[product]['quantityInventory'] - products[product]['quantityRequired'] <= 0) {
+                    color = 'background-color: rgb(250, 74, 74);';
+                }
                 let td = '';
                 td += '<tr>';
-                td += '<td>' + product['id'] + '</td>';
-                td += '<td>' + product['name'] + '</td>';
-                td += '<td>' + product['pivot']['quantity'] + '</td>';
-                td += '<td>' + Number(product['pivot']['unit_price']).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ' + '</td>';
-                td += '<td><img src="' + product['image'] + '" style="width:80px ; height: 80px;" /></td>';
+                td += '<td>' + products[product]['id'] + '</td>';
+                td += '<td>' + products[product]['name'] + '</td>';
+                td += '<td>' + products[product]['quantityRequired'] + '</td>';
+                td += '<td>' + Number(products[product]['unit_price']).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ' + '</td>';
+                //td += '<td><img src="' + products[product]['image'] + '" style="width:80px ; height: 80px;" /></td>';
+                td += '<td style="' + color + '">' + products[product]['quantityInventory'] + '</td>';
                 td += '</tr>';
                 tr += td;
             }
@@ -144,7 +149,6 @@ function changeStatus(s) {
         'id': id
     }), function(data) {
         data = JSON.parse(data);
-        console.log(data);
         if (data['success']) {
             let status = data['status'];
             const btnText = document.getElementById('btn-text-' + id);
@@ -173,7 +177,7 @@ function changeStatus(s) {
                 td += '<td>' + products[product]['name'] + '</td>';
                 td += '<td>' + products[product]['quantityInventory'] + '</td>';
                 td += '<td>' + products[product]['quantityRequired'] + '</td>';
-                td += '<td><img src="' + products[product]['image'] + '" style="width:80px ; height: 80px;" /></td>';
+                //td += '<td><img src="' + products[product]['image'] + '" style="width:80px ; height: 80px;" /></td>';
                 td += '</tr>';
                 tr += td;
             }
@@ -315,7 +319,6 @@ function request(url = "", para = "", callbackSuccess = function() {}, callbackE
                'id': id
            }), function(data) {
                data = JSON.parse(data);
-               console.log(data);
                if (data['success']) {
                    let status = data['status'];
                    const btnText = document.getElementById('btn-text-' + id);

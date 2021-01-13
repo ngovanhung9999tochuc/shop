@@ -76,11 +76,33 @@ class ProductRepository
                 }
             }
             DB::commit();
-            return $this->successfulMessage('thêm', 'sản phẩm');
+            $request->session()->flash('message', "<script>
+            let base_url = window.location.origin;
+            Swal.fire({
+                title: 'Thêm thành công, bạn có muốn xem sản phẩm không ?',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Hủy',
+                confirmButtonText: 'Chấp nhận'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                window.location=base_url+'/admin/product'
+                }
+            });</script>");
+            return redirect()->back();
         } catch (Exception $exception) {
             DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
-            return $this->errorMessage('thêm', 'sản phẩm');
+            $request->session()->flash('message', "<script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi hệ thống !',
+                showConfirmButton: false,
+                timer: 4000
+            })</script>");
+            return redirect()->back();
         }
     }
 
@@ -182,6 +204,4 @@ class ProductRepository
             return false;
         }
     }
-
-   
 }

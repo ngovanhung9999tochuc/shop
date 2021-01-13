@@ -49,11 +49,12 @@ function actionDelete(event) {
                             td += '<tr>';
                             td += '<td>' + products[product]['id'] + '</td>';
                             td += '<td>' + products[product]['name'] + '</td>';
+                            td += '<td>' + products[product]['username'] + '</td>';
                             td += '</tr>';
                             tr += td;
                         }
                         tableProductOrProductType.innerHTML = tr;
-                        modal3.style.display = "block";
+                        modal4.style.display = "block";
                     }
                 },
                 error: function(e) {

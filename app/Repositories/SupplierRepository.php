@@ -30,7 +30,6 @@ class SupplierRepository
     public function create($request)
     {
         try {
-            DB::beginTransaction();
             //Validate request
             $rules = [
                 'name' => 'required',
@@ -66,10 +65,8 @@ class SupplierRepository
 
             $id = $this->supplier->create($dataSupplierCreate)->id;
             $supplier = $this->supplier->find($id);
-            DB::commit();
             return response()->json(array('success' => true, 'supplier' => $supplier), 200);
         } catch (Exception $exception) {
-            DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
             return response()->json(array('fail' => false), 200);
         }
@@ -79,7 +76,6 @@ class SupplierRepository
     public function update($request)
     {
         try {
-            DB::beginTransaction();
             $rules = [
                 'name' => 'required',
                 'email' => 'required|email',
@@ -113,10 +109,8 @@ class SupplierRepository
             ];
             $this->supplier->find($request->id)->update($dataSupplierUpdate);
             $supplier = $this->supplier->find($request->id);
-            DB::commit();
             return response()->json(array('success' => true, 'supplier' => $supplier), 200);
         } catch (Exception $exception) {
-            DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
             return response()->json(array('fail' => false), 200);
         }
@@ -125,12 +119,35 @@ class SupplierRepository
     public function destroy($id)
     {
         try {
-            $supplier = $this->supplier->find($id);
-            $supplier->delete();
-            return response()->json([
-                'code' => 200,
-                'message' => "success",
-            ], 200);
+            $supplier = Supplier::find($id);
+            $anchor = true;
+            $message = '';
+            $data = [];
+            $bills = $supplier->billIns;
+            if (count($bills) != 0) {
+                $count = count($bills);
+                $anchor = false;
+                $message = 'Bạn không thể xóa, nhà cung cấp hiện tại đang có ' . $count . ' phiếu nhập kho';
+                foreach ($bills as  $bill) {
+                    $data[$bill->id]['id'] = $bill->id;
+                    $data[$bill->id]['input_date'] = date("Y/m/d", strtotime($bill->input_date));
+                    $data[$bill->id]['user_name'] = $bill->user->name;
+                }
+            }
+            
+            if ($anchor) {
+                $supplier->delete();
+                return response()->json([
+                    'code' => 200,
+                    'message' => "success",
+                ], 200);
+            } else {
+                return response()->json([
+                    'code' => 500,
+                    'message' => $message,
+                    'data' => $data
+                ], 200);
+            }
         } catch (Exception $exception) {
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
             return response()->json([

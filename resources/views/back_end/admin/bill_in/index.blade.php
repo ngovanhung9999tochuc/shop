@@ -112,11 +112,10 @@
             "paging": true,
             "lengthChange": false,
             "searching": true,
-            "ordering": true,
+            "order": [],
             "info": false,
             "autoWidth": false,
-            "responsive": true,
-            'order': [[0, 'desc']]
+            "responsive": true
         });
     });
 </script>

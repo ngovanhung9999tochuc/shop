@@ -162,34 +162,28 @@
                                     </div>
                                     <!-- /.tab-pane -->
                                     <div class="tab-pane" id="timeline">
-                                        <form method="POST" action="{{route('profile.password')}}" style="margin-top: 10px;" class="form-horizontal">
+                                        <form id="form-update-password" method="POST" action="" style="margin-top: 10px;" class="form-horizontal">
                                             @csrf
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Mật khẩu cũ</label>
                                                 <div class="col-sm-9">
                                                     <input type="hidden" value="{{auth()->user()->id}}" name="id" />
-                                                    <input type="password" class="form-control  @error('password_old') is-invalid @enderror" name="password_old" value="">
-                                                    @error('password_old')
-                                                    <div style="margin-top: 10px;" class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
+                                                    <input type="password" class="form-control" name="password_old" value="">
+                                                    <div id="validation-password-password_old"></div>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Mật khẩu mới</label>
                                                 <div class="col-sm-9">
-                                                    <input type="password" class="form-control  @error('password_new') is-invalid @enderror" name="password_new" value="">
-                                                    @error('password_new')
-                                                    <div style="margin-top: 10px;" class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
+                                                    <input type="password" class="form-control" name="password_new" value="">
+                                                    <div id="validation-password-password_new"></div>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Nhập lại mật khẩu mới</label>
                                                 <div class="col-sm-9">
-                                                    <input type="password" class="form-control  @error('repassword_new') is-invalid @enderror" name="repassword_new" value="">
-                                                    @error('repassword_new')
-                                                    <div style="margin-top: 10px;" class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
+                                                    <input type="password" class="form-control" name="repassword_new" value="">
+                                                    <div id="validation-password-repassword_new"></div>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -376,6 +370,45 @@
                 }
             });
         });
+        //
+        $('#form-update-password').submit(function(e) {
+            e.preventDefault();
+            clearErrorMessagesFormUpdatePassword();
+            var formData = new FormData(this);
+            $.ajax({
+                type: 'POST',
+                url: base_url + '/profile/password',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: (data) => {
+                    this.reset();
+                    if (data['success']) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Bạn cập nhật mật khẩu mới thành công',
+                            showConfirmButton: false,
+                            timer: 4000
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Mật khẩu cũ không đúng',
+                            showConfirmButton: false,
+                            timer: 4000
+                        });
+                    }
+                },
+                error: function(error) {
+                    let errors = error.responseJSON['errors'];
+                    for (const key in errors) {
+                        $('#validation-password-' + key).append('<div class="alert alert-danger">' + errors[key][0] + '</div');
+                    }
+                }
+            });
+        });
+
 
 
         //function
@@ -411,6 +444,12 @@
 
         function clearErrorMessagesFormUpdateImage() {
             document.getElementById('validation-update-image_icon').innerHTML = '';
+        }
+
+        function clearErrorMessagesFormUpdatePassword() {
+            document.getElementById('validation-password-password_old').innerHTML = '';
+            document.getElementById('validation-password-password_new').innerHTML = '';
+            document.getElementById('validation-password-repassword_new').innerHTML = '';
         }
 
         function request(url = "", para = "", callbackSuccess = function() {}, callbackError = function(err) {

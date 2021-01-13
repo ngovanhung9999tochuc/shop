@@ -229,10 +229,10 @@
                                                     <tr>
                                                         <th>ID</th>
                                                         <th>Tên sản phẩm</th>
-                                                        <th>Số Lượng</th>
+                                                        <th>Số Lượng đơn hàng</th>
                                                         <th>Giá bán</th>
-                                                        <th>Hình ảnh</th>
-
+                                                      <!--   <th>Hình ảnh</th> -->
+                                                        <th>Tồn kho</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="table-product">
@@ -267,7 +267,7 @@
                                                         <th>Tên sản phẩm</th>
                                                         <th>Tồn kho</th>
                                                         <th>Số lượng trong đơn hàng</th>
-                                                        <th>Hình ảnh</th>
+                                                       <!--  <th>Hình ảnh</th> -->
                                                     </tr>
                                                 </thead>
                                                 <tbody id="table-product-inventory">
@@ -294,11 +294,10 @@
         "paging": true,
         "lengthChange": false,
         "searching": false,
-        "ordering": true,
+        "order": [],
         "info": false,
         "autoWidth": false,
-        "responsive": true,
-        'order': [[0, 'desc']]
+        "responsive": true
     });
 </script>
 @endsection

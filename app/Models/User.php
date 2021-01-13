@@ -72,7 +72,7 @@ class User extends Authenticatable
         if ($roles->count() == 0) {
             return false;
         } else if ($roles->count() == 1) {
-            if ($roles[0]->name == 'customer') return false;
+            if ($roles[0]->id == 1) return false;
         }
         return true;
     }

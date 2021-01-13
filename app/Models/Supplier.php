@@ -11,4 +11,8 @@ class Supplier extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = [];
+    public function billIns()
+    {
+        return $this->hasMany(BillIn::class, 'supplier_id');
+    }
 }

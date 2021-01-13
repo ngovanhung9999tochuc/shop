@@ -139,6 +139,7 @@
 </div>
 @endsection @section('js')
 <script>
+    
     $('#description').summernote();
     $('#specifications-all').summernote();
     const imageFile = document.getElementById('image-file');
@@ -168,6 +169,7 @@
             outputDetailedImageFile.appendChild(img);  
         }
     });
+   
 </script>
 @php
 if(Session::has('message')){

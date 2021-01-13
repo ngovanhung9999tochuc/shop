@@ -147,12 +147,17 @@ class ProductTypeRepository
             $anchor = true;
             $message = '';
             $type = ProductType::find($id);
+            $data = [];
             if ($type->parent_id == 0) {
                 $types = $type->productTypeChildrents;
                 if (count($types) != 0) {
                     $count = count($types);
                     $anchor = false;
                     $message = 'Bạn không thể xóa, danh mục hiện tại đang có ' . $count . ' danh mục con';
+                    foreach ($types as  $type) {
+                        $data[$type->id]['id'] = $type->id;
+                        $data[$type->id]['name'] = $type->name;
+                    }
                 }
             } else {
                 $products = $type->products;
@@ -160,6 +165,10 @@ class ProductTypeRepository
                     $count = count($products);
                     $anchor = false;
                     $message = 'Bạn không thể xóa, danh mục hiện tại đang có ' . $count . ' sản phẩm';
+                    foreach ($products as  $product) {
+                        $data[$product->id]['id'] = $product->id;
+                        $data[$product->id]['name'] = $product->name;
+                    }
                 }
             }
             if ($anchor) {
@@ -172,6 +181,7 @@ class ProductTypeRepository
                 return response()->json([
                     'code' => 500,
                     'message' => $message,
+                    'data' => $data
                 ], 200);
             }
         } catch (Exception $exception) {

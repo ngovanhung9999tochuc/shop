@@ -3,15 +3,17 @@ var base_url = window.location.origin;
 let btnAddSupplier = document.getElementById('btn-add-supplier');
 const modal = document.getElementById('id01');
 const modal2 = document.getElementById('id02');
+const modal3 = document.getElementById('id03');
 const formSupplier = document.getElementById('form-supplier');
 const formSupplierEdit = document.getElementById('form-supplier-edit');
 const trBody = document.getElementById('trbody');
 
 //event
 window.onclick = function(event) {
-    if (event.target == modal || event.target == modal2) {
+    if (event.target == modal || event.target == modal2 || event.target == modal3) {
         modal.style.display = "none";
         modal2.style.display = "none";
+        modal3.style.display = "none";
     }
 }
 
@@ -62,7 +64,6 @@ formSupplierEdit.addEventListener('submit', function(event) {
 
     }, function(error) {
         let errors = JSON.parse(error)['errors'];
-        console.log(errors);
         for (const key in errors) {
             $('#validation-edit-' + key).append('<div class="alert alert-danger">' + errors[key][0] + '</div');
         }

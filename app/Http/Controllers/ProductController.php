@@ -41,7 +41,7 @@ class ProductController extends Controller
         $htmlOption = $this->productTypeRecusive->ProductTypeRecusiveAdd();
         return view('back_end.admin.product.add', ['htmlOption' => $htmlOption]);
     }
-
+    //ProductAddRequest
     /**
      * Store a newly created resource in storage.
      *
@@ -50,8 +50,7 @@ class ProductController extends Controller
      */
     public function store(ProductAddRequest $request)
     {
-        $result = $this->repository->create($request);
-        return redirect()->back()->with('message', $result);
+        return $this->repository->create($request);
     }
 
     /**
