@@ -31,7 +31,7 @@ class ArchiveRepository
                 $quantity_bill = 0;
                 foreach ($archive_bill as $bill) {
                     if ($bill->product_id == $bill_in->product_id) {
-                        $quantity_bill = $bill->quantity;
+                        $quantity_bill += $bill->quantity;
                     }
                 }
                 $bill_in->quantity = $bill_in->quantity - $quantity_bill;
@@ -80,7 +80,7 @@ class ArchiveRepository
                 $quantity_bill = 0;
                 foreach ($archive_bill as $bill) {
                     if ($bill->product_id == $bill_in->product_id) {
-                        $quantity_bill = $bill->quantity;
+                        $quantity_bill += $bill->quantity;
                     }
                 }
                 $bill_in->quantity = $bill_in->quantity - $quantity_bill;
@@ -114,7 +114,7 @@ class ArchiveRepository
                 $quantity_bill = 0;
                 foreach ($archive_bill as $bill) {
                     if ($bill->product_id == $bill_in->product_id) {
-                        $quantity_bill = $bill->quantity;
+                        $quantity_bill += $bill->quantity;
                     }
                 }
                 $bill_in->quantity = $bill_in->quantity - $quantity_bill;
@@ -148,7 +148,7 @@ class ArchiveRepository
                 $quantity_bill = 0;
                 foreach ($archive_bill as $bill) {
                     if ($bill->product_id == $bill_in->product_id) {
-                        $quantity_bill = $bill->quantity;
+                        $quantity_bill += $bill->quantity;
                     }
                 }
                 $bill_in->quantity = $bill_in->quantity - $quantity_bill;
@@ -182,7 +182,7 @@ class ArchiveRepository
                 $quantity_bill = 0;
                 foreach ($archive_bill as $bill) {
                     if ($bill->product_id == $bill_in->product_id) {
-                        $quantity_bill = $bill->quantity;
+                        $quantity_bill += $bill->quantity;
                     }
                 }
                 $bill_in->quantity = $bill_in->quantity - $quantity_bill;

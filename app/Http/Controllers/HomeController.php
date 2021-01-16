@@ -55,6 +55,13 @@ class HomeController extends Controller
         }
     }
 
+
+    public function getProductPrice($type, $price)
+    {
+        return view('front_end.page.products', $this->repository->getProductPrice($type, $price));
+    }
+
+
     public function getTypeProduct($id)
     {
         return view('front_end.page.products', $this->repository->getTypeProduct($id));
@@ -95,25 +102,7 @@ class HomeController extends Controller
      */
     public function test()
     {
-        $product = Product::find('DTIP000017');
-        //dd($product->userReview==null);
-        $average = (float) $product->userReview->average;
-        $average = $average * 10;
-        $residual = (int)($average / 10);
-        $division = $average % 10;
-        $i = 1;
-        while ($i <= $residual) {
-            echo 'X';
-            $i++;
-        }
-        if($division!=0){
-            echo 'Y';
-            $i++;
-        }
-        while ($i <= 5) {
-            echo 'Z';
-            $i++;
-        }
+       
     }
 
     /**

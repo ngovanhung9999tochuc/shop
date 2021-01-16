@@ -39,14 +39,45 @@ class HomeRepository
         if ($productType->parent_id == 0) {
             $productTypes = ProductType::where('parent_id', $productType->id)->get();
             $products = Product::where('id', 'like', $type . '%')->paginate(12);
-            return ['title' => $productType->name, 'productTypes' => $productTypes, 'products' => $products];
+            return ['title' => [$productType->name, $productType->key_code], 'productTypes' => $productTypes, 'products' => $products];
         } else {
             $productTypeParent = $productType->productTypeParent;
             $productTypes = ProductType::where('parent_id', $productTypeParent->id)->get();
             $products = Product::where('id', 'like', '__' . $type . '%')->paginate(12);
-            return ['title' => $productType->name, 'productTypes' => $productTypes, 'products' => $products];
+            return ['title' => [$productType->name, $productType->key_code], 'productTypes' => $productTypes, 'products' => $products];
         }
     }
+
+
+    public function getProductPrice($type, $price)
+    {
+        $prices = [
+            'P1' => [0, 5000000],
+            'P2' => [5000000, 10000000],
+            'P3' => [10000000, 15000000],
+            'P4' => [15000000, 20000000],
+            'P5' => [20000000, 25000000],
+            'P6' => [25000000, 5000000000],
+        ];
+        $productType = ProductType::where('key_code', $type)->get()[0];
+        if ($productType->parent_id == 0) {
+            $productTypes = ProductType::where('parent_id', $productType->id)->get();
+            $products = Product::where('id', 'like', $type . '%')
+                ->whereBetween('unit_price', [$prices[$price][0], $prices[$price][1]])
+                ->paginate(12);
+            return ['title' => [$productType->name, $productType->key_code], 'productTypes' => $productTypes, 'products' => $products];
+        } else {
+            $productTypeParent = $productType->productTypeParent;
+            $productTypes = ProductType::where('parent_id', $productTypeParent->id)->get();
+            $products = Product::where('id', 'like', '__' . $type . '%')
+                ->whereBetween('unit_price', [$prices[$price][0], $prices[$price][1]])
+                ->paginate(12);
+            return ['title' => [$productType->name, $productType->key_code], 'productTypes' => $productTypes, 'products' => $products];
+        }
+    }
+
+
+
 
     public function getTypeProduct($id)
     {
@@ -54,13 +85,20 @@ class HomeRepository
         $productTypeParent = $productType->productTypeParent;
         $productTypes = ProductType::where('parent_id', $productTypeParent->id)->get();
         $products = Product::where('product_type_id', $productType->id)->paginate(12);
-        return ['title' => $productType->name, 'productTypes' => $productTypes, 'products' => $products];
+        return ['title' => [$productType->name, $productType->key_code], 'productTypes' => $productTypes, 'products' => $products];
     }
 
     public function getProductDetail($id)
     {
         $product = Product::find($id);
-        $similarProduct = Product::where('product_type_id', $product->product_type_id)->limit(8)->get();
+        $type = ProductType::find($product->product_type_id);
+        $typeParent = $type->productTypeParent;
+        //dd($product->specifications);
+        $similarProduct = Product::where('id', 'like', $typeParent->key_code . '%')
+            ->whereBetween('unit_price', [$product->unit_price - 500000, $product->unit_price + 500000])
+            ->orWhereJsonContains('specifications->ram', $product->specifications['ram'])
+            ->limit(8)
+            ->get();
         $productType = $product->productType->productTypeParent;
         $productImage = $product->productImages;
         $user_ratings = $product->ratings()->orderBy('ratings.created_at', 'DESC')->paginate(5);

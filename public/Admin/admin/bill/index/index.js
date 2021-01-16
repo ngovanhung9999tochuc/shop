@@ -149,6 +149,7 @@ function changeStatus(s) {
         'id': id
     }), function(data) {
         data = JSON.parse(data);
+        console.log(data);
         if (data['success']) {
             let status = data['status'];
             const btnText = document.getElementById('btn-text-' + id);
