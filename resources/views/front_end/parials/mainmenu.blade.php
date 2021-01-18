@@ -9,13 +9,42 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <div class="wrapper row">
-                <div class=" col-md-9 navigationDesktop">
-                    <nav>
-                        {!!$htmlMenu!!}
+
+            <div class="row">
+                <div class="col-md-12 navigationDesktop">
+                    <nav style="width: 100%">
+                        <!-- {!!$htmlMenu!!} -->
+                        <UL style="display: flex; background-color: #F2F2F2">
+                            <LI>
+                                <A HREF="HTTP://LOCALHOST:8000/TYPE/DT/1">ĐIỆN THOẠI</A>
+                                <UL>
+                                    <LI><A HREF="HTTP://LOCALHOST:8000/TYPE/XM/2">XIAOMI</A></LI>
+                                    <LI><A HREF="HTTP://LOCALHOST:8000/TYPE/SS/3">SAMSUNG</A></LI>
+                                    <LI><A HREF="HTTP://LOCALHOST:8000/TYPE/VV/4">VIVO</A></LI>
+                                    <LI><A HREF="HTTP://LOCALHOST:8000/TYPE/IP/15">IPHONE</A></LI>
+                                </UL>
+                            </LI>
+                            <LI>
+                                <A HREF="HTTP://LOCALHOST:8000/TYPE/LT/5">LAPTOP</A>
+                                <UL>
+                                    <LI><A HREF="HTTP://LOCALHOST:8000/TYPE/MB/16">MACBOOK</A></LI>
+                                    <LI><A HREF="HTTP://LOCALHOST:8000/TYPE/AS/17">ASUS</A></LI>
+                                    <LI><A HREF="HTTP://LOCALHOST:8000/TYPE/DL/18">DELL</A></LI>
+                                </UL>
+                            </LI>
+                            <LI>
+                                <A HREF="HTTP://LOCALHOST:8000/TYPE/TT/19">TABLET</A>
+                                <UL>
+                                    <LI><A HREF="HTTP://LOCALHOST:8000/TYPE/PB/20">IPAD</A></LI>
+                                </UL>
+                            </LI>
+                            <LI><A></A></LI>
+                            <LI><A></A></LI>
+                            <LI><A></A></LI>
+                        </UL>  
                     </nav>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-md-offset-9">
                     <div id="btn-shopping-cart" class="shopping-item">
                         <a>Giỏ hàng - <span id="total-price-1" class="cart-amunt">
                                 @if(Session::has('cart'))

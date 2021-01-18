@@ -87,79 +87,63 @@
     </div>
     <div id="id01" class="modal col-md-12">
         <div class="modal-content animate">
-            <div class="imgcontainer">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-            </div>
+             <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
 
-            <div class="container">
-                <div class="container">
-                    <div class="col-md-12">
-                        <div id="login">
+            <div id="login">
 
-                            <h2><span class="fontawesome-lock"></span>Đăng nhập</h2>
+                <h2><span class="fontawesome-lock"></span>Đăng nhập</h2>
 
-                            <form id="form-login" action="" method="POST">
-                                @csrf
-                                <fieldset>
-                                    <p><label for="email">Tài khoản</label></p>
-                                    <p><input type="email" id="email" value="" name="email" placeholder="mail@gmail.com"></p>
-                                    <p id="validation-login-email" style="background-color: #dc3545;color: white;border-radius:3px; font-size: 14px;"></p>
-                                    <p><label for="password">Mật khẩu</label></p>
-                                    <p><input type="password" id="password" name="password" value="" placeholder="nhập mật khẩu"></p>
-                                    <p id="validation-login-password" style="background-color: #dc3545;color: white;border-radius:3px; font-size: 14px;"></p>
-                                    <p><input type="submit" value="Gửi"></p>
+                <form id="form-login" action="" method="POST">
+                    @csrf
+                    <fieldset>
+                        <p><label for="email">Tài khoản</label></p>
+                        <p><input type="email" id="email" value="" name="email" placeholder="mail@gmail.com"></p>
+                        <p id="validation-login-email" style="background-color: #dc3545;color: white;border-radius:3px; font-size: 14px;"></p>
+                        <p><label for="password">Mật khẩu</label></p>
+                        <p><input type="password" id="password" name="password" value="" placeholder="nhập mật khẩu"></p>
+                        <p id="validation-login-password" style="background-color: #dc3545;color: white;border-radius:3px; font-size: 14px;"></p>
+                        <p><input type="submit" value="Gửi"></p>
 
-                                </fieldset>
+                    </fieldset>
 
-                            </form>
+                </form>
 
-                        </div> <!-- end login -->
-                    </div>
-                </div>
-            </div>
+            </div> <!-- end login -->
 
         </div>
     </div>
 
     <div id="id02" class="modal col-md-12">
         <div class="modal-content animate">
-            <div class="imgcontainer">
-                <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
-            </div>
+            <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
 
-            <div class="container">
-                <div class="container">
-                    <div class="col-md-12">
-                        <div id="login1">
-                            <h2><span class="fontawesome-lock"></span>Đăng ký</h2>
-                            <form id="form-register" action="" method="POST">
-                                @csrf
-                                <fieldset>
-                                    <p><label>Họ tên</label></p>
-                                    <p><input type="text" value="" name="fullname" value="" placeholder="nhập họ tên"></p>
-                                    <p id="validation-register-fullname" style="background-color: #dc3545;color: white;border-radius:3px; font-size: 14px;"></p>
+            <div id="login1">
+                <h2><span class="fontawesome-lock"></span>Đăng ký</h2>
+                <form id="form-register" action="" method="POST">
+                    @csrf
+                    <fieldset>
+                        <p><label>Họ tên</label></p>
+                        <p><input type="text" value="" name="fullname" value="" placeholder="nhập họ tên"></p>
+                        <p id="validation-register-fullname" style="background-color: #dc3545;color: white;border-radius:3px; font-size: 14px;"></p>
 
 
-                                    <p><label>Email</label></p>
-                                    <p><input type="email" value="" name="username" value="" placeholder="email@gmail.com"></p>
-                                    <p id="validation-register-username" style="background-color: #dc3545;color: white;border-radius:3px; font-size: 14px;"></p>
+                        <p><label>Email</label></p>
+                        <p><input type="email" value="" name="username" value="" placeholder="email@gmail.com"></p>
+                        <p id="validation-register-username" style="background-color: #dc3545;color: white;border-radius:3px; font-size: 14px;"></p>
 
 
-                                    <p><label>Mật khẩu</label></p>
-                                    <p><input type="password" name="password" value="" placeholder="nhập mật khẩu"></p>
-                                    <p id="validation-register-password" style="background-color: #dc3545;color: white;border-radius:3px; font-size: 14px;"></p>
+                        <p><label>Mật khẩu</label></p>
+                        <p><input type="password" name="password" value="" placeholder="nhập mật khẩu"></p>
+                        <p id="validation-register-password" style="background-color: #dc3545;color: white;border-radius:3px; font-size: 14px;"></p>
 
 
-                                    <p><label>Nhập lại mật khẩu</label></p>
-                                    <p><input type="password" name="repassword" value="" placeholder="nhập lại mật khẩu"></p>
-                                    <p id="validation-register-repassword" style="background-color: #dc3545;color: white;border-radius:3px; font-size: 14px;"></p>
-                                    <p><input type="submit" value="Gửi"></p>
-                                </fieldset>
-                            </form>
-                        </div> <!-- end login -->
-                    </div>
-                </div>
-            </div>
+                        <p><label>Nhập lại mật khẩu</label></p>
+                        <p><input type="password" name="repassword" value="" placeholder="nhập lại mật khẩu"></p>
+                        <p id="validation-register-repassword" style="background-color: #dc3545;color: white;border-radius:3px; font-size: 14px;"></p>
+                        <p><input type="submit" value="Gửi"></p>
+                    </fieldset>
+                </form>
+            </div> <!-- end login -->
 
         </div>
     </div>
