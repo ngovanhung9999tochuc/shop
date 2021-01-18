@@ -30,10 +30,9 @@
                         <div class="card card-primary card-outline">
                             <div class="card-body box-profile">
                                 <div class="text-center">
-                                    <img class="profile-user-img img-fluid img-circle" src="{{auth()->user()->image_icon}}" alt="User profile picture">
+                                    <img class="profile-user-img img-fluid img-circle" id="image-icon-profile-user" src="{{auth()->user()->image_icon}}" alt="hình ảnh người dùng">
                                 </div>
-
-                                <h3 class="profile-username text-center">{{auth()->user()->name}}</h3>
+                                <h3 style="margin-top: 10px;" class="profile-username text-center">{{auth()->user()->name}}</h3>
                                 @php
                                 $textRole='';
                                 $roles=auth()->user()->roles;
@@ -42,6 +41,22 @@
                                 }
                                 @endphp
                                 <p class="text-muted text-center">{{substr($textRole,0,-2)}}</p>
+                                <div style="text-align: center; color: black;">
+                                    <button title="Chọn ảnh" id="btn-update-image" class="btn btn-info"><i class="fas fa-camera-retro"></i></button>
+                                </div>
+                                <br />
+                                <div id="image-icon-user" style="display: none;" class="row form-group">
+
+                                    <div class="col-sm-12">
+                                        <form id="form-update-image-icon" method="post">
+                                            @csrf
+                                            <input type="hidden" value="{{auth()->user()->id}}" name="id" />
+                                            <input type="file" onchange="changeImage(this)" class="form-control-file" name="image_icon">
+                                            <div id="validation-update-image_icon"></div>
+                                            <button title="Cập nhật" style="margin-top: 10px; " class="btn btn-info"><i class="fas fa-upload"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -147,34 +162,28 @@
                                     </div>
                                     <!-- /.tab-pane -->
                                     <div class="tab-pane" id="timeline">
-                                        <form method="POST" action="{{route('profile.password')}}" style="margin-top: 10px;" class="form-horizontal">
+                                        <form id="form-update-password" method="POST" action="" style="margin-top: 10px;" class="form-horizontal">
                                             @csrf
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Mật khẩu cũ</label>
                                                 <div class="col-sm-9">
                                                     <input type="hidden" value="{{auth()->user()->id}}" name="id" />
-                                                    <input type="password" class="form-control  @error('password_old') is-invalid @enderror" name="password_old" value="">
-                                                    @error('password_old')
-                                                    <div style="margin-top: 10px;" class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
+                                                    <input type="password" class="form-control" name="password_old" value="">
+                                                    <div id="validation-password-password_old"></div>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Mật khẩu mới</label>
                                                 <div class="col-sm-9">
-                                                    <input type="password" class="form-control  @error('password_new') is-invalid @enderror" name="password_new" value="">
-                                                    @error('password_new')
-                                                    <div style="margin-top: 10px;" class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
+                                                    <input type="password" class="form-control" name="password_new" value="">
+                                                    <div id="validation-password-password_new"></div>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Nhập lại mật khẩu mới</label>
                                                 <div class="col-sm-9">
-                                                    <input type="password" class="form-control  @error('repassword_new') is-invalid @enderror" name="repassword_new" value="">
-                                                    @error('repassword_new')
-                                                    <div style="margin-top: 10px;" class="alert alert-danger">{{ $message }}</div>
-                                                    @enderror
+                                                    <input type="password" class="form-control" name="repassword_new" value="">
+                                                    <div id="validation-password-repassword_new"></div>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -298,12 +307,109 @@
     <script>
         const base_url1 = window.location.origin;
         let profileInfo = document.getElementById('profile-info');
+        const btnUpdateImage = document.getElementById('btn-update-image');
+        const imageIcon = document.getElementById('image-icon-profile-user')
+        const imageIconUser = document.getElementById('image-icon-user');
         //event
+        btnUpdateImage.addEventListener('click', function() {
+
+            if (imageIconUser.style.display == 'none') {
+                imageIconUser.style.display = 'block';
+            } else {
+                imageIconUser.style.display = 'none';
+            }
+        });
+
+        function changeImage(inputImage) {
+            imageIcon.src = URL.createObjectURL(inputImage.files[0]);
+        }
+
         window.onclick = function(event) {
             if (event.target == profileInfo) {
                 profileInfo.style.display = "none";
             }
         }
+
+        $('#form-update-image-icon').submit(function(e) {
+            e.preventDefault();
+            clearErrorMessagesFormUpdateImage();
+            var formData = new FormData(this);
+            $.ajax({
+                type: 'POST',
+                url: base_url + '/profile/image',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: (data) => {
+                    this.reset();
+                    if (data['success']) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Bạn cập nhật ảnh thành công',
+                            showConfirmButton: false,
+                            timer: 4000
+                        });
+                        imageIcon.src = data['image'];
+                        imageIconUser.style.display = 'none';
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi ! bạn cập nhật ảnh không thành công',
+                            showConfirmButton: false,
+                            timer: 4000
+                        });
+                    }
+
+                },
+                error: function(error) {
+                    let errors = error.responseJSON['errors'];
+                    for (const key in errors) {
+                        $('#validation-update-' + key).append('<div class="alert alert-danger">' + errors[key][0] + '</div');
+                    }
+                }
+            });
+        });
+        //
+        $('#form-update-password').submit(function(e) {
+            e.preventDefault();
+            clearErrorMessagesFormUpdatePassword();
+            var formData = new FormData(this);
+            $.ajax({
+                type: 'POST',
+                url: base_url + '/profile/password',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: (data) => {
+                    this.reset();
+                    if (data['success']) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Bạn cập nhật mật khẩu mới thành công',
+                            showConfirmButton: false,
+                            timer: 4000
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Mật khẩu cũ không đúng',
+                            showConfirmButton: false,
+                            timer: 4000
+                        });
+                    }
+                },
+                error: function(error) {
+                    let errors = error.responseJSON['errors'];
+                    for (const key in errors) {
+                        $('#validation-password-' + key).append('<div class="alert alert-danger">' + errors[key][0] + '</div');
+                    }
+                }
+            });
+        });
+
+
 
         //function
         function showInfo(info) {
@@ -336,6 +442,15 @@
             });
         }
 
+        function clearErrorMessagesFormUpdateImage() {
+            document.getElementById('validation-update-image_icon').innerHTML = '';
+        }
+
+        function clearErrorMessagesFormUpdatePassword() {
+            document.getElementById('validation-password-password_old').innerHTML = '';
+            document.getElementById('validation-password-password_new').innerHTML = '';
+            document.getElementById('validation-password-repassword_new').innerHTML = '';
+        }
 
         function request(url = "", para = "", callbackSuccess = function() {}, callbackError = function(err) {
             console.log(err)

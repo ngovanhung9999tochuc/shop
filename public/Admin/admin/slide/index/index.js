@@ -59,7 +59,7 @@ $(document).ready(function(e) {
                 if (data['success']) {
                     Swal.fire({
                         icon: 'success',
-                        title: 'Bạn thêm bìa thành công',
+                        title: 'Bạn thêm khuyến mãi thành công',
                         showConfirmButton: false,
                         timer: 4000
                     });
@@ -72,7 +72,7 @@ $(document).ready(function(e) {
                     dataSlide += '<td id="description-' + slide['id'] + '" >' + slide['description'] + '</td>';
                     dataSlide += '<td><img id="image-' + slide['id'] + '" src="' + slide['image'] + '" alt="image" style="width:250px ; height: 80px;" /></td>';
                     dataSlide += '<td>';
-                    dataSlide += '<button id="btn-edit-' + slide['id'] + '" title="Sửa bìa" onclick="editSlide(this)"  class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>';
+                    dataSlide += '<button id="btn-edit-' + slide['id'] + '" title="Sửa khuyến mãi" onclick="editSlide(this)"  class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>';
                     dataSlide += '<button title="Xóa" data-url="' + base_url + '/admin/slide/' + slide['id'] + '" value="' + slide['id'] + '" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>';
                     dataSlide += '</td>';
                     dataSlide += '</tr>';
@@ -81,7 +81,7 @@ $(document).ready(function(e) {
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Lỗi hệ thống ! bạn thêm bìa không thành công',
+                        title: 'Lỗi hệ thống ! bạn thêm khuyến mãi không thành công',
                         showConfirmButton: false,
                         timer: 4000
                     });
@@ -114,7 +114,7 @@ $(document).ready(function(e) {
                 if (data['success']) {
                     Swal.fire({
                         icon: 'success',
-                        title: 'Bạn sửa bìa thành công',
+                        title: 'Bạn sửa khuyến mãi thành công',
                         showConfirmButton: false,
                         timer: 4000
                     });
@@ -126,7 +126,7 @@ $(document).ready(function(e) {
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Lỗi hệ thống ! bạn sửa bìa không thành công',
+                        title: 'Lỗi hệ thống ! bạn sửa khuyến mãi không thành công',
                         showConfirmButton: false,
                         timer: 4000
                     });

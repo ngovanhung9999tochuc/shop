@@ -1,6 +1,7 @@
 const base_url = window.location.origin;
 const modal = document.getElementById('id01');
 const modal2 = document.getElementById('id02');
+const modal3 = document.getElementById('id03');
 const btnAddType = document.getElementById('btn-add-type');
 const formAddType = document.getElementById('form-add-type');
 const formEditType = document.getElementById('form-edit-type');
@@ -11,9 +12,10 @@ const imageEdit = document.getElementById('image-edit');
 const outputImageEdit = document.getElementById('output-image-edit');
 //event
 window.onclick = function(event) {
-    if (event.target == modal || event.target == modal2) {
+    if (event.target == modal || event.target == modal2 || event.target == modal3) {
         modal.style.display = "none";
         modal2.style.display = "none";
+        modal3.style.display = "none";
     }
 }
 image.addEventListener('change', function() {

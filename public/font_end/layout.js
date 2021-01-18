@@ -268,6 +268,14 @@ function changeQuantity(inputQuantity) {
             totalPrice2.innerHTML = Number(data['totalPrice']).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ';
             totalQuantity.innerHTML = data['totalQty'];
             document.getElementById("total-product-" + product['id']).innerHTML = Number(price).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ';
+            //alert(window.location.href);
+            //alert(base_url + '/order');
+            if (window.location.href == base_url + '/order') {
+                document.getElementById('order-total-price').innerHTML = Number(data['totalPrice']).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ';
+                document.getElementById('order-total-quantity').innerHTML = data['totalQty'];
+                document.getElementById("price-" + product['id']).innerHTML = Number(price).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+                document.getElementById("quantity-" + product['id']).innerHTML = data['item']['quantity'];
+            }
         } else {
             Swal.fire({
                 icon: 'error',
@@ -292,6 +300,14 @@ function deleteItem(btnDelete) {
             totalQuantity.innerHTML = data['totalQty'];
             let li = document.getElementById('item-' + data['id']);
             ulListItem.removeChild(li);
+
+            if (window.location.href == base_url + '/order') {
+                document.getElementById('order-total-price').innerHTML = Number(data['totalPrice']).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ';
+                document.getElementById('order-total-quantity').innerHTML = data['totalQty'];
+                let listItem = document.getElementById('list-item');
+                let child = document.getElementById('media-' + data['id']);
+                listItem.removeChild(child);
+            }
         } else {
             Swal.fire({
                 icon: 'error',

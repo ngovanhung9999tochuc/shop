@@ -90,7 +90,7 @@
                                                 </div>
                                             </div>
                                         </form>
-                                      
+
                                         <form method="POST" class=" col-md-4 float-right" action="{{route('archive.search')}}">
                                             @csrf @method('post')
                                             <div class="row">
@@ -120,6 +120,7 @@
                                         <th>ID</th>
                                         <th>Tên sản phẩm</th>
                                         <th>Số lượng tồn</th>
+                                        <th>Trạng thái</th>
                                         <th>Vốn tồn kho</th>
                                         <th>Giá trị tồn kho</th>
                                     </tr>
@@ -130,6 +131,13 @@
                                         <td>{{$product->product_id}}</td>
                                         <td>{{$product->name}}</td>
                                         <td>{{$product->quantity}}</td>
+                                        <td>
+                                            @if($product->quantity==0)
+                                            {{'Hết hàng'}}
+                                            @else
+                                            {{'Còn hàng'}}
+                                            @endif
+                                        </td>
                                         <td>{{number_format($product->total_original_price)}}</td>
                                         <td>{{number_format($product->total_unit_price)}}</td>
                                     </tr>
@@ -152,10 +160,10 @@
             "paging": true,
             "lengthChange": false,
             "searching": false,
-            "ordering": true,
+            "order": [],
             "info": false,
             "autoWidth": false,
-            "responsive": true,
+            "responsive": true
         });
     });
 </script>

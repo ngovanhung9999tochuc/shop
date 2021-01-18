@@ -29,14 +29,13 @@ class RoleRepository
     public function create($request)
     {
         try {
-            DB::beginTransaction();
             $rules = [
                 'name' => 'required|unique:roles|regex:/(^[\pL0-9 ]+$)/u',
             ];
             $messages = [
                 'name.required' => 'Tên vai trò không được phép trống',
                 'name.unique' => 'Tên vai trò đã được sử dụng',
-                'name.regex' => 'Tên vai trò không được phép có kí tự đặc biệt',
+                'name.regex' => 'Tên vai trò không được phép có ký tự đặc biệt',
             ];
             $validator = Validator::make($request->all(), $rules, $messages);
             // Validate the input and return correct response
@@ -55,10 +54,8 @@ class RoleRepository
 
             $id = $this->role->create($dataRoleCreate)->id;
             $role = $this->role->find($id);
-            DB::commit();
             return response()->json(array('success' => true, 'role' => $role), 200);
         } catch (Exception $exception) {
-            DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
             return response()->json(array('fail' => false), 200);
         }
@@ -68,13 +65,12 @@ class RoleRepository
     public function update($request)
     {
         try {
-            DB::beginTransaction();
             $rules = [
                 'name' => 'required|regex:/(^[\pL0-9 ]+$)/u',
             ];
             $messages = [
                 'name.required' => 'Tên vai trò không được phép trống',
-                'name.regex' => 'Tên vai trò không được phép có kí tự đặc biệt',
+                'name.regex' => 'Tên vai trò không được phép có ký tự đặc biệt',
             ];
             $validator = Validator::make($request->all(), $rules, $messages);
             // Validate the input and return correct response
@@ -93,10 +89,8 @@ class RoleRepository
 
             $this->role->find($request->id)->update($dataRoleUpdate);
             $role = $this->role->find($request->id);
-            DB::commit();
             return response()->json(array('success' => true, 'role' => $role), 200);
         } catch (Exception $exception) {
-            DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
             return response()->json(array('fail' => false), 200);
         }
@@ -105,12 +99,35 @@ class RoleRepository
     public function destroy($id)
     {
         try {
-            $role = $this->role->find($id);
-            $role->delete();
-            return response()->json([
-                'code' => 200,
-                'message' => "success",
-            ], 200);
+            $role = Role::find($id);
+            $anchor = true;
+            $message = '';
+            $data = [];
+            $users = $role->users;
+            if (count($users) != 0) {
+                $count = count($users);
+                $anchor = false;
+                $message = 'Bạn không thể xóa, vai trò hiện tại đang phân quyền cho ' . $count . ' người dùng';
+                foreach ($users as  $user) {
+                    $data[$user->id]['id'] = $user->id;
+                    $data[$user->id]['name'] = $user->name;
+                    $data[$user->id]['username'] = $user->username;
+                }
+            }
+
+            if ($anchor) {
+                $role->delete();
+                return response()->json([
+                    'code' => 200,
+                    'message' => "success",
+                ], 200);
+            } else {
+                return response()->json([
+                    'code' => 500,
+                    'message' => $message,
+                    'data' => $data
+                ], 200);
+            }
         } catch (Exception $exception) {
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
             return response()->json([
@@ -129,12 +146,9 @@ class RoleRepository
     public function edit($request)
     {
         try {
-            DB::beginTransaction();
             $role = $this->role::find($request->id);
-            DB::commit();
             return response()->json(array('success' => true, 'role' => $role), 200);
         } catch (Exception $exception) {
-            DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
             return response()->json(array('fail' => false), 200);
         }
@@ -144,7 +158,7 @@ class RoleRepository
     public function getListPermission($request)
     {
         try {
-            DB::beginTransaction();
+
             $htmlList = '';
             $permissions = $this->permission->all();
             $role = $this->role->find($request->id);
@@ -181,10 +195,8 @@ class RoleRepository
                 $htmlList .= '</li>';
             }
             $htmlList .= '</ul>';
-            DB::commit();
             return response()->json(array('success' => true, 'htmlList' => $htmlList, 'id' => $role->id), 200);
         } catch (Exception $exception) {
-            DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
             return response()->json(array('fail' => false), 200);
         }
@@ -194,13 +206,14 @@ class RoleRepository
     public function updateListPermission($request)
     {
         try {
-            DB::beginTransaction();
-            $role = $this->role->find($request->id);
-            $role->permissions()->sync($request->permission_id);
-            DB::commit();
-            return response()->json(array('success' => true), 200);
+            if ($request->id == 2) {
+                return response()->json(array('success' => false), 200);
+            } else {
+                $role = $this->role->find($request->id);
+                $role->permissions()->sync($request->permission_id);
+                return response()->json(array('success' => true), 200);
+            }
         } catch (Exception $exception) {
-            DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
             return response()->json(array('fail' => false), 200);
         }

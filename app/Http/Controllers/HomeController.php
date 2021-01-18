@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderRequest;
+use App\Models\Product;
 use App\Models\ProductType;
 use App\Repositories\HomeRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use phpDocumentor\Reflection\Types\Float_;
 
 class HomeController extends Controller
 {
-
-
     protected $repository;
 
     public function __construct(HomeRepository $repository)
@@ -54,6 +55,13 @@ class HomeController extends Controller
         }
     }
 
+
+    public function getProductPrice($type, $price)
+    {
+        return view('front_end.page.products', $this->repository->getProductPrice($type, $price));
+    }
+
+
     public function getTypeProduct($id)
     {
         return view('front_end.page.products', $this->repository->getTypeProduct($id));
@@ -94,6 +102,7 @@ class HomeController extends Controller
      */
     public function test()
     {
+       
     }
 
     /**
@@ -128,5 +137,41 @@ class HomeController extends Controller
     public function getBillProduct(Request $request)
     {
         return  $this->repository->getBillProduct($request);
+    }
+
+    public function rating(Request $request)
+    {
+        if (Auth::check()) {
+            $this->validate(
+                $request,
+                [
+                    'review' => 'required|min:40'
+                ],
+                [
+                    'review.min' => 'Đánh giá không ít hơn 40 ký tự',
+                    'review.required' => 'Bạn chưa nhập đánh giá'
+                ]
+            );
+            return  $this->repository->rating(true, $request);
+        } else {
+            $this->validate(
+                $request,
+                [
+                    'email' => 'required|email',
+                    'password' => 'required|min:6|max:30',
+                    'review' => 'required|min:40'
+                ],
+                [
+                    'email.required' => 'Bạn chưa nhập tài khoản',
+                    'email.email' => 'Không đúng định dạng email',
+                    'password.required' => 'Bạn chưa nhập mật khẩu',
+                    'password.min' => 'Mật khẩu không ít hơn 6 ký tự',
+                    'password.max' => 'Mật khẩu không lớn hơn 30 ký tự',
+                    'review.min' => 'Đánh giá không ít hơn 40 ký tự',
+                    'review.required' => 'Bạn chưa nhập đánh giá'
+                ]
+            );
+            return  $this->repository->rating(false, $request);
+        }
     }
 }

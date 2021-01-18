@@ -72,7 +72,6 @@
                                 proSearchAppend.removeChild(trProduct);
                                 delete dataProductBill[id];
                                 totalPriceAndQuantity();
-                                console.log(dataProductBill);
                             });
 
                         }

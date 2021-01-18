@@ -48,14 +48,14 @@
                                     @foreach($bill_ins as $bill)
                                     <tr>
                                         <td>{{$bill->id}}</td>
-                                        <td>{{date("m/d/y g:i A", strtotime($bill->input_date))}}</td>
+                                        <td>{{date("Y/m/d", strtotime($bill->input_date))}}</td>
                                         <td>{{$bill->supplier->name}}</td>
                                         <td>{{$bill->quantity}}</td>
                                         <td>{{number_format($bill->total_price)}}</td>
                                         <td>{{$bill->user->name}}</td>
                                         <td>
-                                            <a id="btn_info-{{$bill->id}}" class="btn-show-info btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
-                                            <button data-url="{{route('billin.destroy',$bill->id)}}" value="{{$bill->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
+                                            <a id="btn_info-{{$bill->id}}" title="Xem" class="btn-show-info btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
+                                            <button title="Xóa" data-url="{{route('billin.destroy',$bill->id)}}" value="{{$bill->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -112,10 +112,10 @@
             "paging": true,
             "lengthChange": false,
             "searching": true,
-            "ordering": true,
+            "order": [],
             "info": false,
             "autoWidth": false,
-            "responsive": true,
+            "responsive": true
         });
     });
 </script>

@@ -76,9 +76,13 @@ class UserController extends Controller
     {
        return $this->repository->updateInfo($request);
     }
-
-    public function updatePassword(UpdateUserPasswordRequest $request)
+    public function updatePassword(Request $request)
     {
        return $this->repository->updatePassword($request);
+    }
+
+    public function updateImageUser(Request $request)
+    {
+       return $this->repository->updateImageUser($request);
     }
 }

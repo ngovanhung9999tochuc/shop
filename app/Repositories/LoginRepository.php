@@ -93,7 +93,7 @@ class LoginRepository
             $user->name = $request->fullname;
             $user->username = $request->username;
             $user->email = $request->username;
-            $user->image_icon = '/storage/user/KreoWWLtLf3ZhBQGwu1p.png';
+            $user->image_icon = '/storage/user/user/KreoWWLtLf3ZhBQGwu1p.png';
             $user->password = bcrypt($request->password);
             $user->save();
             $user->roles()->attach([1]);

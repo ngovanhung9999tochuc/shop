@@ -9,7 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\SlideController;
-use App\Http\Controllers\MenuController;
+//use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
@@ -34,10 +34,12 @@ Route::get('/', [HomeController::class, 'getHome'])->name('home');
 Route::get('/type/{type}/{id}', [HomeController::class, 'getPageTypeProduct'])->name('typeproduct');
 Route::get('/type/{id}', [HomeController::class, 'getTypeProduct'])->name('type.type');
 Route::get('/detail/{id}', [HomeController::class, 'getProductDetail'])->name('detail');
+Route::get('/price/{type}/{price}', [HomeController::class, 'getProductPrice'])->name('price');
 Route::get('/order', [HomeController::class, 'getOrder'])->name('order')->middleware(CheckOut::class);
 Route::post('/order/enter', [HomeController::class, 'enterAnOrder'])->name('order.enter');
 Route::get('/search', [HomeController::class, 'searchProduct'])->name('search');
-
+Route::post('/detail/rating', [HomeController::class, 'rating'])->name('detail.rating');
+//rating
 
 Route::get('/testhung', [HomeController::class, 'test'])->name('test');
 //login
@@ -49,6 +51,7 @@ Route::middleware([Profile::class])->group(function () {
     Route::post('/profile/info', [UserController::class, 'updateInfo'])->name('profile.info');
     Route::post('/profile/password', [UserController::class, 'updatePassword'])->name('profile.password');
     Route::post('/profile/show', [HomeController::class, 'getBillProduct'])->name('profile.show');
+    Route::post('/profile/image', [UserController::class, 'updateImageUser'])->name('profile.image');
 });
 Route::get('/test', [LoginController::class, 'test'])->name('test');
 //register
@@ -138,7 +141,7 @@ Route::middleware('can:admin')->prefix('admin')->group(function () {
         Route::post('/slide/search', [SlideController::class, 'search'])->name('slide.search');
     });
     //menu
-    Route::middleware('can:menu')->group(function () {
+  /*   Route::middleware('can:menu')->group(function () {
         Route::post('/menu/parent', [MenuController::class, 'getParent'])->name('menu.parent');
         Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
         Route::post('/menu/store', [MenuController::class, 'store'])->name('menu.store');
@@ -146,7 +149,7 @@ Route::middleware('can:admin')->prefix('admin')->group(function () {
         Route::post('/menu/update', [MenuController::class, 'update'])->name('menu.update');
         Route::delete('/menu/{menu}', [MenuController::class, 'destroy'])->name('menu.destroy');
         Route::post('/menu/search', [MenuController::class, 'search'])->name('menu.search');
-    });
+    }); */
     //role
     Route::middleware('can:role')->group(function () {
         Route::get('/role', [RoleController::class, 'index'])->name('role.index');

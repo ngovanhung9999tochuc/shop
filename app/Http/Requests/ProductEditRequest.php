@@ -39,8 +39,7 @@ class ProductEditRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.regex' => 'Tên sản phẩm không được phép có kí tự đặc biệt',
-            'name.required' => 'Tên sản phẩm không được phép trống',
+            'name.regex' => 'Tên sản phẩm không được phép có ký tự đặc biệt',
             'name.required' => 'Tên sản phẩm không được phép trống',
             'cpu.required' => 'CPU không được phép trống',
             'ram.required' => 'RAM không được phép trống',

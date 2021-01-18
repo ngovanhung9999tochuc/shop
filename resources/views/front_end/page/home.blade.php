@@ -71,13 +71,26 @@
                                 @endif
                             </div>
                             <div class="rating-wrap-post" style="font-size: 14px; margin-bottom: 10px; margin-top: 5px;">
-                                <i style="color: yellow;" class="fa fa-star"></i>
-                                <i style="color: yellow;" class="fa fa-star"></i>
-                                <i style="color: yellow;" class="fa fa-star"></i>
-                                <i style="color: yellow;" class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                            @php
+                                if($product->userReview!=null){
+                                $average = (float) $product->userReview->average;
+                                $average = $average * 10;
+                                $residual = (int)($average / 10);
+                                $division = $average % 10;
+                                $i = 1;
+                                while ($i <= $residual) 
+                                    { echo '<i style="color: yellow;" class="fa fa-star"></i>' ; $i++; }
+                                if($division!=0)
+                                    { echo '<i style="color: #d0d000;" class="fa fa-star"></i>' ; $i++; }
+                                while ($i <=5) 
+                                    { echo '<i class="fa fa-star"></i>' ; $i++; }
+
+                                    echo '<span style="margin-left: 5px;">'.$product->userReview->quantity_rating.' đánh giá</span>';
+                                } 
+                            @endphp
+                               
                             </div>
-                           <!--  <div class="cdt-product__config__param" style="margin-top: 5px;">
+                            <!--  <div class="cdt-product__config__param" style="margin-top: 5px;">
                                 <span title="CPU"><i class="fas fa-microchip"></i> {{$product->specifications['cpu']}}</span>
                                 <span style="margin-left: 5px;" title="Ram"><i class="fas fa-microchip"></i> {{$product->specifications['ram']}}</span>
                                 <span style="margin-left: 5px;" title="Bộ nhớ"><i class="fas fa-hdd"></i> {{$product->specifications['rom_harddrive']}}</span>
@@ -126,13 +139,25 @@
                                 @endif
                             </div>
                             <div class="rating-wrap-post" style="font-size: 14px; margin-bottom: 10px; margin-top: 5px;">
-                                <i style="color: yellow;" class="fa fa-star"></i>
-                                <i style="color: yellow;" class="fa fa-star"></i>
-                                <i style="color: yellow;" class="fa fa-star"></i>
-                                <i style="color: yellow;" class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                            @php
+                                if($product->userReview!=null){
+                                $average = (float) $product->userReview->average;
+                                $average = $average * 10;
+                                $residual = (int)($average / 10);
+                                $division = $average % 10;
+                                $i = 1;
+                                while ($i <= $residual) 
+                                    { echo '<i style="color: yellow;" class="fa fa-star"></i>' ; $i++; }
+                                if($division!=0)
+                                    { echo '<i style="color: #d0d000;" class="fa fa-star"></i>' ; $i++; }
+                                while ($i <=5) 
+                                    { echo '<i class="fa fa-star"></i>' ; $i++; }
+
+                                    echo '<span style="margin-left: 5px;">'.$product->userReview->quantity_rating.' đánh giá</span>';
+                                } 
+                            @endphp
                             </div>
-                         <!--    <div class="cdt-product__config__param" style="margin-top: 5px;">
+                            <!--    <div class="cdt-product__config__param" style="margin-top: 5px;">
                                 <span title="CPU"><i class="fas fa-microchip"></i> {{$product->specifications['cpu']}}</span>
                                 <span style="margin-left: 5px;" title="Ram"><i class="fas fa-microchip"></i> {{$product->specifications['ram']}}</span>
                                 <span style="margin-left: 5px;" title="Bộ nhớ"><i class="fas fa-hdd"></i> {{$product->specifications['rom_harddrive']}}</span>
@@ -181,13 +206,25 @@
                                 @endif
                             </div>
                             <div class="rating-wrap-post" style="font-size: 14px; margin-bottom: 10px; margin-top: 5px;">
-                                <i style="color: yellow;" class="fa fa-star"></i>
-                                <i style="color: yellow;" class="fa fa-star"></i>
-                                <i style="color: yellow;" class="fa fa-star"></i>
-                                <i style="color: yellow;" class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                            @php
+                                if($product->userReview!=null){
+                                $average = (float) $product->userReview->average;
+                                $average = $average * 10;
+                                $residual = (int)($average / 10);
+                                $division = $average % 10;
+                                $i = 1;
+                                while ($i <= $residual) 
+                                    { echo '<i style="color: yellow;" class="fa fa-star"></i>' ; $i++; }
+                                if($division!=0)
+                                    { echo '<i style="color: #d0d000;" class="fa fa-star"></i>' ; $i++; }
+                                while ($i <=5) 
+                                    { echo '<i class="fa fa-star"></i>' ; $i++; }
+
+                                    echo '<span style="margin-left: 5px;">'.$product->userReview->quantity_rating.' đánh giá</span>';
+                                } 
+                            @endphp
                             </div>
-                           <!--  <div class="cdt-product__config__param" style="margin-top: 5px;">
+                            <!--  <div class="cdt-product__config__param" style="margin-top: 5px;">
                                 <span title="CPU"><i class="fas fa-microchip"></i> {{$product->specifications['cpu']}}</span>
                                 <span style="margin-left: 5px;" title="Ram"><i class="fas fa-microchip"></i> {{$product->specifications['ram']}}</span>
                                 <span style="margin-left: 5px;" title="Bộ nhớ"><i class="fas fa-hdd"></i> {{$product->specifications['rom_harddrive']}}</span>
@@ -234,13 +271,25 @@
                                 @endif
                             </div>
                             <div class="rating-wrap-post" style="font-size: 14px; margin-bottom: 10px; margin-top: 5px;">
-                                <i style="color: yellow;" class="fa fa-star"></i>
-                                <i style="color: yellow;" class="fa fa-star"></i>
-                                <i style="color: yellow;" class="fa fa-star"></i>
-                                <i style="color: yellow;" class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                            @php
+                                if($product->userReview!=null){
+                                $average = (float) $product->userReview->average;
+                                $average = $average * 10;
+                                $residual = (int)($average / 10);
+                                $division = $average % 10;
+                                $i = 1;
+                                while ($i <= $residual) 
+                                    { echo '<i style="color: yellow;" class="fa fa-star"></i>' ; $i++; }
+                                if($division!=0)
+                                    { echo '<i style="color: #d0d000;" class="fa fa-star"></i>' ; $i++; }
+                                while ($i <=5) 
+                                    { echo '<i class="fa fa-star"></i>' ; $i++; }
+
+                                    echo '<span style="margin-left: 5px;">'.$product->userReview->quantity_rating.' đánh giá</span>';
+                                } 
+                            @endphp
                             </div>
-                         <!--    <div class="cdt-product__config__param" style="margin-top: 5px;">
+                            <!--    <div class="cdt-product__config__param" style="margin-top: 5px;">
                                 <span title="CPU"><i class="fas fa-microchip"></i> {{$product->specifications['cpu']}}</span>
                                 <span style="margin-left: 5px;" title="Ram"><i class="fas fa-microchip"></i> {{$product->specifications['ram']}}</span>
                                 <span style="margin-left: 5px;" title="Bộ nhớ"><i class="fas fa-hdd"></i> {{$product->specifications['rom_harddrive']}}</span>

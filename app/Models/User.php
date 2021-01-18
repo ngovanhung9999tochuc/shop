@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public function ratings()
     {
-        return $this->belongsToMany(Product::class, 'ratings', 'user_id', 'product_id')->withPivot('stars')
+        return $this->belongsToMany(Product::class, 'ratings', 'user_id', 'product_id')->withPivot('stars','text_rating')
             ->withTimestamps();
     }
 
@@ -72,7 +72,7 @@ class User extends Authenticatable
         if ($roles->count() == 0) {
             return false;
         } else if ($roles->count() == 1) {
-            if ($roles[0]->name == 'customer') return false;
+            if ($roles[0]->id == 1) return false;
         }
         return true;
     }

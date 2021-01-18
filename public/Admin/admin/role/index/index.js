@@ -3,16 +3,18 @@ const base_url = window.location.origin;
 const modal = document.getElementById('id01');
 const modal2 = document.getElementById('id02');
 const modal3 = document.getElementById('id03');
+const modal4 = document.getElementById('id04');
 const btnAddRole = document.getElementById('btn-add-role');
 const formAddRole = document.getElementById('form-add-role');
 const formEditRole = document.getElementById('form-edit-role');
 const trBody = document.getElementById('trbody');
 //event
 window.onclick = function(event) {
-    if (event.target == modal || event.target == modal2 || event.target == modal3) {
+    if (event.target == modal || event.target == modal2 || event.target == modal3 || event.target == modal4) {
         modal.style.display = "none";
         modal2.style.display = "none";
         modal3.style.display = "none";
+        modal4.style.display = "none";
     }
 }
 btnAddRole.addEventListener('click', function() {
@@ -143,8 +145,8 @@ $('#form-permission-role').submit(function(e) {
                 });
             } else {
                 Swal.fire({
-                    icon: 'error',
-                    title: 'Lỗi hệ thống ! bạn phân quyền không thành công',
+                    icon: 'info',
+                    title: 'Quản trị có quyền quản lý cao nhất, không thể sửa đổi',
                     showConfirmButton: false,
                     timer: 4000
                 });

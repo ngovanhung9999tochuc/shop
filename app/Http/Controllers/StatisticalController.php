@@ -2,18 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\AdminRepository;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class StatisticalController extends Controller
 {
-
-    protected $repository;
-
-    public function __construct(AdminRepository $repository)
-    {
-        $this->repository = $repository;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -21,9 +13,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $data = $this->repository->getAll();
-        return view('back_end.admin.admin', ['data' => $data]);
+        //
     }
+
     /**
      * Show the form for creating a new resource.
      *

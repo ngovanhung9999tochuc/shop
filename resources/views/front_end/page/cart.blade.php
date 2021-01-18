@@ -69,16 +69,16 @@
                         </div>
                         <div class="your-order-body" style="padding: 0px 10px">
                             <div class="your-order-item">
-                                <div>
+                                <div id="list-item">
                                     <!--  one item	 -->
                                     @if(Session::has('cart'))
                                     @foreach($items as $item)
-                                    <div class="media">
+                                    <div id="media-{{$item['product']->id}}" class="media">
                                         <img width="20%" src="{{$item['product']->image}}" alt="" class="pull-left">
                                         <div class="media-body">
                                             <p class="font-large">{{$item['product']->name}}</p>
-                                            <span class="color-gray your-order-info">Giá: {{number_format($item['quantity'] * ($item['product']->unit_price - $item['product']->unit_price * $item['product']->promotion_price / 100))}}đ</span>
-                                            <span class="color-gray your-order-info">Số Lượng: {{$item['quantity']}}</span>
+                                            <span class="color-gray your-order-info">Giá: <span id="price-{{$item['product']->id}}">{{number_format($item['quantity'] * ($item['product']->unit_price - $item['product']->unit_price * $item['product']->promotion_price / 100))}}</span>đ</span>
+                                            <span class="color-gray your-order-info">Số Lượng: <span id="quantity-{{$item['product']->id}}">{{$item['quantity']}}</span></span>
                                         </div>
                                     </div>
                                     @endforeach
@@ -92,7 +92,7 @@
                                     <p class="your-order-f18">Tổng số lượng:</p>
                                 </div>
                                 <div class="pull-right">
-                                    <h5 class="color-black">{{number_format($totalQty)}}</h5>
+                                    <h5 id="order-total-quantity" class="color-black">{{number_format($totalQty)}}</h5>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -102,7 +102,7 @@
                                     <p class="your-order-f18">Tổng tiền:</p>
                                 </div>
                                 <div class="pull-right">
-                                    <h5 class="color-black">{{number_format($totalPrice)}}đ</h5>
+                                    <h5 id="order-total-price" class="color-black">{{number_format($totalPrice)}}đ</h5>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>

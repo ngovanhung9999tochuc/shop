@@ -44,13 +44,18 @@ class Product extends Model
 
     public function ratings()
     {
-        return $this->belongsToMany(User::class, 'ratings', 'product_id', 'user_id')->withPivot('stars')
+        return $this->belongsToMany(User::class, 'ratings', 'product_id', 'user_id')->withPivot('stars','text_rating')
             ->withTimestamps();
     }
 
     public function comments()
     {
-        return $this->belongsToMany(User::class, 'comments', 'product_id', 'user_id')->withPivot('content','parent_id')
+        return $this->belongsToMany(User::class, 'comments', 'product_id', 'user_id')->withPivot('content', 'parent_id')
             ->withTimestamps();
+    }
+
+    public function userReview()
+    {
+        return $this->hasOne(UserReview::class, 'product_id');
     }
 }
