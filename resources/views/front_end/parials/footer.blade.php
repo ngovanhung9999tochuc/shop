@@ -5,11 +5,10 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="footer-menu">
                         <h2 class="footer-wid-title">Giới thiệu</h2>
-                        <ul>
-                            <li><a href="#">Giới thiệu</a></li>
-                            <li><a href="#">Khách hàng</a></li>
-                            <li><a href="#">Đối Tác</a></li>
-                        </ul>
+                        <p>Đến với thế giới di động của chúng tôi bạn sẽ được thỏa mãn đôi mắt với hàng ngàn sản phẩm điện tử được bày bán tại website với nhiều mẫu mã đẹp và lạ mắt với mức giá hợp lý và cho mua vay trả góp còn chằn chờ gì nữa hãy xách tay lên mà mua sắm ngay cho mình 1 món điện tử nào!</p>
+
+
+
                     </div>
                 </div>
 

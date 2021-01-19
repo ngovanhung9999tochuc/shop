@@ -62,11 +62,11 @@ class BillInRepository
             $bill_in = $this->bill_in->create($data_bill_in_create);
             $bill_in->products()->attach($bill_in_detail);
             DB::commit();
-            return $this->successfulMessage('lưu', 'phiếu nhập thành công');
+            return $this->successfulMessage('lưu', 'phiếu nhập');
         } catch (Exception $exception) {
             DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . ' --- Line : ' . $exception->getLine());
-            return $this->errorMessage('lưu', 'phiếu nhập thành công');
+            return $this->errorMessage('lưu', 'phiếu nhập');
         }
     }
 

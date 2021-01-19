@@ -162,6 +162,11 @@ class BillRepository
                 } else {
                     return response()->json(array('success' => false, 'inventorys' => $data), 200);
                 }
+            } else if ($request->status == 3) {
+                $billStatus->status = $request->status;
+                $billStatus->complete_order = date('y-m-d');
+                $billStatus->save();
+                return response()->json(array('success' => true, 'status' => $billStatus->status), 200);
             } else {
                 $billStatus->status = $request->status;
                 $billStatus->save();

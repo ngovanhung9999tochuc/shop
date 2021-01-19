@@ -91,6 +91,8 @@ class HomeRepository
     public function getProductDetail($id)
     {
         $product = Product::find($id);
+        $product->product_view = $product->product_view + 1;
+        $product->save();
         $type = ProductType::find($product->product_type_id);
         $typeParent = $type->productTypeParent;
         //dd($product->specifications);

@@ -48,12 +48,12 @@
                                 <div id="image-icon-user" style="display: none;" class="row form-group">
 
                                     <div class="col-sm-12">
-                                        <form id="form-update-image-icon" method="post">
+                                        <form id="form-update-image-icon" method="post" style="text-align: center; ">
                                             @csrf
                                             <input type="hidden" value="{{auth()->user()->id}}" name="id" />
                                             <input type="file" onchange="changeImage(this)" class="form-control-file" name="image_icon">
                                             <div id="validation-update-image_icon"></div>
-                                            <button title="Cập nhật" style="margin-top: 10px; " class="btn btn-info"><i class="fas fa-upload"></i></button>
+                                            <button title="Cập nhật" style="margin-top: 10px; text-align: center; " class="btn btn-info"><i class="fas fa-upload"></i></button>
                                         </form>
                                     </div>
                                 </div>
@@ -218,19 +218,19 @@
                                                         switch ($bill->status) {
                                                         case "0":
                                                         case "1":
-                                                        $status='xác nhận';
+                                                        $status='Xác nhận';
                                                         break;
                                                         case "2":
-                                                        $status='đang giao';
+                                                        $status='Đang giao';
                                                         break;
                                                         case "3":
-                                                        $status='hoàn thành';
+                                                        $status='Đã mua';
                                                         break;
                                                         case "4":
-                                                        $status='thất bại';
+                                                        $status='Thất bại';
                                                         break;
                                                         default:
-                                                        $status='thất bại';
+                                                        $status='Thất bại';
                                                         }
                                                         @endphp
                                                         <td>{{$bill->id}}</td>

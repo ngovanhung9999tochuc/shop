@@ -88,7 +88,7 @@ input[type=password] {
 
 /* Modal Content/Box */
 
-.modal-content {
+#id01 .modal-content {
     background-color: #fefefe;
     margin: 3% 30%;
     /* 5% from the top, 15% from the bottom and centered */
@@ -143,16 +143,6 @@ input[type=password] {
 
 
 /* Change styles for span and cancel button on extra small screens */
-
-@media screen and (max-width: 300px) {
-    span.psw {
-        display: block;
-        float: none;
-    }
-    .cancelbtn {
-        width: 100%;
-    }
-}
 
 
 /* sdfsfsdf */
@@ -219,4 +209,22 @@ input[type=password] {
 
 #login fieldset input[type="submit"]:hover {
     background-color: #28ad63;
+}
+
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #id01 .modal-content {
+        margin: 3% 16%;
+        border: 1px solid #888;
+        width: 68%;
+    }
 }
