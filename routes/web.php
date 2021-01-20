@@ -62,6 +62,8 @@ Route::post('/cart/delete', [CartController::class, 'deleteItemToCart'])->name('
 Route::middleware('can:admin')->prefix('admin')->group(function () {
 
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::post('/dashboard/filter_by_date_15',[AdminController::class, 'getAccessibleFor15Days'])->name('filter_by_date_15');
+    Route::post('/dashboard/filter_by_date',[AdminController::class, 'getAccessible'])->name('filter_by_date');
     //product
 
     Route::middleware('can:product')->group(function () {

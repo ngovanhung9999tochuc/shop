@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\ProductType;
+use Illuminate\Http\Request;
 
 class AppServiceProvider extends ServiceProvider
 {

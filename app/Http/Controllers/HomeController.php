@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OrderRequest;
 use App\Models\Product;
 use App\Models\ProductType;
+use App\Models\Visitor;
 use App\Repositories\HomeRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,10 +25,18 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getHome()
+    public function getHome(Request $request)
     {
+        $user_ip_address = $request->ip();
+        $visitor_current = Visitor::where('id_address', $user_ip_address)->where('date_visitors', date('Y-m-d'))->get();
+        $visitor_count = $visitor_current->count();
+        if ($visitor_count == 0) {
+            $visitor = new Visitor();
+            $visitor->id_address = $user_ip_address;
+            $visitor->date_visitors = date('Y-m-d');
+            $visitor->save();
+        }
         $products = $this->repository->getHome();
-        //dd($products['newProducts'][0]->specifications);
         return view('front_end.page.home', ['products' => $products]);
     }
 
@@ -102,7 +111,6 @@ class HomeController extends Controller
      */
     public function test()
     {
-       
     }
 
     /**

@@ -21,6 +21,7 @@ class AdminController extends Controller
      */
     public function index()
     {
+        //$this->repository->getAccessibleFor15Days();
         $data = $this->repository->getAll();
         return view('back_end.admin.admin', ['data' => $data]);
     }
@@ -29,9 +30,15 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getAccessibleFor15Days(Request $request)
     {
-        //
+        return $this->repository->getAccessibleFor15Days();
+    }
+
+
+    public function getAccessible(Request $request)
+    {
+        return $this->repository->getAccessible($request);
     }
 
     /**
