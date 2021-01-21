@@ -26,7 +26,7 @@ class BillRepository
 
     public function getAll()
     {
-        return $this->bill->latest()->get();
+        return $this->bill->orderBy('status', 'ASC')->get();
     }
 
 

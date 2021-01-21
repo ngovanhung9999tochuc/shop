@@ -171,7 +171,7 @@ function addItemCart(add) {
                 li.setAttribute("id", "item-" + product['id']);
                 li.classList.add("sbmincart-item");
                 dataLi += '<div class="sbmincart-details-name"> <a class="sbmincart-name" href="' + base_url + '/detail/' + product['id'] + '">' + product['name'] + '</a></div>';
-                dataLi += '<div class="sbmincart-details-quantity"> <input id="input-quantity-' + product['id'] + '" onchange="changeQuantity(this)" class="sbmincart-quantity" name="quantity" type="number" min="1" value="' + data['item']['quantity'] + '" autocomplete="off"> </div>';
+                dataLi += '<div class="sbmincart-details-quantity"> <input id="input-quantity-' + product['id'] + '" onchange="changeQuantity(this)" class="" name="quantity" type="number" min="1" max="10" value="' + data['item']['quantity'] + '" autocomplete="off"> </div>';
                 dataLi += '<div class="sbmincart-details-remove"> <button id="btn-close-' + product['id'] + '" onclick="deleteItem(this)" type="button" class="sbmincart-remove" data-sbmincart-idx="0">×</button> </div>';
                 dataLi += '<div class="sbmincart-details-price"> <span id="total-product-' + product['id'] + '" class="sbmincart-price">' + Number(price).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ'; + '</span> </div>';
                 li.innerHTML = dataLi;

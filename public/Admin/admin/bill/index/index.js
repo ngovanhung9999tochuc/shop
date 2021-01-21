@@ -123,8 +123,15 @@ function showInfo(info) {
                 td += '<td>' + products[product]['name'] + '</td>';
                 td += '<td>' + products[product]['quantityRequired'] + '</td>';
                 td += '<td>' + Number(products[product]['unit_price']).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ' + '</td>';
+                if (bill['status'] == 0) {
+                    td += '<td style="' + color + '">' + products[product]['quantityInventory'] + '</td>';
+                    document.getElementById('th-inventory').textContent = 'Tồn kho';
+                } else {
+                    document.getElementById('th-inventory').textContent = '';
+                }
+
                 //td += '<td><img src="' + products[product]['image'] + '" style="width:80px ; height: 80px;" /></td>';
-                td += '<td style="' + color + '">' + products[product]['quantityInventory'] + '</td>';
+
                 td += '</tr>';
                 tr += td;
             }
@@ -149,7 +156,6 @@ function changeStatus(s) {
         'id': id
     }), function(data) {
         data = JSON.parse(data);
-        console.log(data);
         if (data['success']) {
             let status = data['status'];
             const btnText = document.getElementById('btn-text-' + id);

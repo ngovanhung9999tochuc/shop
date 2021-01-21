@@ -32,7 +32,7 @@
                             @foreach($dataCart['items'] as $item)
                             <li id="item-{{$item['product']->id}}" class="sbmincart-item">
                                 <div class="sbmincart-details-name"> <a class="sbmincart-name" href="{{route('detail',$item['product']->id)}}">{{$item['product']->name}}</a></div>
-                                <div class="sbmincart-details-quantity"> <input id="input-quantity-{{$item['product']->id}}" onchange="changeQuantity(this)" class="sbmincart-quantity" name="quantity" type="number" min="1" value="{{$item['quantity']}}" autocomplete="off"> </div>
+                                <div class="sbmincart-details-quantity"> <input id="input-quantity-{{$item['product']->id}}" onchange="changeQuantity(this)" class="" name="quantity" type="number" min="1" max="10" value="{{$item['quantity']}}" autocomplete="off"> </div>
                                 <div class="sbmincart-details-remove"> <button id="btn-close-{{$item['product']->id}}" onclick="deleteItem(this)" type="button" class="sbmincart-remove" data-sbmincart-idx="0">×</button> </div>
                                 <div class="sbmincart-details-price"> <span id="total-product-{{$item['product']->id}}" class="sbmincart-price">{{number_format($item['quantity'] * ($item['product']->unit_price - $item['product']->unit_price * $item['product']->promotion_price / 100))}}đ</span> </div>
                             </li>

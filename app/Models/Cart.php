@@ -25,10 +25,12 @@ class Cart
 				$item = $this->items[$product->id];
 			}
 		}
-		$item['quantity']++;
-		$this->items[$product->id] = $item;
-		$this->totalQuantity();
-		$this->totalPrice();
+		if ($item['quantity'] < 10) {
+			$item['quantity']++;
+			$this->items[$product->id] = $item;
+			$this->totalQuantity();
+			$this->totalPrice();
+		}
 	}
 	//tinh tong so luong
 	public function totalQuantity()
@@ -58,8 +60,10 @@ class Cart
 	//thay do so luong
 	public function changeItem($id, $quantity)
 	{
-		$this->items[$id]['quantity'] = $quantity;
-		$this->totalQuantity();
-		$this->totalPrice();
+		if ($quantity > 0 && $quantity <= 10) {
+			$this->items[$id]['quantity'] = $quantity;
+			$this->totalQuantity();
+			$this->totalPrice();
+		}
 	}
 }

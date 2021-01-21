@@ -232,7 +232,7 @@
                                                         <th>Số Lượng đơn hàng</th>
                                                         <th>Giá bán</th>
                                                       <!--   <th>Hình ảnh</th> -->
-                                                        <th>Tồn kho</th>
+                                                        <th id="th-inventory"></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="table-product">
