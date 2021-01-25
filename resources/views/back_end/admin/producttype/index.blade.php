@@ -47,7 +47,15 @@
                                     @foreach($productTypes as $productType)
                                     <tr>
                                         <td id="id-{{$productType->id}}">{{$productType->id}}</td>
-                                        <td id="name-{{$productType->id}}">{{$productType->name}}</td>
+                                        @php
+                                            $text='';
+                                            if($productType->parent_id==0){
+                                                $text=' ('.$productType->productTypeChildrents->count().' danh mục con)';
+                                            }else{
+                                                $text=' ('.$productType->products->count().' sản phẩm)';
+                                            }
+                                        @endphp
+                                        <td id="name-{{$productType->id}}">{{$productType->name}}{{$text}}</td>
                                         <td id="icon-{{$productType->id}}">
                                             @if($productType->icon)
                                             <img src="{{$productType->icon}}" alt="icon" style="width:200px ; height: 50px;" />

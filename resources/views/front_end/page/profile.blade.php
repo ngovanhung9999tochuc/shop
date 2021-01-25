@@ -211,7 +211,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach(auth()->user()->bills as $bill)
+                                                    @foreach(auth()->user()->bills()->latest()->get() as $bill)
                                                     <tr>
                                                         @php
                                                         $status='';

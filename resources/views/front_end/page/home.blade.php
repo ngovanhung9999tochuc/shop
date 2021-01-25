@@ -28,7 +28,7 @@
                     <h3 class="caption title">
                         <span class="primary">{{$slide->title}}</span>
                     </h3>
-                    <a class="caption button-radius" href="#"><span class="icon"></span>Xem ngay</a>
+                    <a class="caption button-radius" href="{{$slide->link}}"><span class="icon"></span>Xem ngay</a>
                 </div>
                 <div class="col-md-8">
                     <img src="{{$slide->image}}" alt="Slide" height="2000px">

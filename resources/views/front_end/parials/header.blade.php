@@ -73,10 +73,10 @@
                                 <div class="col-md-4">
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="text" style="border-radius: 5px;" name="table_search" class="col-md-12" placeholder="Tìm mã hoặc tên sản phẩm">
+                                    <input style="width: 240px; height: 40px; border-radius: 5px; margin-left: 50px;" type="text"  name="table_search" class="col-md-12" placeholder="Tìm mã hoặc tên sản phẩm">
                                 </div>
                                 <div class="col-md-2">
-                                    <button type="submit" class="btn btn-info"><i class="fas fa-search"></i></button>
+                                    <button style="height: 40px;" type="submit" class="btn btn-info"><i class="fas fa-search"></i></button>
                                 </div>
                             </div>
                         </form>

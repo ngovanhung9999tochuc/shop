@@ -1334,11 +1334,12 @@ ol.slide-indicators li.active {
 }
 
 .product-big-title-area {
-    background: url(img/crossword.png) repeat scroll 0 0 #7ba9e9;
+    /* background: url(img/crossword.png) repeat scroll 0 0 #7ba9e9; */
     height: 60px;
     margin-top: 10px;
     width: 86.7%;
     margin: 10px auto;
+    color: #000;
 }
 
 .product-bit-title h2 {
@@ -1347,7 +1348,7 @@ ol.slide-indicators li.active {
     font-weight: 400;
     margin: 0;
     padding: 10px 0;
-    color: #fff;
+    color: #000;
 }
 
 .single-product-area .zigzag-bottom {
@@ -1355,7 +1356,7 @@ ol.slide-indicators li.active {
 }
 
 .single-product-area {
-    padding: 80px 0 130px;
+    padding: 20px 0 30px;
 }
 
 .sidebar-title {

@@ -15,7 +15,6 @@
     </div>
 </div>
 <div class="single-product-area">
-
     <div class="container">
         <div class="brands-area">
             <div class="container">
