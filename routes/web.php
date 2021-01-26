@@ -75,7 +75,7 @@ Route::middleware('can:admin')->prefix('admin')->group(function () {
         Route::delete('/product/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
         Route::post('/product/search', [ProductController::class, 'search'])->name('product.search');
         Route::get('/product/price/{product}', [ProductController::class, 'getPrice'])->name('product.price');
-        Route::post('/product/price/{product}', [ProductController::class, 'setPrice'])->name('product.price');
+        Route::post('/product/price', [ProductController::class, 'setPrice'])->name('product.price.post');
     });
 
     Route::middleware('can:producttype')->group(function () {
@@ -161,6 +161,6 @@ Route::middleware('can:admin')->prefix('admin')->group(function () {
         Route::delete('/role/{role}', [RoleController::class, 'destroy'])->name('role.destroy');
         Route::post('/role/search', [RoleController::class, 'search'])->name('role.search');
         Route::post('/role/permission', [RoleController::class, 'getListPermission'])->name('role.permission');
-        Route::post('/role/permission/update', [RoleController::class, 'updateListPermission'])->name('role.permission');
+        Route::post('/role/permission/update', [RoleController::class, 'updateListPermission'])->name('role.permission.update');
     });
 });

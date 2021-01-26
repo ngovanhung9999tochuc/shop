@@ -48,7 +48,7 @@ $('#form-login').submit(function(e) {
     var formData = new FormData(this);
     $.ajax({
         type: 'POST',
-        url: base_url + '/login',
+        url: 'http://localhost/shop/public/login',
         data: formData,
         cache: false,
         contentType: false,

@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-  <base href="{{asset('')}}">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,10 +13,10 @@
   <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
 
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="/ustora/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{asset('/ustora/css/bootstrap.min.css')}}">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="/ustora/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/admin/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="{{asset('/ustora/css/font-awesome.min.css')}}">
+  <link rel="stylesheet" href="{{asset('/admin/plugins/fontawesome-free/css/all.min.css')}}">
 
   <!-- iCheck -->
   <!-- JQVMap -->
@@ -26,11 +25,11 @@
   <!-- Daterange picker -->
   <!-- summernote -->
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="/ustora/style.css">
-  <link rel="stylesheet" href="/ustora/css/responsive.css">
-  <link rel="stylesheet" href="/ustora/style1.css">
-  <link rel="stylesheet" href="/ustora/login.css">
-  <link rel="stylesheet" href="/ustora/login1.css">
+  <link rel="stylesheet" href="{{asset('/ustora/style.css')}}">
+  <link rel="stylesheet" href="{{asset('/ustora/css/responsive.css')}}">
+  <link rel="stylesheet" href="{{asset('/ustora/style1.css')}}">
+  <link rel="stylesheet" href="{{asset('/ustora/login.css')}}">
+  <link rel="stylesheet" href="{{asset('/ustora/login1.css')}}">
 
   @yield('css')
 
@@ -51,9 +50,9 @@
 
   <!-- JQuery-->
   <!-- Latest jQuery form server -->
-  <script src="/ustora/jquery.min.js"></script>
+  <script src="{{asset('/ustora/jquery.min.js')}}"></script>
   <!-- Bootstrap JS form CDN -->
-  <script src="/ustora/bootstrap.min.js"></script>
+  <script src="{{asset('/ustora/bootstrap.min.js')}}"></script>
 
   <script src="{{asset('vendor/sweetalert2@10.js')}}"></script>
   <script src="{{asset('font_end/layout.js')}}"></script>

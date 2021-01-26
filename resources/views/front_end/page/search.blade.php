@@ -23,7 +23,7 @@
                         <div class="single-shop-product">
                             <a href="{{route('detail',$product->id)}}">
                                 <div class="product-upper">
-                                    <img style="height: 220px; width: 220;" src="{{$product->image}}" alt="">
+                                    <img style="height: 220px; width: 220;" src="{{asset($product->image)}}" alt="">
                                 </div>
                                 <h2 style="height: 40px;">{{$product->name}}</h2>
                             </a>

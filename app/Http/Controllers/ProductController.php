@@ -114,9 +114,9 @@ class ProductController extends Controller
         return json_encode($product);
     }
 
-    public function setPrice(Request $request, $id)
+    public function setPrice(Request $request)
     {
-        $result = $this->repository->setPrice($request, $id);
+        $result = $this->repository->setPrice($request, $request->id);
         return json_encode((object) array('result' => $result));
     }
 }

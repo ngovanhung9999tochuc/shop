@@ -25,8 +25,10 @@ class HomeRepository
     public function getHome()
     {
         $newProducts = Product::latest()->limit(8)->get();
-        $phoneProducts = Product::where('id', 'like', 'DT%')->latest()->limit(8)->get();
-        $laptopProducts = Product::where('id', 'like', 'LT%')->latest()->limit(8)->get();
+        $phoneProducts = Product::limit(8)->orderBy('product_view', 'DESC')->get();
+        $laptopProducts =Product::where('id', 'like', 'LT%')->latest()->limit(8)->get();
+
+        
         $tabletProducts = Product::where('id', 'like', 'TT%')->latest()->limit(8)->get();
         $slides = Slide::latest()->limit(4)->get();
         return ['newProducts' => $newProducts, 'phoneProducts' => $phoneProducts, 'laptopProducts' => $laptopProducts, 'tabletProducts' => $tabletProducts, 'slides' => $slides];

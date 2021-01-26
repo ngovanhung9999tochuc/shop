@@ -93,7 +93,7 @@
 
                             <div class="col-md-12">
                                 <div class="row">
-                                    <img src="{{$product->image}}" id="output-image-file"  style="width: 150px; height: 150px;margin-top: 10px;" />
+                                    <img src="{{ asset($product->image)}}" id="output-image-file"  style="width: 150px; height: 150px;margin-top: 10px;" />
                                 </div>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                             <div class="col-md-12" style="margin-top: 10px;">
                                 <div id="output-detailed-image-file" class="row">
                                     @foreach($product->productImages as $image)
-                                    <img style="margin-left: 10px; width: 100px; height: 100px;" src="{{$image->image}}" alt="" />
+                                    <img style="margin-left: 10px; width: 100px; height: 100px;" src="{{ asset($image->image)}}" alt="" />
                                     @endforeach
                                 </div>
                             </div>

@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        
     }
 
     /**
@@ -48,9 +48,6 @@ class AppServiceProvider extends ServiceProvider
                 $ul .= '</ul>';
                 $ul .= '</li>';
             }
-            $ul .= '<li><a></a></li>';
-            $ul .= ' <li><a></a></li>';
-            $ul .= ' <li><a></a></li>';
             $ul .= '</ul>';
               
            

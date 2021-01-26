@@ -54,12 +54,12 @@
                         <div class="col-md-6 ">
                             <div class="product-images text-center">
                                 <div class="product-main-img">
-                                    <img id="main-image" src="{{$product->image}}" alt="" height="400px" width="400px">
+                                    <img id="main-image" src="{{asset($product->image)}}" alt="" height="400px" width="400px">
                                 </div>
                                 <div class="product-gallery">
-                                    <img class="image-gallery" src="{{$product->image}}" alt="">
+                                    <img class="image-gallery" src="{{asset($product->image)}}" alt="">
                                     @foreach($productImage as $image)
-                                    <img class="image-gallery" src="{{$image->image}}" alt="">
+                                    <img class="image-gallery" src="{{asset($image->image)}}" alt="">
                                     @endforeach
                                 </div>
                                 <div class="related-products-wrapper" style="margin-top: 50px;">
@@ -68,7 +68,7 @@
                                         @foreach($similarProduct as $similarproduct)
                                         <div class="single-product">
                                             <div style="width: 180px;height: 220px;" class="product-f-image">
-                                                <img src="{{$similarproduct->image}}" alt="">
+                                                <img src="{{asset($similarproduct->image)}}" alt="">
                                                 <div class="product-hover">
                                                     <a id="item-cart-{{$similarproduct->id}}" onclick="addItemCart(this)" class="add-product-to-cart add-to-cart-link"><i class="fa fa-plus-square"></i> chọn mua</a>
                                                     <a href="{{route('detail',$similarproduct->id)}}" class="view-details-link"><i class="fa fa-link"></i> chi tiết</a>

@@ -24,7 +24,7 @@
                         <div class="brand-wrapper">
                             <div class="brand-list" id="brand-list-delete-child">
                                 @foreach($productTypes as $productType)
-                                <a href="{{route('type.type',$productType->id)}}"><img style="width: 220px; height: 50px;" src="{{$productType->icon}}" alt=""></a>
+                                <a href="{{route('type.type',$productType->id)}}"><img style="width: 220px; height: 50px;" src="{{asset($productType->icon)}}" alt=""></a>
                                 @endforeach
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                         <div class="single-shop-product">
                             <a href="{{route('detail',$product->id)}}">
                                 <div class="product-upper">
-                                    <img style="height: 220px; width: 220;" src="{{$product->image}}" alt="">
+                                    <img style="height: 220px; width: 220;" src="{{asset($product->image)}}" alt="">
                                 </div>
                                 <h2 style="height: 40px;">{{$product->name}}</h2>
                             </a>

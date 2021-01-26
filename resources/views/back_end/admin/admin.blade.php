@@ -209,7 +209,7 @@
       let fromDate = $('#example-date-input1').val();
       let toDate = $('#example-date-input2').val();
       $.ajax({
-        url: 'admin/dashboard/filter_by_date',
+        url: '{{route("filter_by_date")}}',
         method: "POST",
         dataType: "JSON",
         data: {
@@ -228,7 +228,7 @@
     $(function() {
       let _token = $('input[name="_token"]').val();
       $.ajax({
-        url: 'admin/dashboard/filter_by_date_15',
+        url: '{{route("filter_by_date_15")}}',
         method: "POST",
         dataType: "JSON",
         data: {
