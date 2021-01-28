@@ -181,7 +181,10 @@
 <!-- <script src="{{asset('Admin/admin/bill_in/add/add.js')}}"></script>
 <script src="{{asset('Admin/admin/bill_in/add/add1.js')}}"></script> -->
 <script>
-    const base_url = "{{ asset('') }}";
+    let base_url = "{{ asset('') }}";
+    base_url = [...base_url];
+    base_url.pop();
+    base_url = base_url.join("");
     const btnSearchProducts = document.getElementById('search-products');
     const _token = document.getElementById('_token').value;
     const productListAreLookingFor = document.getElementById('product-list-are-looking-for');
@@ -404,7 +407,9 @@
 
     //Request voi callback voi 1 tham so--thuc hien truy van
 
-    function request(url = "", para = "", callbackSuccess = function() {}, callbackError = function(err) { console.log(err) }) {
+    function request(url = "", para = "", callbackSuccess = function() {}, callbackError = function(err) {
+        console.log(err)
+    }) {
         let xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -417,10 +422,6 @@
         xmlHttp.setRequestHeader("Content-type", "application/json");
         xmlHttp.send(para);
     }
-
-
-
-
 </script>
 @php
 if(Session::has('message')){

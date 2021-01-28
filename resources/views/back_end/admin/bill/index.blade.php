@@ -316,7 +316,10 @@
         'class': 'btn-danger',
         'textStatus': ' Thất bại'
     }];
-    const base_url = "{{ asset('') }}";
+    let base_url = "{{ asset('') }}";
+    base_url = [...base_url];
+    base_url.pop();
+    base_url= base_url.join("");
     const btnStatus = document.querySelectorAll('.btn-dropdown-status');
     let modal = document.getElementById('id01');
     let modal2 = document.getElementById('id02');

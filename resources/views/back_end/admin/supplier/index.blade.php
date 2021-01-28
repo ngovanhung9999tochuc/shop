@@ -214,7 +214,10 @@
         "responsive": true,
     });
     //
-    var base_url = "{{ asset('') }}";
+    let base_url = "{{ asset('') }}";
+    base_url = [...base_url];
+    base_url.pop();
+    base_url= base_url.join("");
     let btnAddSupplier = document.getElementById('btn-add-supplier');
     const modal = document.getElementById('id01');
     const modal2 = document.getElementById('id02');

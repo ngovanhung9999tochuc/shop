@@ -186,7 +186,10 @@
         });
     });
     //
-    const base_url = "{{ asset('') }}";
+    let base_url = "{{ asset('') }}";
+    base_url = [...base_url];
+    base_url.pop();
+    base_url= base_url.join("");
     const modal = document.getElementById('id01');
     const modal2 = document.getElementById('id02');
     const btnAddSlide = document.getElementById('btn-add-slide');

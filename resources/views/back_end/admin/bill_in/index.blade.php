@@ -118,7 +118,10 @@
             "responsive": true
         });
     });
-    const base_url ="{{ asset('') }}";
+    let base_url = "{{ asset('') }}";
+    base_url = [...base_url];
+    base_url.pop();
+    base_url = base_url.join("");
     const _token = document.getElementById('_token');
     let modal = document.getElementById('id01');
     let btnShowInfo = document.querySelectorAll('.btn-show-info');
@@ -151,7 +154,7 @@
                         td += '<td>' + product['name'] + '</td>';
                         td += '<td>' + product['pivot']['quantity'] + '</td>';
                         td += '<td>' + Number(product['pivot']['original_price']).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ' + '</td>';
-                        td += '<td><img src="' +base_url+ product['image'] + '" style="width:80px ; height: 80px;" /></td>';
+                        td += '<td><img src="' + base_url + product['image'] + '" style="width:80px ; height: 80px;" /></td>';
                         td += '</tr>';
                         tr += td;
                     }

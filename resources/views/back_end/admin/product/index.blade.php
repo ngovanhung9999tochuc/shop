@@ -136,7 +136,10 @@
 <script src="{{asset('vendor/jquery-2.2.0.min.js')}}"></script>
 <script src="{{asset('Admin/admin/delete.js')}}"></script>
 <script>
-    var base_url = "{{ asset('') }}";
+    let base_url = "{{ asset('') }}";
+    base_url = [...base_url];
+    base_url.pop();
+    base_url = base_url.join("");
     const modal = document.getElementById('id01');
     const formPrice = document.getElementById('form-price');
     let idProduct = '';

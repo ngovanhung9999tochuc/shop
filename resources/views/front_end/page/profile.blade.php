@@ -305,7 +305,7 @@
 
     @section('js')
     <script>
-        const base_url1 = window.location.origin;
+
         let profileInfo = document.getElementById('profile-info');
         const btnUpdateImage = document.getElementById('btn-update-image');
         const imageIcon = document.getElementById('image-icon-profile-user')
@@ -433,8 +433,8 @@
                         td += '<td>' + product['pivot']['quantity'] + '</td>';
                         td += '<td>' + Number(product['pivot']['unit_price']).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ' + '</td>';
                         let image = product["image"];
-                        var assetBaseUrl = "{{ asset('') }}"+image;
-                        td += '<td><img src="'+assetBaseUrl+'" style="width:80px ; height: 80px;" /></td>';
+                        var assetBaseUrl = base_url + image;
+                        td += '<td><img src="' + assetBaseUrl + '" style="width:80px ; height: 80px;" /></td>';
                         td += '</tr>';
                         tr += td;
                     }

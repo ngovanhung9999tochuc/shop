@@ -136,7 +136,10 @@
         $('.select2_init').select2({});
 
     });
-    const base_url = "{{ asset('') }}";
+    let base_url = "{{ asset('') }}";
+    base_url = [...base_url];
+    base_url.pop();
+    base_url= base_url.join("");
     $('.select-roles').on('change', function() {
         let selected = $(this).find("option:selected");
         let arrSelected = [];
