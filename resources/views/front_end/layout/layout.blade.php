@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="{{ asset('/ustora/css/bootstrap.min.css') }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('/ustora/css/font-awesome.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('/admin/plugins/fontawesome-free/css/all.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('/Admin/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{{ asset('/ustora/css/owl.carousel.css') }}">
   <link rel="stylesheet" href="{{ asset('/ustora/style.css') }}">

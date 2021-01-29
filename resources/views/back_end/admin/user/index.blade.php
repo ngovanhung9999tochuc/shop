@@ -62,7 +62,7 @@
                                         </td>
                                         <td>
                                             <a title="Xem thông tin" id="show_{{$user->id}}" class="btn btn-info btn-sm btn-show-info"><i class="fas fa-eye"></i></a>
-                                            <button title="Xóa" data-url="{{route('user.destroy',$user->id)}}" value="{{$user->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
+                                            <!-- <button title="Xóa" data-url="{{route('user.destroy',$user->id)}}" value="{{$user->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button> -->
                                         </td>
                                     </tr>
                                     @endforeach

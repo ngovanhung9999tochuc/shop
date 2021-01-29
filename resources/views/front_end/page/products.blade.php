@@ -60,6 +60,7 @@
 
                 </div> -->
                 <div class="row">
+                    @if(count($products)!=0)
                     @foreach ($products as $product)
                     <div class="col-md-3 col-sm-6" style="height: 550px;">
                         <div class="single-shop-product">
@@ -101,6 +102,16 @@
                         </div>
                     </div>
                     @endforeach
+                    @else
+                    @php
+                        $re='';
+                        $re='Không tìm thấy kết quả';
+                    @endphp
+                    <div class="row" style=" color: black; text-align: center; margin: 20px 0px 20px -30px; width: 1170px; height: 30px;">
+                        {{$re}}
+                    </div>
+                    @endif
+                   
                 </div>
                 <div class="row">
                     {{$products->links()}}

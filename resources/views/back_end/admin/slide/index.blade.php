@@ -189,7 +189,7 @@
     let base_url = "{{ asset('') }}";
     base_url = [...base_url];
     base_url.pop();
-    base_url= base_url.join("");
+    base_url = base_url.join("");
     const modal = document.getElementById('id01');
     const modal2 = document.getElementById('id02');
     const btnAddSlide = document.getElementById('btn-add-slide');
@@ -254,16 +254,18 @@
                             timer: 4000
                         });
                         let slide = data['slide'];
+                        let description = slide['description'] ? slide['description'] : '';
                         let tr = document.createElement('tr');
+
                         let dataSlide = '';
                         dataSlide += '<tr>';
                         dataSlide += '<td id="id-' + slide['id'] + '" >' + slide['id'] + '</td>';
                         dataSlide += '<td id="title-' + slide['id'] + '" >' + slide['title'] + '</td>';
-                        dataSlide += '<td id="description-' + slide['id'] + '" >' + slide['description'] + '</td>';
+                        dataSlide += '<td id="description-' + slide['id'] + '" >' + description + '</td>';
                         dataSlide += '<td><img id="image-' + slide['id'] + '" src="' + slide['image'] + '" alt="image" style="width:250px ; height: 80px;" /></td>';
                         dataSlide += '<td>';
                         dataSlide += '<button id="btn-edit-' + slide['id'] + '" title="Sửa khuyến mãi" onclick="editSlide(this)"  class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>';
-                        dataSlide += '<button title="Xóa" data-url="' + base_url + 'admin/slide/' + slide['id'] + '" value="' + slide['id'] + '" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>';
+                        dataSlide += '<button title="Xóa" data-url="' + base_url + '/admin/slide/' + slide['id'] + '" value="' + slide['id'] + '" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>';
                         dataSlide += '</td>';
                         dataSlide += '</tr>';
                         tr.innerHTML = dataSlide;
@@ -312,7 +314,7 @@
                         document.getElementById('id-' + slide['id']).innerHTML = slide['id'];
                         document.getElementById('title-' + slide['id']).innerHTML = slide['title'];
                         document.getElementById('description-' + slide['id']).innerHTML = slide['description'];
-                        document.getElementById('image-' + slide['id']).src = base_url +slide['image'];
+                        document.getElementById('image-' + slide['id']).src = base_url + slide['image'];
                     } else {
                         Swal.fire({
                             icon: 'error',

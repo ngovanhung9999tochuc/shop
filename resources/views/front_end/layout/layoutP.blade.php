@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="{{asset('/ustora/css/bootstrap.min.css')}}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{asset('/ustora/css/font-awesome.min.css')}}">
-  <link rel="stylesheet" href="{{asset('/admin/plugins/fontawesome-free/css/all.min.css')}}">
+  <link rel="stylesheet" href="{{asset('/Admin/plugins/fontawesome-free/css/all.min.css')}}">
 
   <!-- iCheck -->
   <!-- JQVMap -->
@@ -53,7 +53,6 @@
   <script src="{{asset('/ustora/jquery.min.js')}}"></script>
   <!-- Bootstrap JS form CDN -->
   <script src="{{asset('/ustora/bootstrap.min.js')}}"></script>
-
   <script src="{{asset('vendor/sweetalert2@10.js')}}"></script>
   <script src="{{asset('font_end/layout.js')}}"></script>
 

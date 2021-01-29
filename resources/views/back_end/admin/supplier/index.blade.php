@@ -326,7 +326,7 @@
                 dataSupplier += '<td id="phone-' + supplier['id'] + '">' + supplier['phone'] + '</td>';
                 dataSupplier += '<td>';
                 dataSupplier += '<button id="btn-edit-' + supplier['id'] + '" title="Sửa nhà cung cấp" onclick="editSupplier(this)" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>';
-                dataSupplier += '<button title="Xóa" data-url="' + base_url + 'admin/supplier/' + supplier['id'] + '" value="' + supplier['id'] + '" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>';
+                dataSupplier += '<button title="Xóa" data-url="' + base_url + '/admin/supplier/' + supplier['id'] + '" value="' + supplier['id'] + '" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>';
                 dataSupplier += '</td>';
                 dataSupplier += '</tr>';
                 tr.innerHTML = dataSupplier;

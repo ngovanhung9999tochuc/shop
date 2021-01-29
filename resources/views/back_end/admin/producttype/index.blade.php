@@ -329,7 +329,7 @@
                         dataType += '<td id="parent-' + productType['id'] + '">' + parent + '</td>';
                         dataType += '<td>';
                         dataType += '<button id="btn-edit-' + productType['id'] + '" title="Sửa" onclick="editProductType(this)"  class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>';
-                        dataType += '<button title="Xóa" data-url="' + base_url + 'admin/producttype/' + productType['id'] + '" value="' + productType['id'] + '" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>';
+                        dataType += '<button title="Xóa" data-url="' + base_url + '/admin/producttype/' + productType['id'] + '" value="' + productType['id'] + '" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>';
                         dataType += '</td>';
                         dataType += '</tr>';
                         tr.innerHTML = dataType;

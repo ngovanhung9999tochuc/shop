@@ -55,7 +55,7 @@
                                         <td>{{$bill->user->name}}</td>
                                         <td>
                                             <a id="btn_info-{{$bill->id}}" title="Xem" class="btn-show-info btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
-                                            <button title="Xóa" data-url="{{route('billin.destroy',$bill->id)}}" value="{{$bill->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>
+                                            <!-- <button title="Xóa" data-url="{{route('billin.destroy',$bill->id)}}" value="{{$bill->id}}" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button> -->
                                         </td>
                                     </tr>
                                     @endforeach

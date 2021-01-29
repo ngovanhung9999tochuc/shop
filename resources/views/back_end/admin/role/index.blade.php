@@ -292,7 +292,7 @@
                     dataRole += '<td><button id="btn-permission-' + role['id'] + '" onclick="grantingPermission(this)" class="btn btn-success btn-sm btn-price" style="width: 120px;"><i class="fas fa-plus"> Phân quyền</i></button></td>';
                     dataRole += '<td>';
                     dataRole += '<button id="btn-edit-' + role['id'] + '" title="Sửa" onclick="editRole(this)"  class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button>';
-                    dataRole += '<button title="Xóa" data-url="' + base_url + 'admin/role/' + role['id'] + '" value="' + role['id'] + '" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>';
+                    dataRole += '<button title="Xóa" data-url="' + base_url + '/admin/role/' + role['id'] + '" value="' + role['id'] + '" id="btn_delete" class="btn btn-danger btn-sm action_delete"><i class="fas fa-trash"></i></button>';
                     dataRole += '</td>';
                     dataRole += '</tr>';
                     tr.innerHTML = dataRole;
