@@ -29,7 +29,6 @@ trait MessageTrait
             timer: 4000
         })</script>";
     }
-
     public function errorMessage($action, $name)
     {
         return "<script>

@@ -40,6 +40,7 @@ class MenuRepository
             ];
             $messages = [
                 'name.required' => 'Tên không được phép trống',
+                
             ];
             $validator = Validator::make($request->all(), $rules, $messages);
             // Validate the input and return correct response
@@ -50,7 +51,8 @@ class MenuRepository
 
                 ), 500); // 500 being the HTTP code for an invalid request.
             }
-
+// 500 being the HTTP code for an invalid request.
+// 500 being the HTTP code for an invalid request.
             $dataMenuCreate = [
                 'name' => $request->name,
                 'parent_id' => $request->parent_id,
