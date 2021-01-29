@@ -28,7 +28,8 @@ class HomeRepository
         $phoneProducts = Product::limit(8)->orderBy('product_view', 'DESC')->get();
         $laptopProducts =Product::where('id', 'like', 'LT%')->latest()->limit(8)->get();
 
-        
+/*         $userReview = DB::select('select r.product_id AS product_id,sum(r.stars) / count(r.product_id) AS average,count(r.product_id) AS quantity_rating from ratings r group by r.product_id');
+        dd($userReview); */
         $tabletProducts = Product::where('id', 'like', 'TT%')->latest()->limit(8)->get();
         $slides = Slide::latest()->limit(4)->get();
         return ['newProducts' => $newProducts, 'phoneProducts' => $phoneProducts, 'laptopProducts' => $laptopProducts, 'tabletProducts' => $tabletProducts, 'slides' => $slides];

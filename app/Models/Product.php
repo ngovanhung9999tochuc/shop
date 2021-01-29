@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
@@ -44,7 +45,7 @@ class Product extends Model
 
     public function ratings()
     {
-        return $this->belongsToMany(User::class, 'ratings', 'product_id', 'user_id')->withPivot('stars','text_rating')
+        return $this->belongsToMany(User::class, 'ratings', 'product_id', 'user_id')->withPivot('stars', 'text_rating')
             ->withTimestamps();
     }
 
@@ -57,5 +58,21 @@ class Product extends Model
     public function userReview()
     {
         return $this->hasOne(UserReview::class, 'product_id');
+    }
+
+    public function userReview1()
+    {
+        $result = null;
+        $userReview = DB::select('select r.product_id AS product_id,sum(r.stars) / count(r.product_id) AS average,count(r.product_id) AS quantity_rating from ratings r group by r.product_id');
+        $reviews = collect($userReview);
+        if ($reviews->contains('product_id', $this->id)) {
+            foreach ($reviews as $review) {
+                if ($review->product_id == $this->id) {
+                    $result = $review;
+                    break;
+                }
+            }
+        }
+        return $result;
     }
 }

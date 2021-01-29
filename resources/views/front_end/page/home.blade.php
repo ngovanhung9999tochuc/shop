@@ -3,20 +3,7 @@
 @section('css')
 
 @endsection
-<!-- <div class="snowflakes" aria-hidden="true">
-  <div class="snowflake">❅</div>
-  <div class="snowflake">❆</div>
-  <div class="snowflake">❅</div>
-  <div class="snowflake">❆</div>
-  <div class="snowflake">❅</div>
-  <div class="snowflake">❆</div>
-  <div class="snowflake">❅</div>
-  <div class="snowflake">❆</div>
-  <div class="snowflake">❅</div>
-  <div class="snowflake">❆</div>
-  <div class="snowflake">❅</div>
-  <div class="snowflake">❆</div>
-</div> -->
+
 <div class="slider-area" style="margin-top: 10px;">
     <!-- Slider bxslider-home4 -->
 
