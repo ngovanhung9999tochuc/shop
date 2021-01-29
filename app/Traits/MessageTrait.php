@@ -18,6 +18,17 @@ trait MessageTrait
         })</script>";
     }
 
+    public function successfulMessage1($action, $name)
+    {
+        return "<script>dfsdf
+        Swal.fire({
+            icon: 'success',
+            title: 'Bạn test test " . $action . " " . $name . " thành công',
+            showConfirmButton: false,
+            timer: 4000
+        })</script>";
+    }
+
     public function errorMessage($action, $name)
     {
         return "<script>
