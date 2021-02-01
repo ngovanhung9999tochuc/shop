@@ -15,6 +15,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MailController;
 use App\Http\Middleware\CheckOut;
 use App\Http\Middleware\Profile;
 
@@ -40,9 +41,12 @@ Route::post('/order/enter', [HomeController::class, 'enterAnOrder'])->name('orde
 Route::get('/search', [HomeController::class, 'searchProduct'])->name('search');
 Route::post('/detail/rating', [HomeController::class, 'rating'])->name('detail.rating');
 //rating
-
-Route::get('/testhung', [HomeController::class, 'test'])->name('test');
+//mail
+Route::get('/testhung', [MailController::class, 'sendEmailOrder'])->name('test');
 //login
+//Route::get('/testhung', [HomeController::class, 'test'])->name('test');
+
+//
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/register', [LoginController::class, 'register'])->name('register');

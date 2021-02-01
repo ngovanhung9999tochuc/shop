@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-md-3">
                     <div id="btn-shopping-cart" class="shopping-item">
-                        <a>Giỏ hàng - <span id="total-price-1" class="cart-amunt">
+                        <a>Giỏ hàng  <span id="total-price-1" class="cart-amunt">
                                 @if(Session::has('cart'))
                                 {{number_format($dataCart['totalPrice'])}}đ
                                 @endif

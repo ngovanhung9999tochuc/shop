@@ -139,7 +139,7 @@
               document.getElementById('display-admin').style.display = 'block';
             }
             document.getElementById('name-user-login').innerHTML = data['user']['name'];
-
+            modal.style.display = "none";
             Swal.fire({
               icon: 'success',
               title: 'Bạn đăng nhập thành công',
@@ -178,13 +178,13 @@
         processData: false,
         success: (data) => {
           this.reset();
-          console.log(data);
           if (data['success']) {
 
             document.getElementById('display-login-logout').style.display = 'none';
             document.getElementById('header-right-login').style.display = 'block';
             //name-user-login
             document.getElementById('name-user-login').innerHTML = data['user']['name'];
+            modal2.style.display = "none";
             Swal.fire({
               icon: 'success',
               title: 'Bạn đăng ký thành công',
