@@ -74,7 +74,7 @@
                                     @if(Session::has('cart'))
                                     @foreach($items as $item)
                                     <div id="media-{{$item['product']->id}}" class="media">
-                                        <img width="20%" src="{{$item['product']->image}}" alt="" class="pull-left">
+                                        <img width="20%" src="{{asset($item['product']->image)}}" alt="" class="pull-left">
                                         <div class="media-body">
                                             <p class="font-large">{{$item['product']->name}}</p>
                                             <span class="color-gray your-order-info">Giá: <span id="price-{{$item['product']->id}}">{{number_format($item['quantity'] * ($item['product']->unit_price - $item['product']->unit_price * $item['product']->promotion_price / 100))}}</span>đ</span>

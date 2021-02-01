@@ -5,15 +5,16 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="footer-menu">
                         <h2 class="footer-wid-title">Giới thiệu</h2>
-                        <p style="text-align: justify;">Đến với thế giới điện tử của chúng tôi bạn sẽ được thỏa mãn với hàng ngàn sản phẩm điện tử được bày bán tại website với nhiều mẫu mã đẹp và lạ mắt với mức giá hợp lý còn chằn chờ gì nữa hãy xách tay lên mà mua sắm ngay cho mình 1 món điện tử nào!</p>
+                       
+                        <p style="text-align: justify; margin-top: 25px;">Đến với thế giới điện tử của chúng tôi bạn sẽ được thỏa mãn với hàng ngàn sản phẩm điện tử được bày bán tại website với nhiều mẫu mã đẹp và lạ mắt với mức giá hợp lý còn chằn chờ gì nữa hãy xách tay lên mà mua sắm ngay cho mình một món điện tử nào!</p>
 
                     </div>
                 </div>
 
                 <div class="col-md-4 col-sm-6">
-                    <div class="footer-menu">
+                    <div class="footer-menu" >
                         <h2 class="footer-wid-title">Liên hệ hỗ trợ</h2>
-                        <ul>
+                        <ul style="text-align: justify; margin-top: 20px;">
                             <li>Gọi mua hàng <b style="color: #2ECCFA">1800.1060</b> (7:30 - 22:00)</li>
                             <li>Gọi khiếu nại <b style="color: #2ECCFA">1800.1062</b> (8:00 - 21:30)</li>
                             <li>Gọi bảo hành <b style="color: #2ECCFA">1800.1064</b> (8:00 - 21:00)</li>

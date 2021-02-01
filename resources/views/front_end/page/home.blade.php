@@ -3,20 +3,7 @@
 @section('css')
 
 @endsection
-<!-- <div class="snowflakes" aria-hidden="true">
-  <div class="snowflake">❅</div>
-  <div class="snowflake">❆</div>
-  <div class="snowflake">❅</div>
-  <div class="snowflake">❆</div>
-  <div class="snowflake">❅</div>
-  <div class="snowflake">❆</div>
-  <div class="snowflake">❅</div>
-  <div class="snowflake">❆</div>
-  <div class="snowflake">❅</div>
-  <div class="snowflake">❆</div>
-  <div class="snowflake">❅</div>
-  <div class="snowflake">❆</div>
-</div> -->
+
 <div class="slider-area" style="margin-top: 10px;">
     <!-- Slider bxslider-home4 -->
 
@@ -31,7 +18,7 @@
                     <a class="caption button-radius" href="{{$slide->link}}"><span class="icon"></span>Xem ngay</a>
                 </div>
                 <div class="col-md-8">
-                    <img src="{{$slide->image}}" alt="Slide" height="2000px">
+                    <img src="{{asset($slide->image)}}" alt="Slide" height="2000px">
                 </div>
 
             </li>
@@ -48,13 +35,13 @@
             <div class="col-md-12">
                 <div class="latest-product">
                     <div class="single-sidebar">
-                        <h2 class="sidebar"> Sản phẩm mới nhất</h2>
+                        <h2 class="sidebar"> Mới nhất</h2>
                     </div>
                     <div class="product-carousel">
                         @foreach($products['newProducts'] as $product)
                         <div class="single-product">
                             <div style="height: 220px;" class="product-f-image">
-                                <img src="{{$product->image}}" alt="">
+                                <img src="{{asset($product->image)}}" alt="">
                                 <div class="product-hover">
                                     <a id="item-cart-{{$product->id}}" onclick="addItemCart(this)" class="add-product-to-cart add-to-cart-link"><i class="fa fa-plus-square"></i> Chọn mua</a>
                                     <a href="{{route('detail',$product->id)}}" class="view-details-link"><i class="fa fa-link"></i> chi tiết</a>
@@ -116,13 +103,13 @@
             <div class="col-md-12">
                 <div class="latest-product">
                     <div class="single-sidebar">
-                        <h2 class="sidebar"> Điện thoại</h2>
+                        <h2 class="sidebar"> Xem nhiều nhất</h2>
                     </div>
                     <div class="product-carousel">
                         @foreach($products['phoneProducts'] as $product)
                         <div class="single-product">
                             <div style="height: 220px;" class="product-f-image">
-                                <img src="{{$product->image}}" alt="">
+                                <img src="{{asset($product->image)}}" alt="">
                                 <div class="product-hover">
                                     <a id="item-cart-{{$product->id}}" onclick="addItemCart(this)" class="add-product-to-cart add-to-cart-link"><i class="fa fa-plus-square"></i> Chọn mua</a>
                                     <a href="{{route('detail',$product->id)}}" class="view-details-link"><i class="fa fa-link"></i> chi tiết</a>
@@ -189,7 +176,7 @@
                         @foreach($products['laptopProducts'] as $product)
                         <div class="single-product">
                             <div style="height: 220px;" class="product-f-image">
-                                <img src="{{$product->image}}" alt="">
+                                <img src="{{asset($product->image)}}" alt="">
                                 <div class="product-hover">
                                     <a id="item-cart-{{$product->id}}" onclick="addItemCart(this)" class="add-product-to-cart add-to-cart-link"><i class="fa fa-plus-square"></i> Chọn mua</a>
                                     <a href="{{route('detail',$product->id)}}" class="view-details-link"><i class="fa fa-link"></i> chi tiết</a>
@@ -254,7 +241,7 @@
                         @foreach($products['tabletProducts'] as $product)
                         <div class="single-product">
                             <div style="height: 220px;" class="product-f-image">
-                                <img src="{{$product->image}}" alt="">
+                                <img src="{{asset($product->image)}}" alt="">
                                 <div class="product-hover">
                                     <a id="item-cart-{{$product->id}}" onclick="addItemCart(this)" class="add-product-to-cart add-to-cart-link"><i class="fa fa-plus-square"></i> Chọn mua</a>
                                     <a href="{{route('detail',$product->id)}}" class="view-details-link"><i class="fa fa-link"></i> chi tiết</a>

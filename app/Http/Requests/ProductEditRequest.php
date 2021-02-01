@@ -32,7 +32,8 @@ class ProductEditRequest extends FormRequest
             'operatingsystem' => 'required',
             'publisher' => 'required',
             'image_file' => 'mimes:jpg,jpeg,png,gif|max:10240',
-            'detailed_image_file'=>'mimes:jpg,jpeg,png,gif|max:10240',
+            'detailed_image_file' => 'array',
+            'detailed_image_file.*' => 'mimes:jpg,jpeg,png,gif|max:10240',
         ];
     }
 

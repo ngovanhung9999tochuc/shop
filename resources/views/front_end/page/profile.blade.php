@@ -30,7 +30,7 @@
                         <div class="card card-primary card-outline">
                             <div class="card-body box-profile">
                                 <div class="text-center">
-                                    <img class="profile-user-img img-fluid img-circle" id="image-icon-profile-user" src="{{auth()->user()->image_icon}}" alt="hình ảnh người dùng">
+                                    <img class="profile-user-img img-fluid img-circle" id="image-icon-profile-user" src="{{asset(auth()->user()->image_icon)}}" alt="hình ảnh người dùng">
                                 </div>
                                 <h3 style="margin-top: 10px;" class="profile-username text-center">{{auth()->user()->name}}</h3>
                                 @php
@@ -305,7 +305,7 @@
 
     @section('js')
     <script>
-        const base_url1 = window.location.origin;
+
         let profileInfo = document.getElementById('profile-info');
         const btnUpdateImage = document.getElementById('btn-update-image');
         const imageIcon = document.getElementById('image-icon-profile-user')
@@ -336,7 +336,7 @@
             var formData = new FormData(this);
             $.ajax({
                 type: 'POST',
-                url: base_url + '/profile/image',
+                url: '{{route("profile.image")}}',
                 data: formData,
                 cache: false,
                 contentType: false,
@@ -377,7 +377,7 @@
             var formData = new FormData(this);
             $.ajax({
                 type: 'POST',
-                url: base_url + '/profile/password',
+                url: '{{route("profile.password")}}',
                 data: formData,
                 cache: false,
                 contentType: false,
@@ -416,7 +416,7 @@
             let [x, id] = info.id.split('-');
             let tableProductBill = document.getElementById('table-product-bill');
             let _token = document.getElementById('_token');
-            request(base_url1 + '/profile/show', JSON.stringify({
+            request('{{route("profile.show")}}', JSON.stringify({
                 '_token': _token.value,
                 'id': id
             }), function(data) {
@@ -432,7 +432,9 @@
                         td += '<td>' + product['name'] + '</td>';
                         td += '<td>' + product['pivot']['quantity'] + '</td>';
                         td += '<td>' + Number(product['pivot']['unit_price']).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ' + '</td>';
-                        td += '<td><img src="' + product['image'] + '" style="width:80px ; height: 80px;" /></td>';
+                        let image = product["image"];
+                        var assetBaseUrl = base_url + image;
+                        td += '<td><img src="' + assetBaseUrl + '" style="width:80px ; height: 80px;" /></td>';
                         td += '</tr>';
                         tr += td;
                     }

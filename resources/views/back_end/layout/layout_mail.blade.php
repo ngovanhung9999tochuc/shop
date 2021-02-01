@@ -8,7 +8,7 @@
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>Quản Trị</title>
+  <title>thế giới điện tử</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -38,18 +38,13 @@
   <div class="wrapper">
 
     <!-- Navbar -->
-    @include('back_end.parials.navbar')
-    <!-- /.navbar -->
-
-    <!-- Main Sidebar Container -->
-    @include('back_end.parials.siderbar')
 
 
     <!-- Content Wrapper. Contains page content -->
     @yield('content')
 
     <!-- /.content-wrapper -->
-    @include('back_end.parials.footer')
+
 
 
     <!-- Control Sidebar -->

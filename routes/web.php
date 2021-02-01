@@ -15,6 +15,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MailController;
 use App\Http\Middleware\CheckOut;
 use App\Http\Middleware\Profile;
 
@@ -40,9 +41,12 @@ Route::post('/order/enter', [HomeController::class, 'enterAnOrder'])->name('orde
 Route::get('/search', [HomeController::class, 'searchProduct'])->name('search');
 Route::post('/detail/rating', [HomeController::class, 'rating'])->name('detail.rating');
 //rating
-
-Route::get('/testhung', [HomeController::class, 'test'])->name('test');
+//mail
+Route::get('/testhung', [MailController::class, 'sendEmailOrder'])->name('test');
 //login
+//Route::get('/testhung', [HomeController::class, 'test'])->name('test');
+
+//
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/register', [LoginController::class, 'register'])->name('register');
@@ -75,7 +79,7 @@ Route::middleware('can:admin')->prefix('admin')->group(function () {
         Route::delete('/product/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
         Route::post('/product/search', [ProductController::class, 'search'])->name('product.search');
         Route::get('/product/price/{product}', [ProductController::class, 'getPrice'])->name('product.price');
-        Route::post('/product/price/{product}', [ProductController::class, 'setPrice'])->name('product.price');
+        Route::post('/product/price', [ProductController::class, 'setPrice'])->name('product.price.post');
     });
 
     Route::middleware('can:producttype')->group(function () {
@@ -161,6 +165,6 @@ Route::middleware('can:admin')->prefix('admin')->group(function () {
         Route::delete('/role/{role}', [RoleController::class, 'destroy'])->name('role.destroy');
         Route::post('/role/search', [RoleController::class, 'search'])->name('role.search');
         Route::post('/role/permission', [RoleController::class, 'getListPermission'])->name('role.permission');
-        Route::post('/role/permission/update', [RoleController::class, 'updateListPermission'])->name('role.permission');
+        Route::post('/role/permission/update', [RoleController::class, 'updateListPermission'])->name('role.permission.update');
     });
 });

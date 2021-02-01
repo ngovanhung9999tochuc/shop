@@ -51,7 +51,7 @@
                                         <td>{{$product->name}}</td>
                                         <td id="td-unit-price-{{$product->id}}">{{number_format($product->unit_price)}}</td>
                                         <td id="td-promotion-price-{{$product->id}}">{{$product->promotion_price}}%</td>
-                                        <td><img src="{{$product->image}}" style="width:100px ; height: 100px;" /></td>
+                                        <td><img src="{{ asset($product->image)}}" style="width:100px ; height: 100px;" /></td>
                                         <td>{{$product->productType->productTypeParent->name." ".$product->productType->name}}</td>
                                         <td><button id="price_{{$product->id}}" onclick="enterPrice(this)" class="btn btn-success btn-sm btn-price" style="width: 120px;"><i class="fas fa-plus"> Cập nhật giá</i></button></td>
                                         <td>
@@ -135,7 +135,89 @@
 </script>
 <script src="{{asset('vendor/jquery-2.2.0.min.js')}}"></script>
 <script src="{{asset('Admin/admin/delete.js')}}"></script>
-<script src="{{asset('Admin/admin/product/index/index.js')}}"></script>
+<script>
+    let base_url = "{{ asset('') }}";
+    base_url = [...base_url];
+    base_url.pop();
+    base_url = base_url.join("");
+    const modal = document.getElementById('id01');
+    const formPrice = document.getElementById('form-price');
+    let idProduct = '';
+    //event
+    // When the user clicks anywhere outside of the modal, close it
 
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    //event 
+
+
+    function enterPrice(price) {
+        let [x, id] = price.id.split('_');
+        idProduct = id;
+        modal.style.display = "block";
+        const tdUnitPrice = document.getElementById('td-unit-price-' + idProduct);
+        const tdPromotionPrice = document.getElementById('td-promotion-price-' + idProduct);
+        formPrice['unit_price'].value = tdUnitPrice.innerHTML.split('.')[0].replace(/[^0-9]/gi, '');
+        formPrice['promotion_price'].value = tdPromotionPrice.innerHTML.replace(/[^0-9]/gi, '');
+    }
+
+    formPrice.addEventListener('submit', addProductPrice)
+
+
+    //function
+    function addProductPrice(event) {
+        event.preventDefault();
+        let _token = this['_token'].value;
+        let unitPrice = this['unit_price'].value;
+        let promotionPrice = this['promotion_price'].value;
+        const tdUnitPrice = document.getElementById('td-unit-price-' + idProduct);
+        const tdPromotionPrice = document.getElementById('td-promotion-price-' + idProduct);
+        request('{{route("product.price.post")}}', JSON.stringify({
+            '_token': _token,
+            'unit_price': unitPrice,
+            'promotion_price': promotionPrice,
+            'id': idProduct
+        }), function(data) {
+            let result = JSON.parse(data);
+            if (result['result']) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Bạn thêm giá sản phẩm thành công',
+                    showConfirmButton: false,
+                    timer: 4000
+                });
+                tdUnitPrice.innerHTML = Number(unitPrice).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+                tdPromotionPrice.innerHTML = promotionPrice + '%';
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi hệ thống ! bạn thêm giá sản phẩm không thành công',
+                    showConfirmButton: false,
+                    timer: 4000
+                });
+            }
+        });
+
+    }
+
+    function request(url = "", para = "", callbackSuccess = function() {}, callbackError = function(err) {
+        console.log(err)
+    }) {
+        let xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                callbackSuccess(this.responseText);
+            } else if (this.readyState == 4) {
+                callbackError(this);
+            }
+        }
+        xmlHttp.open("POST", url, true);
+        xmlHttp.setRequestHeader("Content-type", "application/json");
+        xmlHttp.send(para);
+    }
+</script>
 </script>
 @endsection

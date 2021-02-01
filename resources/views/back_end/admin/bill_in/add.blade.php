@@ -178,8 +178,251 @@
     <!-- /.content -->
 </div>
 @endsection @section('js')
-<script src="{{asset('Admin/admin/bill_in/add/add.js')}}"></script>
-<script src="{{asset('Admin/admin/bill_in/add/add1.js')}}"></script>
+<!-- <script src="{{asset('Admin/admin/bill_in/add/add.js')}}"></script>
+<script src="{{asset('Admin/admin/bill_in/add/add1.js')}}"></script> -->
+<script>
+    let base_url = "{{ asset('') }}";
+    base_url = [...base_url];
+    base_url.pop();
+    base_url = base_url.join("");
+    const btnSearchProducts = document.getElementById('search-products');
+    const _token = document.getElementById('_token').value;
+    const productListAreLookingFor = document.getElementById('product-list-are-looking-for');
+    const ulProductList = document.getElementById('ul-product-list');
+    const proSearchAppend = document.getElementById('pro_search_append');
+    const totalQuantity = document.getElementById('total-quantity');
+    const totalPrice = document.getElementById('total-price');
+    const inputProductBill = document.getElementById('data-product-bill');
+    const dataProductBill = {};
+
+    //event
+
+
+    btnSearchProducts.addEventListener('keyup', function() {
+        request("{{route('billin.products')}}", JSON.stringify({
+                '_token': _token,
+                'table_search': btnSearchProducts.value
+            }),
+            function(data) {
+                let products = JSON.parse(data);
+                let li = '';
+                for (const p of products) {
+                    li += '<li  data-product-type="' + p.id + '_' + p.name + '" class="list-group-item">' + p.id + '--' + p.name + '</li>';
+                }
+                ulProductList.innerHTML = li;
+                productListAreLookingFor.style.display = 'block';
+                //them su kien cho li product
+                const listGroupProduct = document.querySelectorAll(".list-group-item");
+                listGroupProduct.forEach(function(listProduct) {
+                    //su kien them 1 product vao ban
+                    listProduct.addEventListener('click', function() {
+                        let product = this.getAttribute("data-product-type");
+                        let [id, name] = product.split('_');
+                        dataProductBill[id] = {
+                            'id': id,
+                            'name': name,
+                            'quantity': 0,
+                            'original_price': 0,
+
+                        }
+                        if (!document.getElementById(id)) {
+                            let trProduct = document.createElement('tr');
+                            trProduct.setAttribute('id', id)
+                            trProduct.innerHTML = '<td style="width: 100px;">' + dataProductBill[id].id + '</td>\
+                                <td style="width: 180px;">' + dataProductBill[id].name + '</td>\
+                                <td class="text-center" style="width: 90px;"><input id="quantity-' + dataProductBill[id].id + '" type="number" min="0" class=" form-control" value="' + dataProductBill[id].quantity + '"></td>\
+                                <td class="text-center" style="width: 150px;"><input id="price-' + dataProductBill[id].id + '" type="number" min="0" class=" form-control" value="' + dataProductBill[id].original_price + '"></td>\
+                                <td class="text-center" id="total-' + dataProductBill[id].id + '">' + (dataProductBill[id].quantity * dataProductBill[id].original_price).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ' + '</td>\
+                                <td class="text-center" style="width: 50px;"><i id="btnDelete-' + dataProductBill[id].id + '" class="fas fa-trash"></i></td>';
+                            proSearchAppend.appendChild(trProduct);
+
+                            //sua kien thay doi cua input quantity, price va delete
+                            let inputQuantity = document.getElementById('quantity-' + dataProductBill[id].id);
+                            let inputPrice = document.getElementById('price-' + dataProductBill[id].id);
+                            let inputTotal = document.getElementById('total-' + dataProductBill[id].id);
+                            let btnDelete = document.getElementById('btnDelete-' + dataProductBill[id].id);
+                            inputQuantity.addEventListener('change', function() {
+                                dataProductBill[id].quantity = inputQuantity.value;
+                                inputTotal.innerHTML = (dataProductBill[id].quantity * dataProductBill[id].original_price).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ';
+                                totalPriceAndQuantity();
+                            });
+
+                            inputPrice.addEventListener('change', function() {
+                                dataProductBill[id].original_price = inputPrice.value;
+                                inputTotal.innerHTML = (dataProductBill[id].quantity * dataProductBill[id].original_price).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ';
+                                totalPriceAndQuantity();
+                            });
+
+                            btnDelete.addEventListener('click', function() {
+                                proSearchAppend.removeChild(trProduct);
+                                delete dataProductBill[id];
+                                totalPriceAndQuantity();
+                            });
+
+                        }
+                        totalPriceAndQuantity();
+
+                        //tinh tong
+                        function totalPriceAndQuantity() {
+                            let quantity = 0,
+                                Total = 0;
+                            for (const key in dataProductBill) {
+
+                                quantity += Number(dataProductBill[key]['quantity']);
+                                Total += dataProductBill[key]['original_price'] * dataProductBill[key]['quantity'];
+                            }
+                            totalQuantity.value = quantity;
+                            totalPrice.value = Total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + 'đ';
+                            inputProductBill.value = JSON.stringify(dataProductBill);
+                        }
+                    });
+                });
+            });
+    });
+
+    ulProductList.addEventListener('mouseover', cleardisplay1);
+    ulProductList.addEventListener('mouseout', cleardisplay2);
+
+
+
+    //function
+
+
+
+
+    function cleardisplay1() {
+        productListAreLookingFor.style.display = 'block';
+    }
+
+    function cleardisplay2() {
+        productListAreLookingFor.style.display = 'none';
+    }
+
+
+    let btnAddSupplier = document.getElementById('btn-add-supplier');
+    const modal = document.getElementById('id01');
+    const formSupplier = document.getElementById('form-supplier');
+    const _tokenGlobal = document.getElementById('_token').value;
+    //event
+    getSuppliers();
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    btnAddSupplier.addEventListener('click', function() {
+        modal.style.display = "block";
+        clearErrorMessages()
+        formSupplier.reset();
+    });
+
+
+
+    formSupplier.addEventListener('submit', function(event) {
+        event.preventDefault();
+        clearErrorMessages()
+        let _token = this['_token'].value;
+        let name = this['name'].value;
+        let email = this['email'].value;
+        let address = this['address'].value;
+        let phone = this['phone'].value;
+
+        request('{{route("supplier.store")}}', JSON.stringify({
+            '_token': _token,
+            'name': name,
+            'email': email,
+            'address': address,
+            'phone': phone
+        }), function(data) {
+            data = JSON.parse(data);
+            if (data['success']) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Bạn thêm nhà cung cấp thành công',
+                    showConfirmButton: false,
+                    timer: 4000
+                });
+                formSupplier.reset();
+                getSuppliers();
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi hệ thống ! bạn thêm nhà cung cấp không thành công',
+                    showConfirmButton: false,
+                    timer: 4000
+                });
+            }
+
+        }, function(error) {
+            let errors = JSON.parse(error)['errors'];
+            for (const key in errors) {
+                $('#validation-' + key).append('<div class="alert alert-danger">' + errors[key][0] + '</div');
+            }
+        });
+
+    });
+
+
+    //function
+    function getSuppliers() {
+        let selectSupplers = document.getElementById('select-supplers');
+        request('{{route("billin.supplier")}}', JSON.stringify({
+                '_token': _tokenGlobal
+            }),
+            function(data) {
+                data = JSON.parse(data);
+                if (data['success']) {
+                    let suppliers = data['suppliers'];
+                    let dataSupplier = '<option value="">Chọn nhà cung cấp</option>';
+                    for (const supplier of suppliers) {
+                        dataSupplier += '<option value="' + supplier['id'] + '">' + supplier['name'] + '</option>';
+                    }
+                    selectSupplers.innerHTML = dataSupplier;
+                }
+            });
+    }
+
+
+    function clearErrorMessages() {
+        document.getElementById('validation-name').innerHTML = '';
+        document.getElementById('validation-email').innerHTML = '';
+        document.getElementById('validation-phone').innerHTML = '';
+        document.getElementById('validation-address').innerHTML = '';
+    }
+
+    function clearFormValue() {
+        formSupplier['name'].value = '';
+        formSupplier['email'].value = '';
+        formSupplier['address'].value = '';
+        formSupplier['phone'].value = '';
+    }
+
+
+
+
+
+
+
+    //Request voi callback voi 1 tham so--thuc hien truy van
+
+    function request(url = "", para = "", callbackSuccess = function() {}, callbackError = function(err) {
+        console.log(err)
+    }) {
+        let xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                callbackSuccess(this.responseText);
+            } else if (this.readyState == 4 && this.status == 500) {
+                callbackError(this.responseText);
+            }
+        }
+        xmlHttp.open("POST", url, true);
+        xmlHttp.setRequestHeader("Content-type", "application/json");
+        xmlHttp.send(para);
+    }
+</script>
 @php
 if(Session::has('message')){
 echo Session::get('message');

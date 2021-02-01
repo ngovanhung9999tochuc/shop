@@ -124,9 +124,11 @@ class ProductTypeRepository
             if (!empty($dataUploadFeatureImage)) {
                 $dataProductTypeUpdate['icon'] = $dataUploadFeatureImage['file_path'];
                 ///storage/producttype/type/t1lVlYwIifyl5qPtfPCo.jpg
-                $filename = str_replace('/storage/producttype/type/', '', $p->icon);
-                // remove old image
-                unlink(storage_path('app/public/producttype/type/' . $filename));
+                if ($p->icon) {
+                    $filename = str_replace('/storage/producttype/type/', '', $p->icon);
+                    // remove old image
+                    unlink(storage_path('app/public/producttype/type/' . $filename));
+                }
             }
             $p->update($dataProductTypeUpdate);
             $productType = $this->productType->find($request->id);

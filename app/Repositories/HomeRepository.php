@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Controllers\MailController;
 use App\Models\Bill;
 use App\Models\Product;
 use App\Models\ProductType;
@@ -25,8 +26,11 @@ class HomeRepository
     public function getHome()
     {
         $newProducts = Product::latest()->limit(8)->get();
-        $phoneProducts = Product::where('id', 'like', 'DT%')->latest()->limit(8)->get();
+        $phoneProducts = Product::limit(8)->orderBy('product_view', 'DESC')->get();
         $laptopProducts = Product::where('id', 'like', 'LT%')->latest()->limit(8)->get();
+
+        /*         $userReview = DB::select('select r.product_id AS product_id,sum(r.stars) / count(r.product_id) AS average,count(r.product_id) AS quantity_rating from ratings r group by r.product_id');
+        dd($userReview); */
         $tabletProducts = Product::where('id', 'like', 'TT%')->latest()->limit(8)->get();
         $slides = Slide::latest()->limit(4)->get();
         return ['newProducts' => $newProducts, 'phoneProducts' => $phoneProducts, 'laptopProducts' => $laptopProducts, 'tabletProducts' => $tabletProducts, 'slides' => $slides];
@@ -154,10 +158,12 @@ class HomeRepository
                 $bill->products()->attach($bill_detail);
                 Session::forget('cart');
                 DB::commit();
+                $mail = new MailController();
+                $mail->sendEmailOrder($bill);
                 $request->session()->flash('messageCheckOut', "<script>
                 Swal.fire({
                     icon: 'success',
-                    title: 'Bạn đã đặt hàng thành công',
+                    title: 'Cảm ơn bạn đã đặt hàng',
                     showConfirmButton: false,
                     timer: 5000
                 })</script>");

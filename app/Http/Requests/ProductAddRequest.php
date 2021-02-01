@@ -32,7 +32,8 @@ class ProductAddRequest extends FormRequest
             'operatingsystem' => 'required',
             'publisher' => 'required',
             'image_file' => 'required|mimes:jpg,jpeg,png,gif|max:10240',
-            'detailed_image_file'=>'mimes:jpg,jpeg,png,gif|max:10240',
+            'detailed_image_file' => 'array',
+            'detailed_image_file.*' => 'mimes:jpg,jpeg,png,gif|max:10240',
         ];
     }
 
@@ -51,7 +52,7 @@ class ProductAddRequest extends FormRequest
             'image_file.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
             'image_file.max' => 'Hình thẻ giới hạn dung lượng không quá 10M',
             'image_file.required' => 'Bạn chưa chọn hình ảnh',
-            'detailed_image_file.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
+            'detailed_image_file.mimes' => 'aaaChỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
             'detailed_image_file.max' => 'Hình thẻ giới hạn dung lượng không quá 10M',
         ];
     }
