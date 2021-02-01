@@ -60,22 +60,20 @@
     <div class="site-branding-area">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-4">
                     <div class="logo">
                         <h1><a href="{{route('home')}}"><img style="width: 176px; height: 64px;" src="/logo/logo.png"></a></h1>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-8">
                     <div style="margin-top: 4%;" class="card">
                         <form method="GET" action="{{route('search')}}">
                             @csrf
                             <div class="row">
-                                <div class="col-md-4">
-                                </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 col-md-offset-4 col-sm-7 col-sm-offset-3">
                                     <input style="width: 240px; height: 40px; border-radius: 5px; margin-left: 50px;" type="text"  name="table_search" class="col-md-12" placeholder="Tìm mã hoặc tên sản phẩm">
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2 col-sm-2">
                                     <button style="height: 40px;" type="submit" class="btn btn-info"><i class="fas fa-search"></i></button>
                                 </div>
                             </div>

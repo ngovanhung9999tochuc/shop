@@ -10,7 +10,7 @@
                 </button>
             </div>
             <div class="wrapper row">
-                <div class=" col-md-9 navigationDesktop">
+                <div class="col-md-9 navigationDesktop">
                     <nav>
                         {!!$htmlMenu!!}
                     </nav>
@@ -45,7 +45,8 @@
                     </form>
                 </div>
             </div>
-
-        </div>
+            
+            </div>
+        
     </div>
 </div> <!-- End mainmenu area -->

@@ -273,20 +273,17 @@ p.sbmincart-empty-text {
 
 @media (max-width:800px) {
     #w3lssbmincart {
-        left: 49%;
+        /* left: 49%; */
+        top: 60px;
         width: 370px;
     }
 }
-
-
-
 
 @media (max-width:736px) {
     #w3lssbmincart {
         left: 47%;
         width: 353px;
     }
-    
 }
 
 @media (max-width:640px) {

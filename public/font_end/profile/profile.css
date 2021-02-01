@@ -90,10 +90,10 @@ input[type=password] {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 3% 25%;
+    margin: 3% 0%;
     /* 5% from the top, 15% from the bottom and centered */
     border: 1px solid #888;
-    width: 50%;
+    width: 100%;
     /* Could be more or less, depending on screen size */
 }
 

@@ -154,16 +154,21 @@ a:hover {
     position: relative;
 }
 
-.navigationDesktop nav {
+
+/* .navigationDesktop nav {
     height: 40px;
     width: 1137px;
     margin: auto;
     text-align: center;
     text-transform: uppercase;
-}
+} */
 
 
 /*-------------------------------------*/
+
+.navigationDesktop {
+    float: left;
+}
 
 .navigationDesktop nav a {
     display: block;
@@ -453,7 +458,7 @@ body {
 
 .navigationDesktop nav {
     height: 40px;
-    width: 1137px;
+    /* width: 1137px; */
     margin: auto;
     text-align: center;
     text-transform: uppercase;
@@ -482,13 +487,14 @@ body {
     list-style: none;
 }
 
-.navigationDesktop nav ul li {
+
+/* .navigationDesktop nav ul li {
     float: left;
     width: 140px;
     height: 40px;
     line-height: 40px;
     background: #F2F2F2;
-}
+} */
 
 .navigationDesktop nav ul ul li {
     position: relative;
